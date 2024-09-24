@@ -24,9 +24,14 @@
     <link rel="stylesheet" href="https://use.typekit.net/kha5kwj.css">
     <link rel="stylesheet" href="https://use.typekit.net/mhl8zjo.css">
     <link rel="stylesheet" href="https://s3.amazonaws.com/static.getsnworks.com/fontawesome/5.15.2/css/all.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   
     <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="fonts.css" rel="stylesheet" type="text/css"/>
+
     <link href="navbar.css" rel="stylesheet" type="text/css"/>
 
     <script type="module" src="script.js" defer></script>
@@ -76,28 +81,35 @@
 
 
 <nav id="top-nav">
-	<!-- Optional hamburger menu. Remove this i tag if your project doesn't have header navigation -->
-	<i class="fas fa-bars" id="menu-icon"></i>
+	<i class="ibm-m fa-bars" id="menu-icon"></i>
 	<div id="left-top-nav">
-		<a href="https://dailyprincetonian.com">
-			<img id="logo" alt="The Daily Princetonian logo"
-				 src="https://dirgyzwl2hnqq.cloudfront.net/8ab5ccf6483af37484451354a9d9e4e3/dist/img/prince_logo_scrolled.png"/>
+		<a href="https://">
+			<img id="logo" alt="Envision logo"
+				 src="assets/ConferenceLogo.png">
 		</a>
-		<div class="project-name"><a href="article">&ensp;|&ensp;[ARTICLE HEADLINE]</a></div>
+		
 	</div>
-	<!-- Optional header navigation. The nav-links will jump to elements with a specific id.
-		Feel free to remove the two divs below if your project doesn't need header navigation. -->
 	<div id="nav-links">
-		<a href="⚠️ #header1 ⚠️">Header</a>
-		<a href="⚠️ #header2 ⚠️">Header</a>
-		<a href="⚠️ #header3 ⚠️">Header</a>
+		<a href="#home">Home</a>
+		<a href="#about">About</a>
+		<a href="#program">Program</a>
 	</div>
 </nav>
 
+<header id="hero" class="min-h-screen justify-center flex align-center flex-col gradient-background">
 
-
-    <div class="flexbox">
-        <div id="test" class="gradient-background"></div>
+	<div class="flexbox">
+        <img id="logo" style="width:15rem; height:auto;" alt="Envision logo"
+				 src="assets/ConferenceLogo.png">
     </div>
+
+</header>
+
+<section id="about" class="h-screen flex flex-row justify-center align-center scroll-section">
+	<h2>About</h2>
+</section>
+
+
+    
 </body>
 </html>
