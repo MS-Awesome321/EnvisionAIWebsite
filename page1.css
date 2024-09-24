@@ -1,0 +1,59 @@
+/* HOME */
+#mainLogo {
+    height: 9vw;
+    width: 48vw;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    mask: url(assets/envisionLogo.png);
+    mask-size: 100%;
+
+    object-fit: fill;
+}
+
+#politics {
+    text-align: right;
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 2.5vw;
+}
+
+/* SOCIAL MEDIA STUFF */
+#socialContainer {
+    height: 10vw;
+    margin-left: 8vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.social {
+    height: 3vh;
+    width: 3vh;
+    object-fit: fill;
+    margin-left: 5vh;
+    background-color: black;
+}
+
+#facebook {
+    mask: url(assets/socialMedia/facebook.png);
+    mask-size: 100%;
+}
+
+#linkedin {
+    mask: url(assets/socialMedia/linkedin.png);
+    mask-size: 100%;
+}
+
+#twitter {
+    mask: url(assets/socialMedia/twitter.png);
+    mask-size: 100%;
+}
+
+#insta {
+    mask: url(assets/socialMedia/insta.png);
+    mask-size: 100%;
+}
