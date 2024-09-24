@@ -9,7 +9,7 @@ body {
 
 .page {
     height: 100vh;
-    /* border: black solid 1px; */
+    border: black solid 1px;
 }
 
 .flexbox {
