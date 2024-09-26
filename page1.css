@@ -57,3 +57,31 @@
     mask: url(assets/socialMedia/insta.png);
     mask-size: 100%;
 }
+
+/* REGISTER BUTTON */
+#register {
+    margin-left: auto;
+    margin-right: 3.5vw;
+    
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+
+    padding: 1vw 2vw 1vw 2vw;
+    border-radius: 20px;
+}
+
+/* DATE and TIME Box */
+#datetime {
+    /* float: right; */
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
+
+    /* text-align: right; */
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    font-size: calc(1vw + 7px);
+}
