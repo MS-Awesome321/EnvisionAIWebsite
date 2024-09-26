@@ -20,6 +20,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="entirePage.css">
     <link rel="stylesheet" type="text/css" href="page1.css">
+    <link rel="stylesheet" type="text/css" href="page4.css">
 
     <!-- Fonts -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +35,7 @@
     </a>
 
     <!-- NAV BAR -->
-    <div class="flexbox" style="position: fixed; width: 10vw;" id="nav">
+    <div class="flexbox" style="position: fixed; width: 10vw; height: calc(100vh - 20vw); margin-top: 10vw;" id="nav">
         <nav>
             <a class="pageName" href="#page1">Home</a>
             <a class="pageName" href="#page2">About</a>
@@ -72,7 +73,27 @@
     <div class="page" id="page3"></div>
 
     <!-- REGISTER PAGE -->
-    <div class="page" id="page4"></div>
+    <div class="page" id="page4">
+        <div class="flexbox" style="height: 95vh; margin-top: 2.5vh;">
+            <div id="registrationBox">
+                <div class="h1" style="margin-top: 5vh;">Registration Opens December 2024</div>
+
+                <div class="h2" style="margin-top: 5vh;">
+                    Fill out this form to let us know you're interested!
+                    <br/>
+                    We'll send you updates and let you know when it's time to register.
+                </div>
+
+                <div id="'formContainer" style="margin-top: 5vh;">
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Made with ❤️ in Princeton by Mayank S, Eden R, and Miguel P
+        </footer>
+    </div>
 
     <script>
         let elementsArray = document.querySelectorAll(".page");
@@ -162,6 +183,7 @@
                 }
 
                 registerFont('15px');
+                document.getElementById('datetime').style.transform = 'translateY(-12vh)';
             }
             else {
                 gainSide();
@@ -173,6 +195,7 @@
                 }
 
                 registerFont('17px');
+                document.getElementById('datetime').style.transform = 'translateY(0px)';
             }
         }
 

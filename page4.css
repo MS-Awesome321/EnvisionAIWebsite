@@ -1,0 +1,39 @@
+/* REGISTRATION BOX */
+#registrationBox {
+    width: calc(68vw - 40px);
+    height: 75vh;
+
+    background-color: gray;
+    border-radius: 20px;
+    padding: 20px;
+
+    color: white;
+
+    text-align: center;
+}
+
+.h1 {
+    font-size: 2vw;
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.h2 {
+    font-size: 1vw;
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* FOOTER */
+footer {
+    height: calc(2.5vh - 4px);
+    padding: 2px;
+    text-align: center;
+
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 8px;
+}

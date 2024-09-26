@@ -9,7 +9,7 @@ body {
 
 .page {
     height: 100vh;
-    border: black solid 1px;
+    /* border: black solid 1px; */
 }
 
 .flexbox {
@@ -42,7 +42,6 @@ body {
 nav {
     position: fixed;
     text-align: right;
-    z-index: 0;
 }
 
 .pageName {
