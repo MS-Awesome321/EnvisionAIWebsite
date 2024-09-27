@@ -1,0 +1,96 @@
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.page {
+    height: 100vh;
+    /* border: black solid 1px; */
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.gradient-background {
+    background: linear-gradient(45deg, #ed5e78, #ce297e, #ab4080, #875681, #3378Bd, #4c8fc7, #65a7d0);
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* NAV BAR */
+nav {
+    position: fixed;
+    text-align: right;
+}
+
+.pageName {
+    /* with padding, the total width is 15vh */
+    width: 7vw;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 1vw;
+    display: block;
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-size: 1.25vw;
+    text-decoration: none;
+    border-right: 2px solid black;
+}
+
+.pageName:hover {
+    font-size: x-large;
+    transition: 0.5s;
+    color: #65A7D0;
+}
+
+.pageName.inView {
+    color: #EC5E78;
+    border-right: 2px solid #EC5E78;
+}
+
+/* TOP LEFT LOGO */
+#topLogoContainer {
+    position: fixed;
+    height: 10vw;
+    width: 10vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#topLogo {
+    height: 60%;
+    width: 60%;
+
+    /* you can enter any png or svg image here to give it a gradient background*/
+    mask: url(assets/BlackLogo.png);
+    mask-size: 100%;
+
+    object-fit: fill;
+    transition: 0.5s;
+
+    z-index: 1;
+}

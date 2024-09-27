@@ -1,0 +1,26 @@
+/* HEADING */
+.leftalign {
+    justify-content: left;
+    align-items: left;
+}
+
+.h1 {
+    font-size: 3vw;
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.h2 {
+    font-size: 2vw;
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.p1 {
+    font-size: 1vw;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
