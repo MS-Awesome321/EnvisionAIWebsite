@@ -1,13 +1,13 @@
 /* HOME */
 #mainLogo {
-    height: 8vw;
+    height: 7.5vw;
     width: 45vw;
 
     justify-content: center;
     align-items: center;
     display: flex;
 
-    mask: url(assets/envisionLogo.png);
+    mask: url(assets/name_logo_white.png);
     mask-size: 100%;
 
     object-fit: fill;

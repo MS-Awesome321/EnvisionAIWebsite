@@ -86,7 +86,7 @@ nav {
     width: 60%;
 
     /* you can enter any png or svg image here to give it a gradient background*/
-    mask: url(assets/BlackLogo.png);
+    mask: url(assets/logo_small.png);
     mask-size: 100%;
 
     object-fit: fill;
