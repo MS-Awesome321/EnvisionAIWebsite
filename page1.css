@@ -1,0 +1,87 @@
+/* HOME */
+#mainLogo {
+    height: 8vw;
+    width: 45vw;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    mask: url(assets/envisionLogo.png);
+    mask-size: 100%;
+
+    object-fit: fill;
+}
+
+#politics {
+    text-align: right;
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 2.5vw;
+}
+
+/* SOCIAL MEDIA STUFF */
+#socialContainer {
+    height: 10vw;
+    margin-left: 8vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.social {
+    height: 4vh;
+    width: 4vh;
+    object-fit: fill;
+    margin-left: 5vh;
+    background-color: black;
+}
+
+#facebook {
+    mask: url(assets/socialMedia/facebook.png);
+    mask-size: 100%;
+}
+
+#linkedin {
+    mask: url(assets/socialMedia/linkedin.png);
+    mask-size: 100%;
+}
+
+#twitter {
+    mask: url(assets/socialMedia/twitter.png);
+    mask-size: 100%;
+}
+
+#insta {
+    mask: url(assets/socialMedia/insta.png);
+    mask-size: 100%;
+}
+
+/* REGISTER BUTTON */
+#register {
+    margin-left: auto;
+    margin-right: 3.5vw;
+    
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+
+    padding: 1vw 2vw 1vw 2vw;
+    border-radius: 20px;
+}
+
+/* DATE and TIME Box */
+#datetime {
+    /* float: right; */
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
+
+    /* text-align: right; */
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    font-size: calc(1vw + 7px);
+}
