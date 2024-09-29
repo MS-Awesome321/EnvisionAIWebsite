@@ -17,7 +17,7 @@ p, i {
     flex-wrap:wrap;
 }
 
-.g{gap:calc(1vh + 3vw);}
+.g{gap:calc(2.5vh + 7.5vw);}
 
 .min-h-screen{min-height:100vh;}
 .h-screen{min-height:100vh;}

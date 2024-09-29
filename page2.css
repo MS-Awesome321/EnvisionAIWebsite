@@ -1,0 +1,37 @@
+#textBox {
+    height: 75vh;
+    width: 80vw;
+    margin-top: 3.5vh;
+    margin-left: 10vw;
+    /* border: black solid 1px; */
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.h3 {
+    font-size: calc(2vw + 10px);
+    font-family: "DM Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px;
+}
+
+.h4 {
+    font-size: calc(1.5vw + 8px);
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 300;
+    font-style: normal;
+    padding: 10px;
+} 
+
+.p1 {
+    font-size: 1.5vw;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
