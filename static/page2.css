@@ -12,9 +12,9 @@
 }
 
 .h3 {
-    font-size: calc(2vw + 10px);
+    font-size: calc(3vh + 1.5vw);
     font-family: "DM Mono", monospace;
-    font-weight: 400;
+    font-weight: 800;
     font-style: normal;
     padding: 10px;
 }

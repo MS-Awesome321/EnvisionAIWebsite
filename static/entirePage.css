@@ -50,7 +50,7 @@ body {
 }
 
 .gradient-background {
-    background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(45deg, #EC5E78, #CE297E, #AB4080, #875681, #3378BD, #4C8FC7, #65A7D0);
     background-size: 400% 400%;
     animation: gradient 5s ease infinite;
 }
@@ -90,12 +90,12 @@ nav {
 
 .pageName.hover {
     transition: 0.5s;
-    color: #23a6d5;
+    color: #65A7D0;
 }
 
 .pageName.inView {
-    color: #e73c7e;
-    border-right: 2px solid #e73c7e;
+    color: #EC5E78;
+    border-right: 2px solid #EC5E78;
 }
 
 /* TOP LEFT LOGO */
