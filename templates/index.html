@@ -125,15 +125,61 @@
             <div id="registrationBox">
                 <div class="h1" style="margin-top: 5vh;">Registration Opens December 2024</div>
 
-                <div class="h2" style="margin-top: 5vh;">
-                    Fill out this form to let us know you're interested!
-                    <br/>
-                    We'll send you updates and let you know when it's time to register.
+                <div id="messageContainer" class="flexbox" style="height: 10%;">
+                    <div id="message" class="h2">
+                        Fill out this form to let us know you're interested!
+                        <br/>
+                        We'll send you updates and let you know when it's time to register.
+                    </div>
+                </div>
+                
+
+                <div id="formContainer">
+                    <form method="POST" class="form" id="form">
+                        {{ contact.csrf_token }}
+                        {{ contact.hidden_tag() }}
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.name(class_="input", id_="nameBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.email_id(class_="input", id_="emailBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.message(class_="input", id_="msgBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;" onclick="checkAndClose()">
+                            {{ contact.submit(class_="submitButton gradient-background", id_="button") }}
+                        </div>
+
+                        <div class="msg">{{ msg }}</div>
+                    </form>
+
+                    <div style="display: none;" id="formOff" onload="closeForm()">{{ formOff }}</div>
                 </div>
 
-                <div id="'formContainer" style="margin-top: 5vh;">
+                <script>
+                    // Submit Contact Form
+                    function closeForm(){
+                        document.getElementById("formContainer").style.display = "none";
+                        document.getElementById("messageContainer").style.height = "65%";
+                        document.getElementById("message").innerHTML = "Form Submitted!";
+                        document.getElementById("message").classList.add('submitted');
+                        document.getElementById("message").classList.add('gradient-background');
+                    }
 
-                </div>
+                    function checkAndClose(){
+                        var name = document.getElementById("nameBox").value;
+                        var email = document.getElementById("emailBox").value;
+                        var msg = document.getElementById("msgBox").value;
+                        if (not((msg==="") || (name==="") || (email===""))){
+                            closeForm();
+                        }
+                    }
+
+                    if (document.getElementById("formOff").innerHTML==="1") {
+                        closeForm();
+                    }
+                </script>
             </div>
         </div>
 

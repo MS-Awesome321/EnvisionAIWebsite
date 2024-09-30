@@ -65,12 +65,18 @@
     
     font-family: "DM Mono", monospace;
     font-weight: 300;
+    font-size: calc(0.8vw + 0.8vh) !important;
     text-decoration: none;
     text-align: center;
     color: white;
 
     padding: 1vw 2vw 1vw 2vw;
     border-radius: 20px;
+}
+
+#register:hover {
+    font-size: calc(1vw + 1vh) !important;
+    transition: 0.5s;
 }
 
 /* DATE and TIME Box */
