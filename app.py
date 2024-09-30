@@ -37,9 +37,7 @@ def index():
     contact = ContactForm()
 
     if contact.validate_on_submit():
-        print(contact.name.data)
         if (contact.name):
-            print(contact.email_id.data)
             # body = ""
             # for x in [contact.name, contact.email_id, contact.message]:
             #     body = body+(x.data)+"\n"
