@@ -18,11 +18,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="entirePage.css">
-    <link rel="stylesheet" type="text/css" href="page1.css">
-    <link rel="stylesheet" type="text/css" href="page2.css">
-    <link rel="stylesheet" type="text/css" href="page3.css">
-    <link rel="stylesheet" type="text/css" href="page4.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='entirePage.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page1.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page4.css')}}">
 
     <!-- Fonts -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,11 +38,25 @@
 
     <!-- NAV BAR -->
     <div class="flexbox" style="position: fixed; width: 10vw; height: calc(100vh - 20vw); margin-top: 10vw;" id="nav">
-        <nav>
-            <a class="pageName" href="#page1">Home</a>
-            <a class="pageName" href="#page2">About</a>
-            <a class="pageName" href="#page3">Team</a>
-            <a class="pageName" href="#page4">Register</a>
+        <nav id="nav">
+            <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
+            <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Team</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
+
+            <script>
+                function hover(id) {
+                    var el = document.getElementById(id);
+                    if (el.classList.contains('hover')) {
+                        el.classList.remove('hover');
+                        el.style.fontSize = 'calc('+el.style.fontSize+' - 2.5px)';
+                    }
+                    else {
+                        el.classList.add('hover');
+                        el.style.fontSize = 'calc('+el.style.fontSize+' + 2.5px)';
+                    }
+                }
+            </script>
         </nav>
     </div>
     
@@ -72,31 +86,31 @@
 
     <!-- ABOUT US PAGE -->
     <div class="page" id="page2">
-        <div class="flexbox" style="height:95vh; margin-top: 10vh;">
+        <div class="flexbox" style="height:95vh; margin-top: 10vh; width: 66vw; margin-left: 17vw;">
             <div id="textBox">
                 <div class="h3" style="text-align: left;">About</br></div>
                 <div class="h4" style="text-align: right; width: 60vw; float: right;">Welcome to Envision 2025: A student-led conference that explores 
                     the intersection of AI, tech, policy, and ethics, with the goal of educating, 
                     inspiring action, and shaping tomorrow’s leaders.</div>
-                <div class="p1" style="text-align: left; width: 25vw;">Possibly other text or items like our themes of ethics, policy, power.</div>
+                <div class="p1" style="text-align: left; width: 25vw;">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.</div>
             </div>
         </div>
     </div>
 
     <!-- TEAM PAGE -->
     <div class="page" id="page3">
-        <div class="flexbox flex-col align-center justify-center" style="height: 95vh; margin-top: 2.5vh;"> 
+        <div class="flexbox flex-col align-center justify-center" style="height: 95vh; width: 70vw; margin-top: 2.5vh; margin-left: 15vw;"> 
             <h2 class="m-1 g">Our Team</h2>
-            <p style="margin-bottom:3rem;">Meet the beautiful faces behind Envision.</p>
+            <p style="margin-bottom:3rem; text-align: center;">Meet the beautiful faces behind Envision.</p>
             <div class="flex flex-col">
                 <div class="flex flex-row g">
                     <div class="team-m no-select">
-                        <img class="profile-img" src="assets/team/emmett.jpg">
+                        <img class="profile-img" src="{{url_for('static', filename='assets/team/emmett.jpg')}}">
                         <p>Emmett Souder</p>
                         <i>Co-President</i>
                     </div>
                     <div class="team-m">
-                        <img class="profile-img" src="assets/team/maddie.jpg">
+                        <img class="profile-img" src="{{url_for('static', filename='assets/team/maddie.jpg')}}">
                         <p>Maddie Feldman</p>
                         <i>Co-President</i>
                     </div>
@@ -131,32 +145,57 @@
     <script>
         let elementsArray = document.querySelectorAll(".page");
         let linksArray = document.querySelectorAll(".pageName");
+        var benchmarks = [];
+        for (var i = 0 ; i < elementsArray.length - 1; i++) {
+            benchmarks[i] = i+0.5;
+        }
 
         var onFirstPage = true;
-        console.log(elementsArray);
         window.addEventListener('scroll', fadeIn); 
         function fadeIn() {
+            var top = elementsArray[0].getBoundingClientRect().top;
+            var height = elementsArray[0].getBoundingClientRect().height;
+            var pos = -top/height;
+            var domain = getDomain(pos);
             for (var i = 0; i < elementsArray.length; i++) {
                 var elem = elementsArray[i];
                 var link = linksArray[i];
-                var top = elem.getBoundingClientRect().top;
-                var height = elem.getBoundingClientRect().height;
 
-                if (1.1*(height-top) > 0 && height-top <= 1.1*height) {
+                if (i==domain) {
+                    elem.classList.add("inView");
+                    elem.classList.remove("outOfView");
                     link.classList.add("inView");
                     if (i==0) {
                         onFirstPage = true;
-                        
                     }
-                } else {
+                } 
+                else {
+                    elem.classList.remove("inView");
+                    elem.classList.add("outOfView");
                     link.classList.remove("inView");
                     if (i==0) {
                         onFirstPage = false;
                     }   
                 }
+
+                elem.style.zIndex = '0';
+                document.getElementById('nav').style.zIndex = '1';
+                document.getElementById('topLogoContainer').style.zIndex = '2';
             }
         }
         fadeIn();
+
+        function getDomain(pos) {
+            // determines which page is in view
+            var domain = 0;
+            for (var i = 0 ; i < benchmarks.length; i++) {
+                if (pos > benchmarks[i]) {
+                    domain = i+1;
+                }
+            }
+
+            return domain;
+        }
 
         window.addEventListener('scroll', changeLogo);
         function changeLogo() {
@@ -171,14 +210,12 @@
 
         function shrinkLogo() {
             var topLogo = document.getElementById('topLogo');
-            console.log(topLogo);
             topLogo.style.height = '65%';
             topLogo.style.width = '65%';
         }
 
         function expandLogo(size = 85) {
             var topLogo = document.getElementById('topLogo');
-            console.log(topLogo);
             topLogo.style.height = String(size)+'%';
             topLogo.style.width =  String(size)+'%';
         }
@@ -209,7 +246,6 @@
                     expandSide();
                 }
                 for (var icon of document.querySelectorAll('.social')) {
-                    console.log(icon)
                     icon.style.height = '6vw';
                     icon.style.width = '6vw';
                     icon.style.marginLeft = '5vw';

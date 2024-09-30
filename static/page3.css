@@ -17,7 +17,7 @@ p, i {
     flex-wrap:wrap;
 }
 
-.g{gap:calc(2.5vh + 7.5vw);}
+.g{gap:4vw}
 
 .min-h-screen{min-height:100vh;}
 .h-screen{min-height:100vh;}
@@ -66,7 +66,7 @@ p, i {
 
 .profile-img{
     aspect-ratio: 1/1;
-    width:calc(12vh + 8vw);
+    width:calc(10vh + 8vw);
     object-fit:cover;
     border-radius:50%;
 }

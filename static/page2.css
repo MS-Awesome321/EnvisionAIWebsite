@@ -2,11 +2,9 @@
     height: 75vh;
     width: 80vw;
     margin-top: 3.5vh;
-    margin-left: 10vw;
     /* border: black solid 1px; */
     padding-left: 1vw;
     padding-right: 1vw;
-    padding-top: 10vh;
     padding-bottom: 10vh;
     display: flex;
     flex-direction: column;

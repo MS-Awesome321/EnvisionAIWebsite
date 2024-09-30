@@ -9,7 +9,36 @@ body {
 
 .page {
     height: 100vh;
+    opacity: 0%;
     /* border: black solid 1px; */
+}
+
+.page.inView {
+    animation: fadeIn 0.5s ease 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+.page.outOfView {
+    animation: fadeOut 0.5s ease 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
 }
 
 .flexbox {
@@ -59,8 +88,7 @@ nav {
     border-right: 2px solid black;
 }
 
-.pageName:hover {
-    font-size: x-large;
+.pageName.hover {
     transition: 0.5s;
     color: #23a6d5;
 }
