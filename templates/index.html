@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Envision AI Conference @ Princeton</title>
+
+	<meta name="description" content="Welcome to Envision, Princeton University's annual student-run AI conference.">
+
+    <meta property="og:url" content="https://websitename"> <!-- edit here -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Envision AI Conference @ Princeton University">
+    <meta property="og:description" content="Welcome to Envision, Princeton University's annual student-run AI conference.">
+    <meta property="og:image" content="[logo here]"> <!-- edit here -->
+    <meta name="twitter:card" content="summary_large_image">
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='entirePage.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page1.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='page4.css')}}">
+
+    <!-- Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- TOP LEFT LOGO -->
+    <a href="#page1" id="topLogoContainer">
+        <div class="gradient-background" id="topLogo"></div>
+    </a>
+
+    <!-- NAV BAR -->
+    <div class="flexbox" style="position: fixed; width: 10vw; height: calc(100vh - 20vw); margin-top: 10vw;" id="nav">
+        <nav id="nav">
+            <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
+            <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Team</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
+
+            <script>
+                function hover(id) {
+                    var el = document.getElementById(id);
+                    if (el.classList.contains('hover')) {
+                        el.classList.remove('hover');
+                        el.style.fontSize = 'calc('+el.style.fontSize+' - 2.5px)';
+                    }
+                    else {
+                        el.classList.add('hover');
+                        el.style.fontSize = 'calc('+el.style.fontSize+' + 2.5px)';
+                    }
+                }
+            </script>
+        </nav>
+    </div>
+    
+    <!-- HOME PAGE -->
+    <div class="page" id="page1">
+        <div id="socialContainer">
+            <a href="https://www.facebook.com/"><div class="social" id="facebook"></div></a>
+            <a href="https://www.linkedin.com/"><div class="social" id="linkedin"></div></a>
+            <a href="https://www.twitter.com/"><div class="social" id="twitter"></div></a>
+            <a href="https://www.instagram.com/"><div class="social" id="insta"></div></a>
+
+            <a href="#page4"  id='register' class="gradient-background"><div>Register</div></a>
+        </div>
+
+        <div class="flexbox" style="margin-left: 10vw; width: 80vw; height: calc(100vh - 20vw);">
+            <div>
+                <div id="mainLogo" class="gradient-background"></div>
+                <div id="politics">the politics of AI</div>
+            </div>
+        </div>
+
+        <div id="datetime">
+            February 22-23, 2025 <br/>
+            Princeton, NJ
+        </div>
+    </div>
+
+    <!-- ABOUT US PAGE -->
+    <div class="page" id="page2">
+        <div class="flexbox" style="height:95vh; margin-top: 10vh; width: 66vw; margin-left: 17vw;">
+            <div id="textBox">
+                <div class="h3" style="text-align: left;">About</br></div>
+                <div class="h4" style="text-align: right; width: 60vw; float: right;">Welcome to Envision 2025: A student-led conference that explores 
+                    the intersection of AI, tech, policy, and ethics, with the goal of educating, 
+                    inspiring action, and shaping tomorrow’s leaders.</div>
+                <div class="p1" style="text-align: left; width: 30vw;">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEAM PAGE -->
+    <div class="page" id="page3">
+        <div class="flexbox flex-col align-center justify-center" style="height: 95vh; width: 70vw; margin-top: 2.5vh; margin-left: 15vw;"> 
+            <h2 class="m-1 g">Our Team</h2>
+            <p style="margin-bottom:3rem; text-align: center;">Meet the beautiful faces behind Envision.</p>
+            <div class="flex flex-col">
+                <div class="flex flex-row g">
+                    <div class="team-m no-select">
+                        <img class="profile-img" src="{{url_for('static', filename='assets/team/emmett.jpg')}}">
+                        <p>Emmett Souder</p>
+                        <i>Co-President</i>
+                    </div>
+                    <div class="team-m">
+                        <img class="profile-img" src="{{url_for('static', filename='assets/team/maddie.jpg')}}">
+                        <p>Maddie Feldman</p>
+                        <i>Co-President</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER PAGE -->
+    <div class="page" id="page4">
+        <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
+            <div id="registrationBox">
+                <div class="h1" style="margin-top: 5vh;">Registration Opens December 2024</div>
+
+                <div id="messageContainer" class="flexbox" style="height: 10%;">
+                    <div id="message" class="h2">
+                        Fill out this form to let us know you're interested!
+                        <br/>
+                        We'll send you updates and let you know when it's time to register.
+                    </div>
+                </div>
+                
+
+                <div id="formContainer">
+                    <form method="POST" class="form" id="form">
+                        {{ contact.csrf_token }}
+                        {{ contact.hidden_tag() }}
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.name(class_="input", id_="nameBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.email_id(class_="input", id_="emailBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            {{ contact.message(class_="input", id_="msgBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;" onclick="checkAndClose()">
+                            {{ contact.submit(class_="submitButton gradient-background", id_="button") }}
+                        </div>
+
+                        <div class="msg">{{ msg }}</div>
+                    </form>
+
+                    <div style="display: none;" id="formOff" onload="closeForm()">{{ formOff }}</div>
+                </div>
+
+                <script>
+                    // Submit Contact Form
+                    function closeForm(){
+                        document.getElementById("formContainer").style.display = "none";
+                        document.getElementById("messageContainer").style.height = "65%";
+                        document.getElementById("message").innerHTML = "Form Submitted!";
+                        document.getElementById("message").classList.add('submitted');
+                        document.getElementById("message").classList.add('gradient-background');
+                    }
+
+                    function checkAndClose(){
+                        var name = document.getElementById("nameBox").value;
+                        var email = document.getElementById("emailBox").value;
+                        var msg = document.getElementById("msgBox").value;
+                        if (not((msg==="") || (name==="") || (email===""))){
+                            closeForm();
+                        }
+                    }
+
+                    if (document.getElementById("formOff").innerHTML==="1") {
+                        closeForm();
+                    }
+                </script>
+            </div>
+        </div>
+
+        <footer>
+            Made with ❤️ in Princeton by Mayank S, Eden R, and Miguel P
+        </footer>
+    </div>
+
+    <script>
+        let elementsArray = document.querySelectorAll(".page");
+        let linksArray = document.querySelectorAll(".pageName");
+        var benchmarks = [];
+        for (var i = 0 ; i < elementsArray.length - 1; i++) {
+            benchmarks[i] = i+0.5;
+        }
+
+        var onFirstPage = true;
+        window.addEventListener('scroll', fadeIn); 
+        function fadeIn() {
+            var top = elementsArray[0].getBoundingClientRect().top;
+            var height = elementsArray[0].getBoundingClientRect().height;
+            var pos = -top/height;
+            var domain = getDomain(pos);
+            for (var i = 0; i < elementsArray.length; i++) {
+                var elem = elementsArray[i];
+                var link = linksArray[i];
+
+                if (i==domain) {
+                    elem.classList.add("inView");
+                    elem.classList.remove("outOfView");
+                    link.classList.add("inView");
+                    if (i==0) {
+                        onFirstPage = true;
+                    }
+                } 
+                else {
+                    elem.classList.remove("inView");
+                    elem.classList.add("outOfView");
+                    link.classList.remove("inView");
+                    if (i==0) {
+                        onFirstPage = false;
+                    }   
+                }
+
+                elem.style.zIndex = '0';
+                document.getElementById('nav').style.zIndex = '1';
+                document.getElementById('topLogoContainer').style.zIndex = '2';
+            }
+        }
+        fadeIn();
+
+        function getDomain(pos) {
+            // determines which page is in view
+            var domain = 0;
+            for (var i = 0 ; i < benchmarks.length; i++) {
+                if (pos > benchmarks[i]) {
+                    domain = i+1;
+                }
+            }
+
+            return domain;
+        }
+
+        window.addEventListener('scroll', changeLogo);
+        function changeLogo() {
+            if (onFirstPage) {
+                shrinkLogo();
+            }
+            else {
+                expandLogo();
+            }
+        }
+        changeLogo();
+
+        function shrinkLogo() {
+            var topLogo = document.getElementById('topLogo');
+            topLogo.style.height = '65%';
+            topLogo.style.width = '65%';
+        }
+
+        function expandLogo(size = 85) {
+            var topLogo = document.getElementById('topLogo');
+            topLogo.style.height = String(size)+'%';
+            topLogo.style.width =  String(size)+'%';
+        }
+
+        window.addEventListener('resize', checkPhoneMode);
+        var onPhone = true;
+        function checkPhoneMode() {
+            var height = window.innerHeight;
+            var width = window.innerWidth;
+            if (height > width) {
+                onPhone = true;
+            }
+            else {
+                onPhone = false;
+            }
+            phoneMode();
+        }
+        checkPhoneMode();
+
+        window.addEventListener('scroll', phoneMode);
+        function phoneMode() {
+            if (onPhone) {
+                if (onFirstPage) {
+                    loseSide();
+                }
+                else{
+                    gainSide();
+                    expandSide();
+                }
+                for (var icon of document.querySelectorAll('.social')) {
+                    icon.style.height = '6vw';
+                    icon.style.width = '6vw';
+                    icon.style.marginLeft = '5vw';
+                }
+
+                registerFont('15px');
+                document.getElementById('datetime').style.transform = 'translateY(-12vh)';
+            }
+            else {
+                gainSide();
+                shrinkSide();
+                for (var icon of document.querySelectorAll('.social')) {
+                    icon.style.height = '4vh';
+                    icon.style.width = '4vh';
+                    icon.style.marginLeft = '5vh';
+                }
+
+                registerFont('17px');
+                document.getElementById('datetime').style.transform = 'translateY(0px)';
+            }
+        }
+
+        function loseSide() {
+            document.getElementById('nav').style.display = 'none';
+            document.getElementById('topLogoContainer').style.display = 'none';
+            document.getElementById('socialContainer').style.marginLeft = '0';
+        }
+
+        function gainSide() {
+            document.getElementById('nav').style.display = 'flex';
+            document.getElementById('topLogoContainer').style.display = 'flex';
+            document.getElementById('socialContainer').style.marginLeft = '8vw';
+        }
+
+        function expandSide() {
+            expandLogo(65);
+            for (var pageName of document.querySelectorAll('.pageName')) {
+                pageName.style.width = '18vw';
+                pageName.style.fontSize = '2.25vw';
+            }
+            document.getElementById('topLogoContainer').style.height = '15vw';
+            document.getElementById('topLogoContainer').style.width = '15vw';
+        }
+
+        function shrinkSide() {
+            changeLogo();
+            for (var pageName of document.querySelectorAll('.pageName')) {
+                pageName.style.width = '7vw';
+                pageName.style.fontSize = '1.25vw';
+                document.getElementById('topLogoContainer').style.height = '10vw';
+                document.getElementById('topLogoContainer').style.width = '10vw';
+            }
+        }
+
+        function registerFont(size) {
+            document.getElementById('register').style.fontSize = size;
+        }
+    </script>
+</body>
+</html>

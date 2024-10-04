@@ -9,19 +9,48 @@ body {
 
 .page {
     height: 100vh;
+    opacity: 0%;
     /* border: black solid 1px; */
+}
+
+.page.inView {
+    animation: fadeIn 0.5s ease 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+.page.outOfView {
+    animation: fadeOut 0.5s ease 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+    }
 }
 
 .flexbox {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 .gradient-background {
-    background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(45deg, #EC5E78, #CE297E, #AB4080, #875681, #3378BD, #4C8FC7, #65A7D0);
     background-size: 400% 400%;
     animation: gradient 5s ease infinite;
 }
@@ -59,15 +88,14 @@ nav {
     border-right: 2px solid black;
 }
 
-.pageName:hover {
-    font-size: x-large;
+.pageName.hover {
     transition: 0.5s;
-    color: #23a6d5;
+    color: #65A7D0;
 }
 
 .pageName.inView {
-    color: #e73c7e;
-    border-right: 2px solid #e73c7e;
+    color: #EC5E78;
+    border-right: 2px solid #EC5E78;
 }
 
 /* TOP LEFT LOGO */
@@ -86,9 +114,11 @@ nav {
     width: 60%;
 
     /* you can enter any png or svg image here to give it a gradient background*/
-    mask: url(assets/BlackLogo.png);
+    mask: url(assets/logo_small.png);
     mask-size: 100%;
 
     object-fit: fill;
     transition: 0.5s;
+
+    z-index: 1;
 }
