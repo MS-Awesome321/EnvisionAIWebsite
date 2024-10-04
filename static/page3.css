@@ -90,3 +90,9 @@ h2 {
 .team-m p {
 	text-align: center;
 }
+
+.logo {
+    object-fit: cover;
+    max-width: 120px;
+    height: auto;
+}
