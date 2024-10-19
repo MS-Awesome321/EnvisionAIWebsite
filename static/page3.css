@@ -91,8 +91,35 @@ h2 {
 	text-align: center;
 }
 
-.logo {
-    object-fit: cover;
-    max-width: 120px;
-    height: auto;
+.s-logo {
+    height: 6.5vw;
+    min-height: 50px;
+    object-fit: contain;
 }
+
+.l-logo {
+    object-fit: cover;
+    height: 15vw;
+}
+
+#affiliates-preview{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap:2vw;
+  
+}
+
+
+/* ----- MOBILE -------- */
+
+@media screen and (max-width: 420px){
+    .flex-row {
+        flex-direction: column;
+    }
+    .l-logo{
+        width: 80%;
+        height: auto;
+    }
+}
+
