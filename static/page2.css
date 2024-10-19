@@ -1,8 +1,7 @@
 #textBox {
     height: 75vh;
     width: 80vw;
-    margin-top: 3.5vh;
-    /* border: black solid 1px; */
+    margin-top: 10vh;
     padding-left: 1vw;
     padding-right: 1vw;
     padding-bottom: 10vh;
@@ -11,7 +10,7 @@
     justify-content: space-around;
 }
 
-.h3 {
+h2 {
     font-size: calc(3vh + 1.5vw);
     font-family: "DM Mono", monospace;
     font-weight: 800;
@@ -19,16 +18,17 @@
     padding: 10px;
 }
 
-.h4 {
-    font-size: calc(1.5vw + 8px);
+
+.p1 {
+    font-size: calc(1.5vw + 15px);
     font-family: "IBM Plex Serif", serif;
     font-weight: 300;
     font-style: normal;
     padding: 10px;
-} 
+}
 
-.p1 {
-    font-size: 1.5vw;
+.p2 {
+    font-size: calc(.7vw + 13px);
     font-family: "IBM Plex Sans", sans-serif;
     font-weight: 300;
     font-style: normal;

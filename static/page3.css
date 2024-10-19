@@ -47,22 +47,14 @@ p, i {
     width:100%;
 }
 
-.fs-1{font-size: 1.5rem;}
-.fs-m{font-size:2rem;}
-.fs-l{font-size:2.5rem;}
-.fs-2{font-size: 2rem;}
-.text-center{text-align: center;}
-
-.bold-1{font-weight: 500;}
-.bold-2{font-weight: 600;}
-.bold-3{font-weight:700;}
-
 .no-select {
     user-select: none; /* Standard syntax */
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+.text-center{text-align:center;}
 
 .profile-img{
     aspect-ratio: 1/1;
@@ -77,6 +69,7 @@ h2 {
     font-family: "DM Mono", monospace;
     font-weight: 800;
     font-style: normal;
+    padding:10px;
 }
 
 .team-m {
@@ -108,6 +101,14 @@ h2 {
     justify-content: flex-end;
     gap:2vw;
   
+}
+
+
+.page-ctn {
+    height:95vh; 
+    margin-top: 10vh; 
+    width: 66vw; 
+    margin-left: 17vw;
 }
 
 
