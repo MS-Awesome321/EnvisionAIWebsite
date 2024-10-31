@@ -250,7 +250,6 @@ nav {
 /* SOCIAL MEDIA STUFF */
 #socialContainer {
     height: 10vw;
-    margin-left: 8vw;
     display: flex;
     align-items: center;
     position: relative;
@@ -285,10 +284,17 @@ nav {
 }
 
 /* REGISTER BUTTON */
+#registerContainer {
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 3.5vw;
+}
+
 #register {
-    margin-left: auto;
-    margin-right: 3.5vw;
-    
     font-family: "DM Mono", monospace;
     font-weight: 300;
     font-size: calc(0.8vw + 0.8vh) !important;
@@ -303,11 +309,12 @@ nav {
 #register:hover {
     font-size: calc(1vw + 1vh) !important;
     transition: 0.5s;
+    animation: shake 0.5s infinite;
 }
 
 /* DATE and TIME Box */
 #datetime {
-    /* float: right; */
+    display: inline-block;
     margin-left: 3.5vw;
     margin-right: 3.5vw;
 
@@ -317,6 +324,37 @@ nav {
     font-style: normal;
     font-size: calc(1vw + 7px);
 }
+
+/* Registration Open Box */
+#registrationOpen {
+    float: right;
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
+
+    text-align: right;
+    text-decoration: underline;
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    font-size: calc(1.5vw + 10.5px);
+
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
 
 /* -------- PAGE 2 -------------- */
 
@@ -377,7 +415,7 @@ nav {
 }
 
 
-/* REGISTRATION BOX */
+/* CONTACT BOX */
 #registrationBox {
     width: calc(68vw - 40px);
     height: 75vh;
