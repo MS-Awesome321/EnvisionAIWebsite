@@ -80,7 +80,7 @@ h2 {
     flex-wrap:wrap;
 }
 
-.g{gap:4vw}
+.g{gap:calc(4vw)}
 
 .p-3{ padding:2.5rem;}
 .p-2{padding:1.75rem;}
@@ -114,10 +114,6 @@ h2 {
 @media screen and (max-width: 420px){
     .flex-row {
         flex-direction: column;
-    }
-    .l-logo{
-        width: 80%;
-        height: auto;
     }
 }
 
@@ -511,7 +507,7 @@ nav {
 
 #msgBox{
     height: 18vh;
-    padding-top: 0.5vw;
+    padding-top: 1.5vh;
 }
 
 /* FOOTER */
