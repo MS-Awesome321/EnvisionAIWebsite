@@ -109,17 +109,7 @@ h2 {
 .text-center{text-align:center;}
 
 
-/* ----- MOBILE -------- */
 
-@media screen and (max-width: 420px){
-    .flex-row {
-        flex-direction: column;
-    }
-    .l-logo{
-        width: 80%;
-        height: auto;
-    }
-}
 
 
 
@@ -166,6 +156,8 @@ h2 {
     width: 66vw; 
     margin-left: 17vw;
 }
+
+
 
 
 /* ------- NAV BAR ----------- */
@@ -318,7 +310,7 @@ nav {
     font-size: calc(1vw + 7px);
 }
 
-/* -------- PAGE 2 -------------- */
+/* -------- ABOUT -------------- */
 
 #textBox {
     height: 75vh;
@@ -333,9 +325,32 @@ nav {
 }
 
 
+/* ----------- PROGRAM ---------- */
+
+.b-panel{
+	height: calc(7vw + 4px);
+	border-radius: 2rem;
+	width: calc(60vw + 4px);
+	
+
+}
+
+.agenda-item {
+	display: flex;
+	flex-direction: row;
+	background-color: white;
+	height: calc(7vw);
+	border-radius: 2rem;
+	width: calc(60vw);
+	gap:4vw;
+	align-items: center;
+	justify-content: space-evenly;
+}
 
 
-/* ----------- PAGE 3 --------- */
+
+
+/* ----------- TEAM --------- */
 
 .profile-img{
     aspect-ratio: 1/1;
@@ -486,4 +501,16 @@ footer {
     font-weight: 300;
     font-style: normal;
     font-size: 8px;
+}
+
+/* ----- MOBILE -------- */
+
+@media screen and (max-width: 420px){
+    .flex-row {
+        flex-direction: column;
+    }
+    .l-logo{
+        width: 80%;
+        height: auto;
+    }
 }
