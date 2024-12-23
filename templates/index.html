@@ -37,9 +37,10 @@
         <nav id="nav">
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Team</a>
-            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Partners</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Contact</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Venue</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Team</a>
+            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Partners</a>
+            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -112,8 +113,89 @@
         </div>
     </section>
 
+    <!-- VENUE PAGE -->
+     <section class="page" id="page3">
+        <div class="flexbox" style="width: 100%; height: 100%;">
+            <div id="mapContainer">
+                <div class="flexbox">
+                    <div id="mapWordsContainer">
+                        <h2 class="flexbox" style="height: 25%;">
+                            Venue
+                        </h2>
+                        
+                        <div class="flexbox" style="height: 75%;">
+                            <div class="h2" style="padding: 10% 10% 35% 10%;">
+                                <span style="font-weight: bold;">Robertson Hall, Princeton NJ 08540</span>
+                                <br/>
+                                <br/>
+                                Nearest Airports: Newark Liberty International Airport, Philadelphia International Airport
+                                <br/>
+                                <br/>
+                                Trains: Stop at Princeton Junction Station and take the <a href="https://www.njtransit.com/dinky">Dinky to Princeton Station</a>
+                                <br/>
+                                <br/>
+                                Nearby Hotels: 
+                                    <a href="https://www.hilton.com/en/hotels/pctgpgu-graduate-princeton/?arrivalDate=2024-12-23&departureDate=2024-12-24&flexibleDates=false&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&sessionToken=fb295439-047c-4ae9-b8dc-a75ffa940a28">
+                                        Graduate by Hilton
+                                    </a>, 
+                                    <a href="https://nassauinn.com/?device=c&keyword=nassau%20inn%20princeton&placement&adgroup=65095475655&campaign=1675358774&gad_source=1&gclid=Cj0KCQiAsaS7BhDPARIsAAX5cSC2Jr1boGtJPulQnj-VXu_ytZTd6z0H0MOvkv3QLRbd9Oy3XdcKgbkaAr4IEALw_wcB">
+                                        Nassau Inn
+                                    </a>, 
+                                    <a href="https://www.ihg.com/holidayinn/hotels/us/en/princeton/prnnj/hoteldetail">
+                                        Holiday Inn Princeton
+                                    </a>, 
+                                    <a href="https://www.hyatt.com/hyatt-regency/en-US/princ-hyatt-regency-princeton?icamp=hpe-hy-com_hcom_search_chico_0_en-US_property_princ">
+                                        Hyatt Regency Princeton
+                                    </a>, 
+                                    <a href="https://www.hyatt.com/hyatt-place/en-US/ewrzp-hyatt-place-princeton?icamp=hpe-hy-com_hcom_search_chico_1_en-US_property_ewrzp">
+                                        Hyatt Place Princeton
+                                    </a>, 
+                                    <a href="https://www.hilton.com/en/hotels/pctdtdt-doubletree-princeton/">
+                                        DoubleTree Princeton
+                                    </a>
+                                <br/>
+                                <br/>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Map -->
+                    <iframe
+                        id = 'map'
+                        style="height: 100%; width: 50%; border-radius: 20px;"
+                        frameborder="0" style="border:0"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD15o7bijQYNsCUhowrAafhpGrOcfGTe4E&q=Robertson+Hall,Princeton+NJ&maptype=satellite&zoom=18"
+                        allowfullscreen>
+                     </iframe>
+                </div>
+            </div>
+
+            <script>
+                function bigVenue() {
+                    console.log('bigVenue()')
+                    var mapWords = document.getElementById('mapWordsContainer');
+                    var map = document.getElementById('map');
+                    
+                    mapWords.style.display = 'none';
+                    map.style.width = '100%';
+                }
+                
+                function smallVenue() {
+                    console.log('smallVenue()')
+                    var mapWords = document.getElementById('mapWordsContainer');
+                    var map = document.getElementById('map');
+
+                    mapWords.style.display = 'block';
+                    map.style.width = '50%';
+                }
+            </script>
+        </div>
+     </section>
+
     <!-- TEAM PAGE -->
-    <section class="page" id="page3">
+    <section class="page" id="page4">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Meet the beautiful faces behind Envision.</p>
@@ -136,7 +218,7 @@
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page4">
+    <section class="page" id="page5">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
@@ -152,13 +234,13 @@
     </section>
 
     <!-- CONTACT PAGE -->
-    <section class="page" id="page5">
+    <section class="page" id="page6">
         <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
             <div id="registrationBox">
                 <div class="h1" style="margin-top: 5vh;">Contact Us</div>
 
                 <div id="messageContainer" class="flexbox" style="height: 10%;">
-                    <div id="message" class="h2">
+                    <div id="message" class="p2">
                         Fill out this form for any questions or just to get in touch!
                         <br/>
                         We'll reply back as soon as possible.
@@ -331,6 +413,7 @@
 
                 registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
+                bigVenue();
             }
             else {
                 gainSide();
@@ -343,6 +426,7 @@
 
                 registerFont('17px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(0px)';
+                smallVenue();
             }
         }
 

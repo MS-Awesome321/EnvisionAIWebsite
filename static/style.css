@@ -352,7 +352,7 @@ nav {
   }
 
 
-/* -------- PAGE 2 -------------- */
+/* -------- ABOUT US ------------- */
 
 #textBox {
     height: 75vh;
@@ -366,10 +366,25 @@ nav {
     justify-content: space-around;
 }
 
+/* --------- VENUE --------- */
+#mapContainer {
+    width: calc(68vw - 40px);
+    height: 75vh;
+    border-radius: 20px;
+    padding: 20px;
+    color: black;
+    text-align: center;
+}
+
+#mapWordsContainer {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    
+}
 
 
-
-/* ----------- PAGE 3 --------- */
+/* ----------- TEAM --------- */
 
 .profile-img{
     aspect-ratio: 1/1;
@@ -402,6 +417,8 @@ nav {
     height: 15vw;
 }
 
+/* --------PARTNERS-------- */
+
 #affiliates-preview{
     display:flex;
     flex-direction: row;
@@ -410,20 +427,17 @@ nav {
 
 }
 
+/* --------CONTACT-------- */
 
 /* CONTACT BOX */
 #registrationBox {
     width: calc(68vw - 40px);
     height: 75vh;
-
     background-color: gray;
     border-radius: 20px;
     padding: 20px;
-
     color: white;
-
     text-align: center;
-
 }
 
 .h1 {
