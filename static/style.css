@@ -157,9 +157,9 @@ h2 {
 }
 
 .page-ctn {
-    height:95vh; 
-    margin-top: 10vh; 
-    width: 66vw; 
+    height:95vh;
+    margin-top: 10vh;
+    width: 66vw;
     margin-left: 17vw;
 }
 
@@ -355,7 +355,7 @@ nav {
 /* -------- PAGE 2 -------------- */
 
 #textBox {
-    height: 130vh;
+    height: 75vh;
     width: 80vw;
     margin-top: 10vh;
     padding-left: 1vw;
@@ -407,7 +407,7 @@ nav {
     flex-direction: row;
     justify-content: flex-end;
     gap:2vw;
-  
+
 }
 
 
@@ -423,7 +423,7 @@ nav {
     color: white;
 
     text-align: center;
-    
+
 }
 
 .h1 {
