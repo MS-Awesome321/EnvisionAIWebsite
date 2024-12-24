@@ -21,11 +21,13 @@
     <link rel="stylesheet" type="text/css" href="static/style.css">
 
     <!-- Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-</head>
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <body>
     <!-- TOP LEFT LOGO -->
     <a href="#page1" id="topLogoContainer">
@@ -37,10 +39,11 @@
         <nav id="nav">
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Venue</a>
-            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Team</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Partners</a>
-            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Contact</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Venue</a>
+            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
+            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
+            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -113,8 +116,115 @@
         </div>
     </section>
 
-    <!-- VENUE PAGE -->
+    <!-- SPEAKERS PAGE -->
      <section class="page" id="page3">
+        <div class="flexbox" style="width: 100%; height: 100%;">
+            <div id="speakerSlidesContainer">
+                <!-- Speaker Slides -->
+                {% for i in range(length_speakers) %}
+                    {% if i%2==0 %}
+                        <div class="slide" id="slide{{i}}">
+                            <div class="bioContainer" style="float: left">
+                                <h2>{{speakers[i].name}}</h2>
+                                <h3>{{speakers[i].organization}}</h3>
+                                <div class="h2" style="padding-left: 10px;">
+                                    {{speakers[i].bio}}
+                                </div>
+                            </div>
+
+                            <div class="imgContainer flexbox" style="float: right">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="slide" id="slide{{i}}">
+                            <div class="imgContainer flexbox" style="float: left">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
+                                </div>
+                            </div>
+
+                            <div class="bioContainer" style="float: right">
+                                <h2>{{speakers[i].name}}</h2>
+                                <h3>{{speakers[i].organization}}</h3>
+                                <div class="h2" style="padding-left: 10px;">
+                                    {{speakers[i].bio}}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Slide Buttons -->
+                <div id="buttons">
+                    <div class="flexbox" style="cursor: pointer;">
+                        <div class="material-symbols-outlined" style="font-size: 1vw;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% for i in range(length_speakers) %}
+                            <div class="material-symbols-outlined page_controllers" style="font-size: 1vw;" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endfor %}
+                        <div class="material-symbols-outlined" style="font-size: 1vw;" onclick="nextSlide(); delay()">arrow_forward</div>
+                    </div>
+                </div>
+
+                <!-- Slide Script -->
+                 <script>
+                    var speakers = document.querySelectorAll(".slide");
+                    var pageControllers = document.querySelectorAll(".page_controllers");
+                    var slideNum = 0;
+                    var time = 0;
+
+                    function showSlide(j) {
+                        slideNum = (j+speakers.length)%speakers.length;
+                        for (var i = 0; i < speakers.length; i++) {
+                            speakers[i].style.display = "none";
+                            pageControllers[i].innerHTML = "radio_button_unchecked";
+                            speakers[i].classList.remove('inView');
+                        }
+                        speakers[slideNum].style.display = "block";
+                        speakers[slideNum].classList.add('inView');
+                        pageControllers[slideNum].innerHTML = "radio_button_checked";
+                    }
+                    
+                    function nextSlide(){
+                        slideNum++;
+                        showSlide(slideNum);
+                    }
+
+                    function prevSlide(){
+                        slideNum--;
+                        showSlide(slideNum);
+                    }
+
+                    showSlide(0);
+
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    function delay() {
+                        time = -450;
+                    }
+
+                    // Move Slides
+                    function moveAuto() {
+                        time++;
+                        if (time >= 450) {
+                            nextSlide();
+                            time = 0;
+                        }
+                        requestAnimationFrame(moveAuto);
+                    }
+
+                    requestAnimationFrame(moveAuto);
+                 </script>
+            </div>
+        </div>
+     </section>
+
+    <!-- VENUE PAGE -->
+     <section class="page" id="page4">
         <div class="flexbox" style="width: 100%; height: 100%;">
             <div id="mapContainer">
                 <div class="flexbox">
@@ -166,7 +276,7 @@
                         style="height: 100%; width: 50%; border-radius: 20px;"
                         frameborder="0" style="border:0"
                         referrerpolicy="no-referrer-when-downgrade"
-                        src=
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD15o7bijQYNsCUhowrAafhpGrOcfGTe4E&q=Robertson+Hall,Princeton+NJ&maptype=satellite&zoom=18"
                         allowfullscreen>
                      </iframe>
                 </div>
@@ -195,19 +305,19 @@
      </section>
 
     <!-- TEAM PAGE -->
-    <section class="page" id="page4">
+    <section class="page" id="page5">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Meet the beautiful faces behind Envision.</p>
             <div class="flex flex-col">
                 <div class="flex flex-row g">
                     <div class="team-m no-select">
-                        <img class="profile-img" src="static/assets/team/emmett.jpg">
+                        <img class="profile-img" src="{{url_for('static', filename='/assets/team/emmett.jpg')}}">
                         <p>Emmett Souder</p>
                         <i>Co-President</i>
                     </div>
                     <div class="team-m">
-                        <img class="profile-img" src="static/assets/team/maddie.jpg">
+                        <img class="profile-img" src="{{url_for('static', filename='/assets/team/maddie.jpg')}}">
                         <p>Maddie Feldman</p>
                         <i>Co-President</i>
                     </div>
@@ -218,7 +328,7 @@
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page5">
+    <section class="page" id="page6">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
@@ -234,7 +344,7 @@
     </section>
 
     <!-- CONTACT PAGE -->
-    <section class="page" id="page6">
+    <section class="page" id="page7">
         <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
             <div id="registrationBox">
                 <div class="h1" style="margin-top: 5vh;">Contact Us</div>

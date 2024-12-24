@@ -29,6 +29,14 @@ h2 {
     padding: 10px;
 }
 
+h3 {
+    font-size: calc(1vh + 0.5vw);
+    font-family: "DM Mono", monospace;
+    font-weight: normal;
+    font-style: normal;
+    padding: 0px 10px 10px 10px;
+}
+
 .p1 {
     font-size: calc(1.5vw + 15px);
     font-family: "IBM Plex Serif", serif;
@@ -128,8 +136,8 @@ h2 {
     /* border: black solid 1px; */
 }
 
-.page.inView {
-    animation: fadeIn 0.5s ease 1;
+.page.inView, .slide.inView {
+    animation: fadeIn 1s ease 1;
     animation-fill-mode: forwards;
 }
 
@@ -142,8 +150,8 @@ h2 {
     }
 }
 
-.page.outOfView {
-    animation: fadeOut 0.5s ease 1;
+.outOfView {
+    animation: fadeOut 1s ease 1;
     animation-fill-mode: forwards;
 }
 
@@ -366,11 +374,46 @@ nav {
     justify-content: space-around;
 }
 
+/* --------- SPEAKERS --------- */
+#speakerSlidesContainer {
+    width: calc(68vw - 40px);
+    height: 75vh;
+}
+
+.slide {
+    width: 100%;
+    height: 90%;
+    color: black;
+}
+
+#buttons {
+    width: 100%;
+    height: 10%;
+    color: black;
+    transition: 0.5s;
+}
+
+.bioContainer {
+    width: 45%;
+    padding: 10% 5% 10% 5%;
+}
+
+.imgContainer {
+    height: 100%;
+    width: 45%;
+}
+
+.speaker-img{
+    aspect-ratio: 1/1;
+    width:90%;
+    object-fit:cover;
+    border-radius:50%;
+}
+
 /* --------- VENUE --------- */
 #mapContainer {
     width: calc(68vw - 40px);
     height: 75vh;
-    border-radius: 20px;
     padding: 20px;
     color: black;
     text-align: center;

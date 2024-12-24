@@ -7,6 +7,7 @@ from flask_mail import Mail, Message
 from flask_wtf.csrf import CSRFProtect
 from datetime import date, datetime
 import socket
+from speakers import speakers
 
 # For dev purposes only; delete when deployed
 hostname = socket.gethostname()
@@ -56,7 +57,7 @@ def index():
                 file.write(new_entry+"\n")
             return redirect(url_for("noForm", _anchor='page4'))
 
-    return render_template("index.html", contact=contact, formOff=0)
+    return render_template("index.html", contact=contact, formOff=0, speakers=speakers, length_speakers = len(speakers))
 
 @app.route("/noForm", methods=['GET', 'POST'])
 def noForm():
