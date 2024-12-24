@@ -124,11 +124,13 @@
                 {% for i in range(length_speakers) %}
                     {% if i%2==0 %}
                         <div class="slide" id="slide{{i}}">
-                            <div class="bioContainer" style="float: left">
-                                <h2>{{speakers[i].name}}</h2>
-                                <h3>{{speakers[i].organization}}</h3>
-                                <div class="h2" style="padding-left: 10px;">
-                                    {{speakers[i].bio}}
+                            <div class="bioContainer flexbox" style="float: left">
+                                <div>
+                                    <h2>{{speakers[i].name}}</h2>
+                                    <h3>{{speakers[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
+                                        {{speakers[i].bio}}
+                                    </div>
                                 </div>
                             </div>
 
@@ -146,11 +148,13 @@
                                 </div>
                             </div>
 
-                            <div class="bioContainer" style="float: right">
-                                <h2>{{speakers[i].name}}</h2>
-                                <h3>{{speakers[i].organization}}</h3>
-                                <div class="h2" style="padding-left: 10px;">
-                                    {{speakers[i].bio}}
+                            <div class="bioContainer flexbox" style="float: right;">
+                                <div>
+                                    <h2>{{speakers[i].name}}</h2>
+                                    <h3>{{speakers[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
+                                        {{speakers[i].bio}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,11 +164,11 @@
                 <!-- Slide Buttons -->
                 <div id="buttons">
                     <div class="flexbox" style="cursor: pointer;">
-                        <div class="material-symbols-outlined" style="font-size: 1vw;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
                         {% for i in range(length_speakers) %}
-                            <div class="material-symbols-outlined page_controllers" style="font-size: 1vw;" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="material-symbols-outlined page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
                         {% endfor %}
-                        <div class="material-symbols-outlined" style="font-size: 1vw;" onclick="nextSlide(); delay()">arrow_forward</div>
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="nextSlide(); delay()">arrow_forward</div>
                     </div>
                 </div>
 
