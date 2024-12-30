@@ -43,7 +43,7 @@ speakers = [
     "Noah Broestl",
     "Partner and Associate Director, Responsible AI, BCG",
     "Noah Broestl is a Partner and Associate Director of Responsible AI at Boston Consulting Group (BCG), focusing on implementing ethical AI frameworks across various industries. Prior to joining BCG, he spent 13 years at Google, contributing to projects in vendor management, infrastructure engineering, abuse response, and artificial intelligence. Academically, Noah holds a Master's in Practical Ethics from the University of Oxford, where he explored topics including climate ethics. He is also a member of the Green Software Foundation's Steering Committee, contributing to sustainable software development practices.",
-    "assets/speakers/broestl.jpeg",
+    "assets/speakers/broestl.png",
     "https://github.com/orgs/Green-Software-Foundation/discussions/135?utm_source=chatgpt.com"
   ),
 
