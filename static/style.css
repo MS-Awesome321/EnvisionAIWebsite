@@ -405,7 +405,7 @@ nav {
 
 .speaker-img{
     aspect-ratio: 1/1;
-    width:90%;
+    width:25vw;
     object-fit:cover;
     border-radius:50%;
 }
