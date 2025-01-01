@@ -578,3 +578,15 @@ footer {
     font-style: normal;
     font-size: 8px;
 }
+
+/* ----- MOBILE -------- */
+
+@media screen and (max-width: 420px){
+    .flex-row {
+        flex-direction: column;
+    }
+    .l-logo{
+        width: 80%;
+        height: auto;
+    }
+}
