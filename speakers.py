@@ -40,18 +40,26 @@ speakers = [
   ),
 
   Speaker(
-    "Noah Broestl",
-    "Partner and Associate Director, Responsible AI, BCG",
-    "Noah Broestl is a Partner and Associate Director of Responsible AI at Boston Consulting Group (BCG), focusing on implementing ethical AI frameworks across various industries. Prior to joining BCG, he spent 13 years at Google, contributing to projects in vendor management, infrastructure engineering, abuse response, and artificial intelligence. Academically, Noah holds a Master's in Practical Ethics from the University of Oxford, where he explored topics including climate ethics. He is also a member of the Green Software Foundation's Steering Committee, contributing to sustainable software development practices.",
-    "assets/speakers/broestl.png",
-    "https://github.com/orgs/Green-Software-Foundation/discussions/135?utm_source=chatgpt.com"
-  ),
-
-  Speaker(
     "Happy Buzaaba",
     "Postdoctoral Research Associate in African Language Technologies, Princeton's Center for Digital Humanities",
     "Happy Buzaaba is a Postdoctoral Research Associate at Princeton University's Center for Digital Humanities, focusing on developing technologies for low-resource African languages.He earned his Ph.D. in Systems and Information Engineering from the University of Tsukuba, where he specialized in machine learning and computational linguistics.",
     "assets/speakers/buzaaba.jpg",
     "https://buzaabah.github.io/"
-  )
+  ),
+
+  Speaker(
+    "Noah Broestl",
+    "Partner and Associate Director, Responsible AI, BCG",
+    "Noah Broestl is a Partner and Associate Director of Responsible AI at Boston Consulting Group (BCG), focusing on implementing ethical AI frameworks across various industries. Prior to joining BCG, he spent 13 years at Google, contributing to projects in vendor management, infrastructure engineering, abuse response, and artificial intelligence. Academically, Noah holds a Master's in Practical Ethics from the University of Oxford, where he explored topics including climate ethics. He is also a member of the Green Software Foundation's Steering Committee, contributing to sustainable software development practices.",
+    "assets/speakers/broestl.png",
+    "https://github.com/orgs/Green-Software-Foundation/discussions/135"
+  ),
+
+  Speaker(
+    "Josua New",
+    "Director of Policy, SeedAI",
+    "Joshua New is the Director of Policy for SeedAI, responsible for SeedAI’s public policy thought leadership. Previously, Joshua led the public policy portfolio for generative AI and AI safety, open innovation, and other technology and science policy issues at IBM. At IBM, Joshua helped launch the AI Alliance, an international community focused on developing AI collaboratively, transparently, and with a focus on safety, ethics, and the greater good, and served as co-chair of the AI Alliance’s policy working group. Prior to IBM, Joshua was a Senior Policy Analyst at the Information Technology and Innovation Foundation’s (ITIF) Center for Data Innovation, where he focused on AI, emerging data-driven technologies, and open innovation.",
+    "assets/speakers/new.jpg",
+    ""
+  ),
 ]
