@@ -2,7 +2,7 @@ class Speaker():
   def __init__(self, name, organization, bio, img, link=""):
     self.name = name
     self.organization = organization
-    self.bio = bio 
+    self.bio = bio
     self.img = img
     self.link = link
 
@@ -16,11 +16,27 @@ speakers = [
   ),
 
   Speaker(
+      "Patrick Achi",
+      "Prime Minister, Côte d'Ivoire",
+      "Patrick Achi is the Former Prime Minister of the Republic of Côte d’Ivoire. Patrick Achi was appointed Prime Minister, Chief of Government, from March 2021 to October 2023. From January 2017 to March 2021, he was Secretary General of the Presidency and Executive Secretary of the National Council for Economic Policy, in charge of preparing the Vision 2030 Strategic Development Plan of the country, with key emphasis on growth, food security, youth employment, human resources, and environment. During the preceding 17 years, from 2000 to 2017, he was Minister of Economic Infrastructure in charge of roads, water infrastructures, ports, airports, and railways development. He developed close ties with key DFI’s and implemented major PPP projects.",
+      "assets/speakers/achi.jpg",
+      "https://en.wikipedia.org/wiki/Patrick_Achi"
+  ),
+
+  Speaker(
     "Liz Stotland Weiswasser",
     "Co-Chair, Litigation Department, Paul, Weiss, Rifkind, Wharton & Garrison LLP",
     "Liz Stotland Weiswasser is a nationally renowned litigator and counselor specializing in life sciences and technology, now co-chair of the Litigation Department at Paul, Weiss. With accolades such as 'IP Litigator of the Year' and a career spanning patent litigation, biopharma technologies, and high-stakes competitor disputes, she brings unparalleled expertise to the intersection of innovation and regulatory challenges.",
     "assets/speakers/weiswasser.jpeg",
     "https://www.paulweiss.com/professionals/partners-and-counsel/elizabeth-stotland-weiswasser"
+  ),
+
+  Speaker(
+      "Franklin Keller",
+      "Founder and Chief Investment Officer, Talos Asset Management",
+      "Franklin Keller is the Founder and Chief Investment Officer of Talos Asset Management, a Technology-focused hedge fund. Prior to founding Talos, he was Investment Director for the CHIPS Program Office (CPO) within the Department of Commerce – a $53bn grant and $75bn loan authority created by the bipartisan CHIPS Act of 2022 to bring semiconductor manufacturing back to America. Before joining the CPO, Mr. Keller was Associate Portfolio Manager at Ashler Capital (a Citadel business) focused on technology, a role he served from 2019-23. He was the Semiconductor Sector Head at Millennium Management from 2016-18 and started his investing career as an analyst at Balyasny Asset Management, where he worked from 2014-16. Prior to joining the buyside, he worked in sell-side equity research at Morgan Stanley from 2013-14 and Lehman Brothers / Barclays from 2008-13, covering semiconductors.",
+      "assets/speakers/keller.jpg",
+      "https://jrc.princeton.edu/speakers/franklin-keller"
   ),
 
   Speaker(
