@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, send_file
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField
 from wtforms.validators import InputRequired, Length
@@ -63,6 +63,10 @@ def index():
 def noForm():
     contact = ContactForm()
     return render_template("index.html", contact=contact, formOff=1)
+
+@app.route("/schedule", methods=['GET'])
+def showSchedule():
+    return send_file('templates/EnvisionSchedule.pdf')
 
 # RUN APP
 if __name__ == '__main__':

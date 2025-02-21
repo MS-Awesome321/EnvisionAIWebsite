@@ -78,4 +78,20 @@ speakers = [
     "assets/speakers/new.jpg",
     ""
   ),
+
+  Speaker(
+    "Luke Chan",
+    "Chief of Staff at Cofactor",
+    "Luke Chan is the Chief of Staff at Cofactor, which builds AI to be healthcare's first true financial intelligence layer. They help providers tackle their most complex denials so that they can focus on what really matters."
+    "assets/speakers/chan.jpeg",
+    "https://www.linkedin.com/in/lukemchan/"
+  ),
+
+  Speaker(
+    "Gabriel Daly",
+    "Associate General Counsel, US Department of Energy",
+    "Gabriel Daly is a legal advisor and Associate General Counsel at the United States Department of Energy. His speciality lies at the intersection of law, energy systems, and power-hungry AI, where he focuses on the challenge of supplying modern AI technologies with the resources they need to function while making these systems more energy efficient overall.",
+    "assets/speakers/daly.png",
+    "https://www.linkedin.com/in/gabriel-daly-0527b423/"
+  ),
 ]

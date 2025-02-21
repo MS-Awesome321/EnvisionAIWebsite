@@ -288,7 +288,7 @@ nav {
 }
 
 /* REGISTER BUTTON */
-#registerContainer {
+.registerContainer {
     height: 10vw;
     display: flex;
     align-items: center;
@@ -298,7 +298,7 @@ nav {
     right: 3.5vw;
 }
 
-#register {
+.register {
     font-family: "DM Mono", monospace;
     font-weight: 300;
     font-size: calc(0.8vw + 0.8vh) !important;
@@ -308,9 +308,10 @@ nav {
 
     padding: 1vw 2vw 1vw 2vw;
     border-radius: 20px;
+    margin-left: 2vw;
 }
 
-#register:hover {
+.register:hover {
     font-size: calc(1vw + 1vh) !important;
     transition: 0.5s;
     animation: shake 0.5s infinite;
