@@ -86,9 +86,8 @@
 
         <div id="bottomHomePage">
             <div id="datetime">
-                February 22-23, 2025 <br/>
-                Princeton, NJ </br>
-                <span style="font-size: 0.7rem; margin-top:2px;">** In-Person only</span>
+                February 22, 2025 <br/>
+                Princeton, NJ
             </div>
 
             <div id="registrationOpen">
@@ -167,7 +166,7 @@
                 {% endfor %}
 
                 <!-- Slide Buttons -->
-                <div class="buttons">
+                <div id="buttons">
                     <div class="flexbox" style="cursor: pointer;">
                         <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
                         {% for i in range(length_speakers) %}
@@ -274,9 +273,6 @@
                                     </a>
                                 <br/>
                                 <br/>
-                                <br/>
-                                <br>
-                                <i>**In-Person Attendance Only**</i>
 
                             </div>
                         </div>
@@ -320,105 +316,21 @@
     <section class="page" id="page5">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
-            <p class="p2 text-center" >Meet the beautiful faces behind Envision.</p>
-
-            <div style="height:80vh;">
-
-            <!-- TEAM Slides -->
-                {% set counter = 1 %}
-                {% for i in range(team_slides) %}
-                {% if i==0 %}
-                    <div class="a_slide" id="a_slide{{i}}">
-                            <div class="flex flex-row justify-center p2">
-                                    <img class="team-img" src="{{url_for('static', filename=team[i].img)}}">
-                            </div>
-                        <p style="text-align:center;">{{team[i].name}}</p>
-                        </div>
-
-                {% else %}
-                <div class="a_slide" id="a_slide{{i}}">
-                        <div class="flex flex-col g">
-                            <div class="flex flex-row justify-center g">
-                {% for j in range(6) %}
-                                {% set counter =  loop.index +((i - 1) * 6) %}
-                                {% if counter < length_team %}
-                            <div class="team-m no-select">
-                                <img class="profile-img" src="{{url_for('static', filename=team[counter].img)}}">
-                                <div class="flex flex-col align-center">
-                                    <p style="margin: 0px; font-size:15px;">{{ team[counter].name }}</p>
-                                <i style="font-size: 12px;">{{ team[counter].role }}</i>
-                                </div>
-
-                            </div>
-                                {% endif %}
-
-                    {% if j == 2 %}
-                        </div>
-                         <div class="flex flex-row justify-center g">
-                    {% endif %}
-
-                {% endfor %}
+            <p class="p2 text-center" style="margin-bottom:3rem;">Meet the beautiful faces behind Envision.</p>
+            <div class="flex flex-col">
+                <div class="flex flex-row g">
+                    <div class="team-m no-select">
+                        <img class="profile-img" src="{{url_for('static', filename='/assets/team/emmett.jpg')}}">
+                        <p>Emmett Souder</p>
+                        <i>Co-President</i>
                     </div>
-                        </div>
-                    </div>
-                {% endif %}
-                {% endfor %}
-
-                </div>
-
-                <!-- Slide Buttons -->
-                <div class="buttons">
-                    <div class="flexbox" style="cursor: pointer;">
-                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="teamPrevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% for i in range(team_slides) %}
-                            <div class="material-symbols-outlined t_page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="teamShowSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% endfor %}
-                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="teamNextSlide(); delay()">arrow_forward</div>
+                    <div class="team-m">
+                        <img class="profile-img" src="{{url_for('static', filename='/assets/team/maddie.jpg')}}">
+                        <p>Maddie Feldman</p>
+                        <i>Co-President</i>
                     </div>
                 </div>
-
-                <!-- Slide Script -->
-                 <script>
-                    var team = document.querySelectorAll(".a_slide");
-                    var t_pageControllers = document.querySelectorAll(".t_page_controllers");
-                    var t_slideNum = 0;
-                    var t_time = 0;
-
-                    function teamShowSlide(j) {
-                        t_slideNum = (j+team.length)%team.length;
-                        for (var i = 0; i < team.length; i++) {
-                            team[i].style.display = "none";
-                            t_pageControllers[i].innerHTML = "radio_button_unchecked";
-                            team[i].classList.remove('inView');
-                        }
-                        team[t_slideNum].style.display = "block";
-                        team[t_slideNum].classList.add('inView');
-                        t_pageControllers[t_slideNum].innerHTML = "radio_button_checked";
-                    }
-
-                    function teamNextSlide(){
-                        t_slideNum++;
-                        teamShowSlide(t_slideNum);
-                    }
-
-                    function teamPrevSlide(){
-                        t_slideNum--;
-                        teamShowSlide(t_slideNum);
-                    }
-
-                    teamShowSlide(0);
-
-                    // Move Slides
-                    function teamMoveAuto() {
-                        t_time++;
-                        if (t_time >= 450) {
-
-                            t_time = 0;
-                        }
-                        requestAnimationFrame(teamMoveAuto);
-                    }
-                    requestAnimationFrame(teamMoveAuto);
-                 </script>
+            </div>
 
         </div>
     </section>
@@ -428,13 +340,12 @@
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
-            <div class="flex flex-row align-center wrap justify-center g">
-                <a class="text-center" href="https://citp.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/citp_logo.jpeg')}}"></a>
-                <a class="text-center" href="https://cdh.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/cdh_logo.jpg')}}"></a>
-                <a class="text-center" href="https://researchcomputing.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/princeton_research_computing_logo.jpeg')}}"></a>
-                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/JRCPPF.png')}}"></a>
-                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/LISD_logo.png')}}"></a>
-                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/odus_logo.png')}}"></a>
+            <div class="flex flex-row align-center g">
+                <a class="text-center" href="https://citp.princeton.edu/" target="_blank"><img class="l-logo" src="static/assets/citp_logo.jpeg">
+                </a>
+                <a class="text-center" href="https://cdh.princeton.edu/" target="_blank"><img class="l-logo" src="static/assets/cdh_logo.jpg"></a>
+                <a class="text-center" href="https://researchcomputing.princeton.edu/" target="_blank"><img class="l-logo" src="static/assets/princeton_research_computing_logo.jpeg"></a>
+                </div>
             </div>
         </div>
     </section>
