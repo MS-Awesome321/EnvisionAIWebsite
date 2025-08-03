@@ -1,30 +1,26 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, send_file
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, IntegerField
 from wtforms.validators import InputRequired, Length
 from wtforms.widgets import TextArea
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 from flask_wtf.csrf import CSRFProtect
-from datetime import date, datetime
-import socket
-
-# For dev purposes only; delete when deployed
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+from speakers import speakers
+from team import team
 
 # Initialize app and contact form
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'nHFv%^&NcfDSww@236567H'
 csrf = CSRFProtect(app)
 
-# MAIL MANAGER
-app.config['MAIL_SERVER'] = "smtp.gmail.com"
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = '' # Fill this in later
-app.config['MAIL_PASSWORD'] = '' # Fill this in later
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
+# # MAIL MANAGER
+# app.config['MAIL_SERVER'] = "smtp.gmail.com"
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = '' # Fill this in later
+# app.config['MAIL_PASSWORD'] = '' # Fill this in later
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+# mail = Mail(app)
 
 class ContactForm(FlaskForm):
     name = StringField(validators=[InputRequired(), Length(min=4, max=80)], render_kw={"placeholder": "Full Name"})
@@ -52,17 +48,21 @@ def index():
                 new_entry = ""
                 for x in [contact.name, contact.email_id, contact.message]:
                     new_entry = new_entry+(x.data)+"\t"
-                
+
                 file.write(new_entry+"\n")
             return redirect(url_for("noForm", _anchor='page4'))
 
-    return render_template("index.html", contact=contact, formOff=0)
+    return render_template("index.html", contact=contact, formOff=0, speakers=speakers, team=team, length_team = len(team), length_speakers = len(speakers),team_slides = int((len(team) / 6) + 0.5) + 1)
 
 @app.route("/noForm", methods=['GET', 'POST'])
 def noForm():
     contact = ContactForm()
     return render_template("index.html", contact=contact, formOff=1)
 
+@app.route("/schedule", methods=['GET'])
+def showSchedule():
+    return send_file('templates/EnvisionSchedule.pdf')
+
 # RUN APP
 if __name__ == '__main__':
-    app.run(debug=True, host=IPAddr)
+    app.run(debug=True, host=str(IPAddr))

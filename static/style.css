@@ -29,6 +29,14 @@ h2 {
     padding: 10px;
 }
 
+h3 {
+    font-size: calc(1vh + 0.5vw);
+    font-family: "DM Mono", monospace;
+    font-weight: normal;
+    font-style: normal;
+    padding: 0px 10px 10px 10px;
+}
+
 .p1 {
     font-size: calc(1.5vw + 15px);
     font-family: "IBM Plex Serif", serif;
@@ -128,8 +136,8 @@ h2 {
     /* border: black solid 1px; */
 }
 
-.page.inView {
-    animation: fadeIn 0.5s ease 1;
+.page.inView, .slide.inView {
+    animation: fadeIn 1s ease 1;
     animation-fill-mode: forwards;
 }
 
@@ -142,8 +150,8 @@ h2 {
     }
 }
 
-.page.outOfView {
-    animation: fadeOut 0.5s ease 1;
+.outOfView {
+    animation: fadeOut 1s ease 1;
     animation-fill-mode: forwards;
 }
 
@@ -157,9 +165,9 @@ h2 {
 }
 
 .page-ctn {
-    height:95vh; 
-    margin-top: 10vh; 
-    width: 66vw; 
+    height:95vh;
+    margin-top: 10vh;
+    width: 66vw;
     margin-left: 17vw;
 }
 
@@ -259,28 +267,19 @@ nav {
     background-color: black;
 }
 
-#facebook {
-    mask: url(assets/socialMedia/facebook.png);
-    mask-size: 100%;
-}
-
 #linkedin {
     mask: url(assets/socialMedia/linkedin.png);
     mask-size: 100%;
-}
-
-#twitter {
-    mask: url(assets/socialMedia/twitter.png);
     mask-size: 100%;
 }
 
-#insta {
-    mask: url(assets/socialMedia/insta.png);
+#slack {
+    mask: url(assets/socialMedia/slack.png);
     mask-size: 100%;
 }
 
 /* REGISTER BUTTON */
-#registerContainer {
+.registerContainer {
     height: 10vw;
     display: flex;
     align-items: center;
@@ -290,7 +289,7 @@ nav {
     right: 3.5vw;
 }
 
-#register {
+.register {
     font-family: "DM Mono", monospace;
     font-weight: 300;
     font-size: calc(0.8vw + 0.8vh) !important;
@@ -300,9 +299,10 @@ nav {
 
     padding: 1vw 2vw 1vw 2vw;
     border-radius: 20px;
+    margin-left: 2vw;
 }
 
-#register:hover {
+.register:hover {
     font-size: calc(1vw + 1vh) !important;
     transition: 0.5s;
     animation: shake 0.5s infinite;
@@ -352,10 +352,10 @@ nav {
   }
 
 
-/* -------- PAGE 2 -------------- */
+/* -------- ABOUT US ------------- */
 
 #textBox {
-    height: 130vh;
+    height: 75vh;
     width: 80vw;
     margin-top: 10vh;
     padding-left: 1vw;
@@ -366,10 +366,73 @@ nav {
     justify-content: space-around;
 }
 
+/* --------- SPEAKERS --------- */
+#speakerSlidesContainer {
+    width: calc(68vw - 40px);
+    height: 75vh;
+}
 
+.slide {
+    width: 100%;
+    height: 90%;
+    color: black;
+}
 
+#buttons {
+    width: 100%;
+    height: 10%;
+    color: black;
+    transition: 0.5s;
+}
 
-/* ----------- PAGE 3 --------- */
+.bioContainer {
+    width: 45%;
+    padding: 0% 5% 0% 5%;
+}
+
+.imgContainer {
+    height: 100%;
+    width: 45%;
+}
+
+.speaker-img{
+    aspect-ratio: 1/1;
+    width:20vw;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+/* --------- VENUE --------- */
+#mapContainer {
+    width: calc(68vw - 40px);
+    height: 75vh;
+    padding: 20px;
+    color: black;
+    text-align: center;
+}
+
+#mapWordsContainer {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+
+}
+
+/* --------- SLACK --------- */
+#slackContainer {
+    width: calc(68vw - 40px);
+    height: 75vh;
+}
+
+#slackWordsContainer {
+    height: 50%;
+    width: 50%;
+    text-align: center;
+    padding-top: 30%;
+    padding-bottom: 20%;
+}
+
+/* ----------- TEAM --------- */
 
 .profile-img{
     aspect-ratio: 1/1;
@@ -399,31 +462,30 @@ nav {
 
 .l-logo {
     object-fit: cover;
-    height: 15vw;
+    height: 10vh;
 }
+
+/* --------PARTNERS-------- */
 
 #affiliates-preview{
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
     gap:2vw;
-  
+
 }
 
+/* --------CONTACT-------- */
 
 /* CONTACT BOX */
 #registrationBox {
     width: calc(68vw - 40px);
     height: 75vh;
-
     background-color: gray;
     border-radius: 20px;
     padding: 20px;
-
     color: white;
-
     text-align: center;
-    
 }
 
 .h1 {
@@ -520,4 +582,12 @@ footer {
     font-weight: 300;
     font-style: normal;
     font-size: 8px;
+}
+
+/* ----- MOBILE -------- */
+
+@media screen and (max-width: 420px){
+    .flex-row {
+        flex-direction: column;
+    }
 }
