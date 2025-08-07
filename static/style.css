@@ -481,30 +481,27 @@ nav {
 #registrationBox {
     width: calc(68vw - 40px);
     height: 75vh;
-    background-color: gray;
     border-radius: 20px;
     padding: 20px;
-    color: white;
     text-align: center;
 }
 
 .h1 {
     font-size: calc(1.25vh + 1vw);
     font-family: "DM Mono", monospace;
-    font-weight: 300;
+    font-weight: 600;
     font-style: normal;
 }
 
-.h2 {
+.h2 {   
     font-size: calc(0.75vh + 0.5vw);
     font-family: "IBM Plex Serif", serif;
-    font-weight: 300;
+    font-weight: 600;
     font-style: normal;
 }
 
 /* FORM */
 #message {
-    margin-top: 5vh;
     font-size: calc(0.75vh + 0.75vw);
 }
 
@@ -527,7 +524,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5vh;
+    margin-top: 1rem;
 }
 
 .form {
@@ -541,12 +538,13 @@ nav {
     margin-right: 2vw;
     margin-bottom: 1vw;
     height: 6vh;
-    width:44vw;
+    width:100%;
     padding: 0.5vh 1.25vw 0.5vh 1.25vw;
-    border: 0px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     font-size: calc(1vh + 1vw);
     display: block;
+    background: white;
 }
 
 .submitButton {

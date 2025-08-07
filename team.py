@@ -13,42 +13,36 @@ team = [
         " "
     ),
     Team(
-        "Emmett Souder",
-        "/assets/team/souder.JPG",
-        "Co-President"
-    ),
-
-    Team(
-        "Maddie Feldman",
-        "/assets/team/feldman.png",
-        "Co-President"
+        "Mohemeen Ahmed",
+        "/assets/team/ahmed.jpeg",
+        "Co-Director"
     ),
     Team(
         "Eden Reinfurt",
         "/assets/team/reinfurt.JPG",
-        "Website"
+        "Co-Director"
     ),
     Team(
         "Mayank Sengupta",
         "/assets/team/sengupta.JPG",
-        "Website"
+        "Outreach"
     ),
     Team(
         "Miguel Piñero-Jacome",
         "/assets/team/pinero.JPG",
         "Website"
     ),
-
+Team(
+        "Haya Elamir",
+        "/assets/team/elamir.jpg",
+        "Treasurer"
+    ),
     Team(
         "Sidak Singh",
         "/assets/team/singh.JPG",
         ""
     ),
-     Team(
-        "Haya Elamir",
-        "/assets/team/elamir.jpg",
-        "Treasurer"
-    ),
+     
     Team(
         "Tarun Iyengar",
         "/assets/team/iyengar.JPG",

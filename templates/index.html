@@ -41,10 +41,9 @@
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
             <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
             <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Venue</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Slack</a>
-            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
-            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Partners</a>
-            <a class="pageName" href="#page8" id="page8Link" onmouseenter="hover('page8Link')" onmouseleave="hover('page8Link')">Contact</a>
+            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
+            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
+            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -66,7 +65,7 @@
     <div class="registerContainer">
         <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8Kz3a4LNCl8EjYF_tPRyPcdygOM-M9fXd5MnlDoCniAz3cA/viewform" class="gradient-background register" id="register"><div>Register</div></a>-->
 
-        <a href="schedule"  class="gradient-background register"><div>Schedule</div></a>
+        <a href="#page7"  class="gradient-background register"><div>Get Involved</div></a>
     </div>
 
     <!-- HOME PAGE -->
@@ -85,14 +84,17 @@
 
         <div id="bottomHomePage">
             <div id="datetime">
-                February 22-23, 2025 <br/>
+                February 21, 2026 <br/>
                 Princeton, NJ <br/>
                 <span style="font-size: 0.7rem; margin-top:2px;">** In-Person only</span>
             </div>
 
+            <!-- registration open 
             <div id="registrationOpen">
                 Schedule Released!
             </div>
+            -->
+            
         </div>
     </header>
 
@@ -101,7 +103,7 @@
         <div class="flexbox page-ctn">
             <div id="textBox">
                 <h2 style="text-align: left;">About<br/></h2>
-                <div class="p1" style="text-align: right; width: 60vw; float: right;">Welcome to Envision 2025: A student-led conference that explores
+                <div class="p1" style="text-align: right; width: 60vw; float: right;">Welcome to Envision 2026: A student-led conference that explores
                     the intersection of AI, tech, policy, and ethics, with the goal of educating,
                     inspiring action, and shaping tomorrow’s leaders.</div>
                 <div class="p2" style="text-align: left; width: calc(30vw + 10px);">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.
@@ -315,7 +317,8 @@
         </div>
      </section>
 
-    <!-- SLACK -->
+    <!-- SLACK  -->
+     <!--
     <section class="page" id="page5">
         <div class="flexbox">
             <div id="slackContainer">
@@ -333,7 +336,7 @@
                         </div>
                     </div>
 
-                    <!-- The QR Code -->
+                    The QR Code
                     <a href="https://join.slack.com/t/envision2025/shared_invite/zt-30cgsyamt-KtYfKwBrDAGZKX1adv7WHw" target="_blank">
                         <img style="height:calc(10vh + 15vw)" src="{{url_for('static', filename='assets/slackQR.jpeg')}}" />
                     </a>
@@ -341,9 +344,10 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- TEAM PAGE -->
-    <section class="page" id="page6">
+    <section class="page" id="page5">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
             <p class="p2 text-center" >Meet the beautiful faces behind Envision.</p>
@@ -356,7 +360,7 @@
                 {% if i==0 %}
                     <div class="a_slide" id="a_slide{{i}}">
                             <div class="flex flex-row justify-center p2">
-                                    <img class="team-img" style="height: 40vw; border-radius: 20px" src="{{url_for('static', filename=team[i].img)}}">
+                                    <img class="team-img" style="height: 30vw; border-radius: 20px" src="{{url_for('static', filename=team[i].img)}}">
                             </div>
                         <p style="text-align:center;">{{team[i].name}}</p>
                     </div>
@@ -450,7 +454,7 @@
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page7">
+    <section class="page" id="page6">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
@@ -466,14 +470,14 @@
     </section>
 
     <!-- CONTACT PAGE -->
-    <section class="page" id="page8">
+    <section class="page" id="page7">
         <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
             <div id="registrationBox">
-                <div class="h1" style="margin-top: 5vh;">Contact Us</div>
+                <h2>Contact Us</h2>
 
                 <div id="messageContainer" class="flexbox" style="height: 10%;">
                     <div id="message" class="p2">
-                        Fill out this form for any questions or just to get in touch!
+                        Fill out this form to get in touch with us.
                         <br/>
                         We'll reply back as soon as possible.
                     </div>
@@ -481,20 +485,29 @@
 
 
                 <div id="formContainer">
-                    <form method="POST" class="form" id="form">
-                        {{ contact.csrf_token }}
-                        {{ contact.hidden_tag() }}
+                    <form method="POST" action="{{ url_for('get_involved') }}" class="form" id="form">
+                        {{ ContactForm.csrf_token }}
+                        {{ ContactForm.hidden_tag() }}
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.name(class_="input", id_="nameBox") }}
+                            {{ ContactForm.name(class_="input", id_="nameBox") }}
                         </div>
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.email_id(class_="input", id_="emailBox") }}
+                            {{ ContactForm.email_id(class_="input", id_="emailBox") }}
                         </div>
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.message(class_="input", id_="msgBox") }}
+                            {{ ContactForm.affiliation(class_="input", id_="affiliationBox") }}
                         </div>
-                        <div style="display: flex; justify-content: center;" onclick="checkAndClose()">
-                            {{ contact.submit(class_="submitButton gradient-background", id_="button") }}
+                        <div style="display: flex; justify-content: center;">
+                            {{ ContactForm.role(class_="input", id_="roleBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            {{ ContactForm.message(class_="input", id_="msgBox") }}
+                        </div>
+                        <div style="display:none">
+                            {{ ContactForm.honeypot(class_="input", id_="websiteBox") }}
+                        </div>
+                        <div style="display: flex; justify-content: center; padding:10px;" onclick="checkAndClose()">
+                            {{ ContactForm.submit(class_="submitButton gradient-background", id_="button") }}
                         </div>
 
                         <div class="msg">{{ msg }}</div>
@@ -504,6 +517,36 @@
                 </div>
 
                 <script>
+                    document.getElementById("form").addEventListener("submit", async function(event){
+                        event.preventDefault();
+
+                        const formData = new FormData(this);
+                        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+                        const response = await fetch("/get-involved", {
+                            method: "POST",
+                            headers: {
+                                'X-CSRFToken': csrfToken, 
+                            },
+                            body: formData
+                        });
+                        if (response.status === 429){
+                            document.getElementById("message").innerHTML = "Too many form submissions. Please try again later.";
+                            document.getElementById("message").classList.add('error');
+                            return;
+
+                        }
+                        if (response.ok){
+                            const result = await response.json();
+                            if (result.success) {
+                                closeForm();
+                            } else {
+                                document.getElementById("message").innerHTML = result.message;
+                                document.getElementById("message").classList.add('error');
+                            }
+                        }
+                    });
+
                     // Submit Contact Form
                     function closeForm(){
                         document.getElementById("formContainer").style.display = "none";
