@@ -89,7 +89,8 @@ def index():
         team=team,
         length_team=len(team),
         length_speakers=len(speakers),
-        team_slides=int((len(team) / 6) + 0.5) + 1
+        team_slides=int((len(team) / 6) + 0.5) + 1,
+        registrationOpen = False  # Set to True if registration is open
     )
 
 ''''
@@ -114,4 +115,4 @@ def showSchedule():
 
 # RUN APP
 if __name__ == '__main__':
-    app.run(debug=True, host=str(IPAddr))
+    app.run(debug=True)   

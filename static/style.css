@@ -114,7 +114,14 @@ h3 {
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+.no-link-decor { 
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent element */}
+
+
 .text-center{text-align:center;}
+.text-left{text-align:left;}
+.text-right{text-align:right;}
 
 
 /* ----- MOBILE -------- */
@@ -250,6 +257,10 @@ nav {
     font-style: normal;
     font-size: 2.5vw;
 }
+#bottomHomePage {
+    text-align:right;
+}
+
 
 /* SOCIAL MEDIA STUFF */
 #socialContainer {
@@ -353,6 +364,14 @@ nav {
 
 
 /* -------- ABOUT US ------------- */
+#conferenceImage {
+    width: 40vw;
+    z-index: 1;
+    box-shadow: 20px 12px 1px #875681;
+    border-radius: 20px;
+    margin-bottom: 2vh;
+    
+}
 
 #textBox {
     height: 75vh;
@@ -365,7 +384,89 @@ nav {
     flex-direction: column;
     justify-content: space-around;
 }
+/* ------ HISTORY ------ */
 
+#pastSpeakersTitle {
+        height: 25%;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+#historyContainer {
+    padding: 20px;
+    color: black;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#pastSpeakersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden; /* clip edges so fades look clean */
+}
+
+.scrolling-track {
+    display: flex;
+    animation: scroll-left 45s linear infinite;
+    will-change: transform;
+}
+
+/* Base state: hidden until 'in-view' is added by the observer */
+.past-speaker-container {
+    flex: 0 0 auto;
+    width: 12vw;
+    height: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 400ms ease, transform 400ms ease;
+    text-wrap: auto;
+    
+}
+
+/* Visible state (added when intersectionRatio >= ENTER_RATIO) */
+.past-speaker-container.in-view {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Soft dim only when ALSO in-view (pre-exit) */
+.past-speaker-container.in-view.near-edge {
+    opacity: 0.65;   /* subtle dim near edges */
+    transform: scale(0.96);
+}
+.past-speaker-container:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+
+.past-speaker-img {
+    width: 10vw;
+    min-width: 80px;
+    max-width: 120px;
+    aspect-ratio: 1/1;
+    min-height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    user-select: none;
+}
+
+@keyframes scroll-left {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
 /* --------- SPEAKERS --------- */
 #speakerSlidesContainer {
     width: calc(68vw - 40px);
@@ -496,7 +597,7 @@ nav {
 .h2 {   
     font-size: calc(0.75vh + 0.5vw);
     font-family: "IBM Plex Serif", serif;
-    font-weight: 600;
+    font-weight: 300;
     font-style: normal;
 }
 

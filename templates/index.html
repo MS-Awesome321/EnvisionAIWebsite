@@ -39,7 +39,7 @@
         <nav id="nav">
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Past</a>
             <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Venue</a>
             <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
             <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
@@ -107,19 +107,139 @@
                     the intersection of AI, tech, policy, and ethics, with the goal of educating,
                     inspiring action, and shaping tomorrow’s leaders.</div>
                 <div class="p2" style="text-align: left; width: calc(30vw + 10px);">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.
+                    
 
                 </div>
+                
+
                 <div id="affiliates-preview">
                     <a href="https://www.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/princeton_logo.png"> </a>
                     <a href="https://citp.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/citp_logo.jpeg">
                     </a>
                     <a href="https://cdh.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/cdh_logo.jpg"></a>
-
             </div>
             </div>
         </div>
     </section>
 
+<!-- HISTORY PAGE -->
+ <section class="page" id="page3">
+    <div class="flexbox" style="width: 100%; height: 100%;">
+        
+        <div id="historyContainer">
+            <div class="flex flex-row justify-center  margin-bottom g" style="padding: 2vh 0;">
+                <div class="flex-col align-center text-left">
+                    <h2 class="g" >Our
+                        History</h2>
+                
+                <p class="p1" style="width: 30vw;"> Envision was founded in ____.</p>
+                more text here
+                </div>
+                <img id="conferenceImage" src="static/assets/conference.png" >
+
+            </div>
+            
+            <div id="pastSpeakersContainer">
+                <h3 id="pastSpeakersTitle" class="flex">
+                    Past Speakers
+                </h3>
+                <div class="scrolling-track" id="scrollingTrack">
+                    {% for i in range(length_speakers) %}
+                    <a class="no-link-decor" href="{{ speakers[i].link }}">
+                        <div class="past-speaker-container">
+                            <div class="team-m no-select">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                            </div>
+                            <h3>{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].organization }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    {% for i in range(length_speakers) %}
+                        <a class="no-link-decor" href="{{ speakers[i].link }}">
+                        <div class="past-speaker-container">
+                            <div class="team-m no-select">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                            </div>
+                            <h3>{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].organization }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('pastSpeakersContainer');
+    const track = document.getElementById('scrollingTrack');
+    const speakerItems = track.querySelectorAll('.past-speaker-container');
+
+    // ===== Pause/Resume + Reset animation based on viewport =====
+    const section = document.getElementById('page3');
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Reset animation to start
+                track.style.animation = 'none';
+                track.offsetHeight; // trigger reflow
+                track.style.animation = ''; // restore original animation
+                track.style.animationPlayState = 'running';
+            } else {
+                track.style.animationPlayState = 'paused';
+            }
+        });
+    }, {
+        root: null,      // viewport
+        threshold: 0.2   // at least 20% of section visible to run
+    });
+    sectionObserver.observe(section);
+
+    // ===== Fade-in/out observer for speaker items =====
+    const ENTER_RATIO = 0.01; // must be ~35% visible to fade IN
+    const EXIT_RATIO  = 0.9;  // drop below 15% to fade OUT
+    const EDGE_RATIO  = 0.5;  // dim near edges when <25% visible
+
+    const active = new WeakSet();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const el = entry.target;
+            const ratio = entry.intersectionRatio;
+
+            if (!active.has(el) && ratio >= ENTER_RATIO) {
+                active.add(el);
+                el.classList.add('in-view');
+            }
+
+            if (active.has(el) && ratio <= EXIT_RATIO) {
+                active.delete(el);
+                el.classList.remove('in-view');
+                el.classList.remove('near-edge');
+            }
+
+            if (active.has(el)) {
+                if (ratio < EDGE_RATIO) {
+                    el.classList.add('near-edge');
+                } else {
+                    el.classList.remove('near-edge');
+                }
+            }
+        });
+    }, {
+        root: container,
+        rootMargin: '0px',
+        threshold: [0, EXIT_RATIO, EDGE_RATIO, ENTER_RATIO, 1]
+    });
+
+    speakerItems.forEach((item) => observer.observe(item));
+});
+</script>
+
+{% if registrationOpen %}
     <!-- SPEAKERS PAGE -->
      <section class="page" id="page3">
         <div class="flexbox" style="width: 100%; height: 100%;">
@@ -232,6 +352,8 @@
             </div>
         </div>
      </section>
+
+{% endif %}
 
     <!-- VENUE PAGE -->
      <section class="page" id="page4">
