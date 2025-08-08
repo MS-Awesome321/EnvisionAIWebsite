@@ -1,2 +1,3 @@
 Chuck	cnorris@gmail.com	Hello world	
 Bob Ross	Bross@gmail.com	I want to join envision!	
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton University	volunteer	plz let me join	
