@@ -1,5 +1,6 @@
 html {
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
+    min-width: 300px;
 }
 
 body {
@@ -603,6 +604,19 @@ nav {
 }
 
 /* FORM */
+
+.field-error {
+    color: red;
+    font-size: calc(0.5vh + 0.5vw);
+    margin-top: -0.5vh;
+    margin-bottom: 0.5vh;
+    display:block;
+}
+
+.field-error:empty {
+    display: none;
+}
+
 #message {
     font-size: calc(0.75vh + 0.75vw);
 }

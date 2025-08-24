@@ -593,6 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
 
     <!-- CONTACT PAGE -->
+
     <section class="page" id="page7">
         <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
             <div id="registrationBox">
@@ -605,31 +606,44 @@ document.addEventListener('DOMContentLoaded', () => {
                         We'll reply back as soon as possible.
                     </div>
                 </div>
-
-
+                <!-- Classic reCAPTCHA -->
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                
                 <div id="formContainer">
                     <form method="POST" action="{{ url_for('get_involved') }}" class="form" id="form">
                         {{ ContactForm.csrf_token }}
                         {{ ContactForm.hidden_tag() }}
+                        
                         <div style="display: flex; justify-content: center;">
                             {{ ContactForm.name(class_="input", id_="nameBox") }}
                         </div>
+                        <span class="field-error" id="error-name"></span>
+
                         <div style="display: flex; justify-content: center;">
                             {{ ContactForm.email_id(class_="input", id_="emailBox") }}
                         </div>
+                        <span class="field-error" id="error-email_id"></span>
+
                         <div style="display: flex; justify-content: center;">
                             {{ ContactForm.affiliation(class_="input", id_="affiliationBox") }}
                         </div>
+                        <span class="field-error" id="error-affiliation"></span>
+                        
                         <div style="display: flex; justify-content: center;">
                             {{ ContactForm.role(class_="input", id_="roleBox") }}
                         </div>
+                        <span class="field-error" id="error-role"></span>
+
                         <div style="display: flex; justify-content: center;">
                             {{ ContactForm.message(class_="input", id_="msgBox") }}
                         </div>
+                        <span class="field-error" id="error-message"></span>
+
                         <div style="display:none">
                             {{ ContactForm.honeypot(class_="input", id_="websiteBox") }}
                         </div>
-                        <div style="display: flex; justify-content: center; padding:10px;" onclick="checkAndClose()">
+                        <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                        <div style="display: flex; justify-content: center; padding:10px;">
                             {{ ContactForm.submit(class_="submitButton gradient-background", id_="button") }}
                         </div>
 
@@ -640,34 +654,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <script>
+                    function clearFieldErrors() {
+                    document.querySelectorAll(".field-error").forEach(el => {
+                        el.textContent = "";
+                    });
+                    }
+
+                    function showFieldErrors(errors) {
+                    // errors is a dict like { "email_id": ["Invalid email address."] }
+                    if (!errors || typeof errors !== "object") return;
+                    for (const [field, messages] of Object.entries(errors)) {
+                        const el = document.getElementById(`error-${field}`);
+                        if (el) el.textContent = (messages || []).join(" ");
+                    }
+                    }
+
                     document.getElementById("form").addEventListener("submit", async function(event){
-                        event.preventDefault();
+                    event.preventDefault();
 
-                        const formData = new FormData(this);
-                        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+                    const msgEl = document.getElementById("message");
+                    msgEl.classList.remove("error");
+                    msgEl.innerHTML = ""; // clear prior message
+                    clearFieldErrors();
 
-                        const response = await fetch("/get-involved", {
-                            method: "POST",
-                            headers: {
-                                'X-CSRFToken': csrfToken, 
-                            },
-                            body: formData
+                    const formData = new FormData(this);
+                    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+                    let response;
+                    try {
+                        response = await fetch("/get-involved", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": csrfToken
+                        },
+                        body: formData,
+                        credentials: "same-origin"
                         });
-                        if (response.status === 429){
-                            document.getElementById("message").innerHTML = "Too many form submissions. Please try again later.";
-                            document.getElementById("message").classList.add('error');
-                            return;
+                    } catch (err) {
+                        msgEl.classList.add("error");
+                        msgEl.textContent = "Network error. Please try again.";
+                        if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+                        return;
+                    }
 
-                        }
-                        if (response.ok){
-                            const result = await response.json();
-                            if (result.success) {
-                                closeForm();
-                            } else {
-                                document.getElementById("message").innerHTML = result.message;
-                                document.getElementById("message").classList.add('error');
-                            }
-                        }
+                    // Handle rate limiting explicitly
+                    if (response.status === 429) {
+                        msgEl.classList.add("error");
+                        msgEl.textContent = "Too many form submissions. Please try again later.";
+                        if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+                        return;
+                    }
+
+                    // Try to parse JSON regardless of status
+                    let result = {};
+                    try {
+                        result = await response.json();
+                    } catch (_) {
+                        // Non-JSON response
+                    }
+
+                    if (response.ok && result && result.success) {
+                        closeForm();
+                        return;
+                    }
+
+                    // Show server-provided validation / CSRF / reCAPTCHA messages
+                    if (result && result.errors) {
+                        showFieldErrors(result.errors);
+                    }
+
+                    msgEl.classList.add("error");
+                    if (result && result.message) {
+                    msgEl.textContent = result.message;
+                    } else {
+                    msgEl.textContent = "Submission failed. Please fix errors and try again.";
+                    }
+                    if (typeof grecaptcha !== "undefined") grecaptcha.reset();
                     });
 
                     // Submit Contact Form
@@ -677,15 +739,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById("message").innerHTML = "Form Submitted!";
                         document.getElementById("message").classList.add('submitted');
                         document.getElementById("message").classList.add('gradient-background');
-                    }
-
-                    function checkAndClose(){
-                        var name = document.getElementById("nameBox").value;
-                        var email = document.getElementById("emailBox").value;
-                        var msg = document.getElementById("msgBox").value;
-                        if (not((msg==="") || (name==="") || (email===""))){
-                            closeForm();
-                        }
                     }
 
                     if (document.getElementById("formOff").innerHTML==="1") {
