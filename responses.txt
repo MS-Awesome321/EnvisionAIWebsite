@@ -1,2 +1,35 @@
 Chuck	cnorris@gmail.com	Hello world	
-Bob Ross	Bross@gmail.com	I want to join envision!	
+Bob Ross	Bross@gmail.com	I want to join envision!	Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	This is a test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	attendee	Testing.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	Testing.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	volunteer	Test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	volunteer	Test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	volunteer	hello
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	attendee	This is a test.
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	speaker	Test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	volunteer	test.
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	Testing.
+Miguel Pinero-Jacome	mpinero@princeton.edu	Princeton	speaker	Testing.
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	volunteer	Testing.
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	speaker	testing.
+Miguel Piñero-Jacome	mpinero@gmail.com	Princeton	speaker	testing.
+Joe Biden	mpineroj@gmail.com	Princeton	speaker	Testing.
+Bill Clinton	mpinero@princeton.edu	Princeton	speaker	Testing.
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	speaker	Testing
+Morgan Freeman	mpinero@princeton.edu	Princeton	speaker	Testing.
+testing	abckegfosd@gmail.com	Princeton	volunteer	hello this is a trst
+Microsoft	mpinero@princeton.edu	Microsoft	partner-sponsor	Testing.
+Tamar Byl-Brann	tamarbylbrann@gmail.com	Williams	partner-sponsor	Hi gf
+Jaime Piñero	jaimecpinero@gmail.com	University of Massachusetts	partner-sponsor	Hi dad
+David Piñero-Jacome	dpineroj@cmu.edu	Carnegie Mellon University	partner-sponsor	I want to give my college savings to Envision.
+Jaime Pinero	jaimecpinero@gmail.com	UMass	attendee	hola
+Miguel Piñero-Jacome	mpinero@princeton.edu	Princeton	attendee	Final testing.
+Albert Einstein	mpineroj@gmail.com	Princeton	speaker	Testing.
+Stephen Hawkings	mpineroj@gmail.com	Princeton	volunteer	Testing.
+MIGUEL	mpineroj@gmail.com	Princeton	attendee	hello.
+Please	mpineroj@gmail.com	pleasw work	partner-sponsor	okay this might work.
