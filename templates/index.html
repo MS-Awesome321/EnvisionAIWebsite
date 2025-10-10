@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Envision AI Conference @ Princeton</title>
+    <title>Envision AI Conference @ Princeton University</title>
 
 	<meta name="description" content="Welcome to Envision, Princeton University's annual student-run AI conference.">
 
@@ -17,15 +17,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" type="image/png" href="static/favicon.png"/>
+
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="static/style.css">
 
     <!-- Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-</head>
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <body>
     <!-- TOP LEFT LOGO -->
     <a href="#page1" id="topLogoContainer">
@@ -37,9 +41,11 @@
         <nav id="nav">
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Team</a>
-            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Partners</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Contact</a>
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Past</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Venue</a>
+            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
+            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
+            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -58,17 +64,17 @@
     </div>
 
     <!-- REGISTER BUTTON -->
-    <div id="registerContainer">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPaqrfBgS2pyxLQBfCPmpqgW3ACOvYdXhwaeZMGJ6k8d89jQ/viewform"  id='register' class="gradient-background"><div>Register</div></a>
+    <div class="registerContainer">
+        <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8Kz3a4LNCl8EjYF_tPRyPcdygOM-M9fXd5MnlDoCniAz3cA/viewform" class="gradient-background register" id="register"><div>Register</div></a>-->
+
+        <a href="#page7"  class="gradient-background register"><div>Get Involved</div></a>
     </div>
-   
+
     <!-- HOME PAGE -->
     <header class="page" id="page1">
         <div id="socialContainer">
-            <a href="https://www.facebook.com/"><div class="social" id="facebook"></div></a>
-            <a href="https://www.linkedin.com/"><div class="social" id="linkedin"></div></a>
-            <a href="https://www.twitter.com/"><div class="social" id="twitter"></div></a>
-            <a href="https://www.instagram.com/"><div class="social" id="insta"></div></a>
+            <a href="https://www.linkedin.com/company/envision-princeton?trk=public_post_feed-actor-image" target="_blank"><div class="social" id="linkedin"></div></a>
+            <a href="https://join.slack.com/t/envision2025/shared_invite/zt-30cgsyamt-KtYfKwBrDAGZKX1adv7WHw" target="_blank"><div class="social" id="slack"></div></a>
         </div>
 
         <div class="flexbox" style="margin-left: 10vw; width: 80vw; height: calc(100vh - 20vw);">
@@ -80,13 +86,17 @@
 
         <div id="bottomHomePage">
             <div id="datetime">
-                February 22-23, 2025 <br/>
-                Princeton, NJ
+                February 21, 2026 <br/>
+                Princeton, NJ <br/>
+                <span style="font-size: 0.7rem; margin-top:2px;">** In-Person only</span>
             </div>
 
+            <!-- registration open 
             <div id="registrationOpen">
-                Registration Open!
+                Schedule Released!
             </div>
+            -->
+            
         </div>
     </header>
 
@@ -94,126 +104,549 @@
     <section class="page" id="page2">
         <div class="flexbox page-ctn">
             <div id="textBox">
-                <h2 style="text-align: left;">About</br></h2>
-                <div class="p1" style="text-align: right; width: 60vw; float: right;">Welcome to Envision 2025: A student-led conference that explores
+                <h2 style="text-align: left;">About Envision<br/></h2>
+                <div class="p1" style="text-align: right; width: 60vw; float: right;">A student-led conference that explores
                     the intersection of AI, tech, policy, and ethics, with the goal of educating,
                     inspiring action, and shaping tomorrow’s leaders.</div>
-                    <br>
-                    <div class="p2" style="text-align: left; width: 60vw;">
-                        The conference will explore four major themes, closely tracking those of our main partner, 
-                        The Center for Information Technology Policy (<a href="https://citp.princeton.edu/">CITP</a>) at Princeton. We have also met with the 
-                        Center for Digital Humanities (<a href="https://cdh.princeton.edu/">CDH</a>), the <a href="https://ai.princeton.edu/ai-lab">AI Lab</a>, 
-                        Princeton Research and Computing (<a href="https://researchcomputing.princeton.edu/">PRC</a>), 
-                        and the Julis-Rabinowitz Center for Public Policy and Finance (<a href="https://jrc.princeton.edu/">JRCPPF</a>). 
-                        Through all of the discussion, we have chosen to focus on these four areas:
-                    </div>
-                    <div class="p1" style="text-align: left; width: 50vw; font-weight: 500">1. AI Governance</div>
-                        <div class="p2" style="text-align: left; width: 60vw; padding-left: 4vw;">Learning how companies, corporations, 
-                            government stakeholders, etc., are making policies on AI regulation is a priority for our conference.
-                        </div>
-                    <div class="p1" style="text-align: right; width: 50vw; font-weight: 500">2. Privacy and Security</div>
-                        <div class="p2" style="text-align: right; width: 60vw; padding-right: 4vw;">National security and the surveillance state, 
-                            Arms races in methods, data, and hardware, 
-                            Supply chain dependencies and protectionist industrial policy, 
-                            International security agreements.                        
-                        </div>
-                    <div class="p1" style="text-align: left; width: 50vw; font-weight: 500">3. Digital Public Infrastructure (DPI) and Platforms</div>
-                        <div class="p2" style="text-align: left; width: 60vw; padding-left: 4vw;">Censorship and filtering on platforms, 
-                            Platform transparency and accountability, 
-                            Providing digital services as public utilities, 
-                            DPI discussions inspired by the Princeton Course EGR 421/SPI 487/SAS 421: 
-                            “Redesigning Governance: The Globalization of India's Digital Public Infrastructure” by professors Mihir Kshirsagar and Akash Kapur. 
-                        </div>
-                    <div class="p1" style="text-align: right; width: 50vw; font-weight: 500">4. AI and Identity</div>
-                        <div class="p2" style="text-align: right; width: 60vw; padding-right: 4vw;">AI alignment and existential risk, 
-                            Sentience, moral status, and responsibility, 
-                            History of technology, 
-                            Global culture and society, 
-                            Art and creativity, 
-                            Posthumanism.                       
-                        </div>
-                    <br><br><br>
+                <div class="p2" style="text-align: left; width: calc(30vw + 10px);">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.
+                    
+
                 </div>
+                
+
                 <div id="affiliates-preview">
                     <a href="https://www.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/princeton_logo.png"> </a>
                     <a href="https://citp.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/citp_logo.jpeg">
                     </a>
                     <a href="https://cdh.princeton.edu/" target="_blank"><img class="s-logo" src="static/assets/cdh_logo.jpg"></a>
-
             </div>
             </div>
         </div>
     </section>
 
-    <!-- TEAM PAGE -->
-    <section class="page" id="page3">
-        <div class="page-ctn flexbox flex-col align-center justify-center">
-            <h2 class="m-1 g">Our Team</h2>
-            <p class="p2 text-center" style="margin-bottom:3rem;">Meet the beautiful faces behind Envision.</p>
-            <div class="flex flex-col">
-                <div class="flex flex-row g">
-                    <div class="team-m no-select">
-                        <img class="profile-img" src="static/assets/team/emmett.jpg">
-                        <p>Emmett Souder</p>
-                        <i>Co-President</i>
-                    </div>
-                    <div class="team-m">
-                        <img class="profile-img" src="static/assets/team/maddie.jpg">
-                        <p>Maddie Feldman</p>
-                        <i>Co-President</i>
-                    </div>
+<!-- HISTORY PAGE -->
+ <section class="page" id="page3">
+    <div class="flexbox" style="width: 100%; height: 100%;">
+        
+        <div id="historyContainer">
+            <div class="flex flex-row justify-center  margin-bottom g" style="padding: 2vh 0;">
+                <div class="flex-col align-center text-left">
+                    <h2 class="g" >Our
+                        History</h2>
+                
+                <p class="p1" style="width: 30vw;">Over a decade of inspiring the future.</p>
+                <span style="display: block; width: 30vw;">Since its conception in the early 2010s, Envision has grown into one of Princeton’s hubs for meaningful conversations at the intersection of AI, policy, and society. From intimate gatherings to hosting over 100 participants in 2025, we’ve brought together voices from across universities, industries, and the globe. Each year builds on the last—expanding our reach, refining our themes, and fostering connections that spark new ideas, collaborations, and action. As we look ahead to Envision 2026, we honor the momentum of our past while setting our sights on a future shaped by curiosity, debate, and a shared vision for AI’s role in the world.</span>
+                
+                </div>
+                <img id="conferenceImage" src="static/assets/conference.png" >
+
+            </div>
+            
+            <div id="pastSpeakersContainer">
+                <h3 id="pastSpeakersTitle" class="flex">
+                    Past Speakers
+                </h3>
+                <div class="scrolling-track" id="scrollingTrack">
+                    {% for i in range(length_speakers) %}
+                    <a class="no-link-decor" href="{{ speakers[i].link }}">
+                        <div class="past-speaker-container">
+                            <div class="team-m no-select">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                            </div>
+                            <h3>{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].organization }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    {% for i in range(length_speakers) %}
+                        <a class="no-link-decor" href="{{ speakers[i].link }}">
+                        <div class="past-speaker-container">
+                            <div class="team-m no-select">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                            </div>
+                            <h3>{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].organization }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('pastSpeakersContainer');
+    const track = document.getElementById('scrollingTrack');
+    const speakerItems = track.querySelectorAll('.past-speaker-container');
+
+    // ===== Pause/Resume + Reset animation based on viewport =====
+    const section = document.getElementById('page3');
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Reset animation to start
+                track.style.animation = 'none';
+                track.offsetHeight; // trigger reflow
+                track.style.animation = ''; // restore original animation
+                track.style.animationPlayState = 'running';
+            } else {
+                track.style.animationPlayState = 'paused';
+            }
+        });
+    }, {
+        root: null,      // viewport
+        threshold: 0.2   // at least 20% of section visible to run
+    });
+    sectionObserver.observe(section);
+
+    // ===== Fade-in/out observer for speaker items =====
+    const ENTER_RATIO = 0.01; // must be ~35% visible to fade IN
+    const EXIT_RATIO  = 0.9;  // drop below 15% to fade OUT
+    const EDGE_RATIO  = 0.5;  // dim near edges when <25% visible
+
+    const active = new WeakSet();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const el = entry.target;
+            const ratio = entry.intersectionRatio;
+
+            if (!active.has(el) && ratio >= ENTER_RATIO) {
+                active.add(el);
+                el.classList.add('in-view');
+            }
+
+            if (active.has(el) && ratio <= EXIT_RATIO) {
+                active.delete(el);
+                el.classList.remove('in-view');
+                el.classList.remove('near-edge');
+            }
+
+            if (active.has(el)) {
+                if (ratio < EDGE_RATIO) {
+                    el.classList.add('near-edge');
+                } else {
+                    el.classList.remove('near-edge');
+                }
+            }
+        });
+    }, {
+        root: container,
+        rootMargin: '0px',
+        threshold: [0, EXIT_RATIO, EDGE_RATIO, ENTER_RATIO, 1]
+    });
+
+    speakerItems.forEach((item) => observer.observe(item));
+});
+</script>
+
+{% if registrationOpen %}
+    <!-- SPEAKERS PAGE -->
+     <section class="page" id="page3">
+        <div class="flexbox" style="width: 100%; height: 100%;">
+            <div id="speakerSlidesContainer">
+                <!-- Speaker Slides -->
+                {% for i in range(length_speakers) %}
+                    {% if i%2 == 0 %}
+                        <div class="slide" id="slide{{i}}">
+                            <div class="bioContainer flexbox" style="float: left">
+                                <div>
+                                    <h2>{{speakers[i].name}}</h2>
+                                    <h3>{{speakers[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
+                                        {{speakers[i].bio}}
+                                        <a href="{{speakers[i].link}}">{{speakers[i].link}}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="imgContainer flexbox" style="float: right">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="slide" id="slide{{i}}">
+                            <div class="imgContainer flexbox" style="float: left">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
+                                </div>
+                            </div>
+
+                            <div class="bioContainer flexbox" style="float: right;">
+                                <div>
+                                    <h2>{{speakers[i].name}}</h2>
+                                    <h3>{{speakers[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
+                                        {{speakers[i].bio}}
+                                        <a href="{{speakers[i].link}}">{{speakers[i].link}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Slide Buttons -->
+                <div class="buttons">
+                    <div class="flexbox" style="cursor: pointer;">
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% for i in range(length_speakers) %}
+                            <div class="material-symbols-outlined page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endfor %}
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="nextSlide(); delay()">arrow_forward</div>
+                    </div>
+                </div>
+
+                <!-- Slide Script -->
+                 <script>
+                    var speakers = document.querySelectorAll(".slide");
+                    var pageControllers = document.querySelectorAll(".page_controllers");
+                    var slideNum = 0;
+                    var time = 0;
+
+                    function showSlide(j) {
+                        slideNum = (j+speakers.length)%speakers.length;
+                        for (var i = 0; i < speakers.length; i++) {
+                            speakers[i].style.display = "none";
+                            pageControllers[i].innerHTML = "radio_button_unchecked";
+                            speakers[i].classList.remove('inView');
+                        }
+                        speakers[slideNum].style.display = "block";
+                        speakers[slideNum].classList.add('inView');
+                        pageControllers[slideNum].innerHTML = "radio_button_checked";
+                    }
+
+                    function nextSlide(){
+                        slideNum++;
+                        showSlide(slideNum);
+                    }
+
+                    function prevSlide(){
+                        slideNum--;
+                        showSlide(slideNum);
+                    }
+
+                    showSlide(0);
+
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    function delay() {
+                        time = -450;
+                    }
+
+                    // Move Slides
+                    function moveAuto() {
+                        time++;
+                        if (time >= 450) {
+                            nextSlide();
+                            time = 0;
+                        }
+                        requestAnimationFrame(moveAuto);
+                    }
+
+                    requestAnimationFrame(moveAuto);
+                 </script>
+            </div>
+        </div>
+     </section>
+
+{% endif %}
+
+    <!-- VENUE PAGE -->
+     <section class="page" id="page4">
+        <div class="flexbox" style="width: 100%; height: 100%;">
+            <div id="mapContainer">
+                <div class="flexbox">
+                    <div id="mapWordsContainer">
+                        <h2 class="flexbox" style="height: 25%;">
+                            Venue
+                        </h2>
+
+                        <div class="flexbox" style="height: 75%;">
+                            <div class="h2" style="padding: 10% 10% 35% 10%;">
+                                <span style="font-weight: bold;">Frist Campus Center, Princeton NJ 08540</span>
+                                <br/>
+                                <br/>
+                                Nearest Airports: Newark Liberty International Airport, Philadelphia International Airport
+                                <br/>
+                                <br/>
+                                Trains: Stop at Princeton Junction Station and take the <a href="https://www.njtransit.com/dinky">Dinky to Princeton Station</a>
+                                <br/>
+                                <br/>
+                                Nearby Hotels:
+                                    <a href="https://www.hilton.com/en/hotels/pctgpgu-graduate-princeton/?arrivalDate=2024-12-23&departureDate=2024-12-24&flexibleDates=false&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&sessionToken=fb295439-047c-4ae9-b8dc-a75ffa940a28">
+                                        Graduate by Hilton
+                                    </a>,
+                                    <a href="https://nassauinn.com/?device=c&keyword=nassau%20inn%20princeton&placement&adgroup=65095475655&campaign=1675358774&gad_source=1&gclid=Cj0KCQiAsaS7BhDPARIsAAX5cSC2Jr1boGtJPulQnj-VXu_ytZTd6z0H0MOvkv3QLRbd9Oy3XdcKgbkaAr4IEALw_wcB">
+                                        Nassau Inn
+                                    </a>,
+                                    <a href="https://www.ihg.com/holidayinn/hotels/us/en/princeton/prnnj/hoteldetail">
+                                        Holiday Inn Princeton
+                                    </a>,
+                                    <a href="https://www.hyatt.com/hyatt-regency/en-US/princ-hyatt-regency-princeton?icamp=hpe-hy-com_hcom_search_chico_0_en-US_property_princ">
+                                        Hyatt Regency Princeton
+                                    </a>,
+                                    <a href="https://www.hyatt.com/hyatt-place/en-US/ewrzp-hyatt-place-princeton?icamp=hpe-hy-com_hcom_search_chico_1_en-US_property_ewrzp">
+                                        Hyatt Place Princeton
+                                    </a>,
+                                    <a href="https://www.hilton.com/en/hotels/pctdtdt-doubletree-princeton/">
+                                        DoubleTree Princeton
+                                    </a>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br>
+                                <i>**In-Person Attendance Only**</i>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Map -->
+                    <iframe
+                        id = 'map'
+                        style="height: 100%; width: 50%; border-radius: 20px;"
+                        frameborder="0" style="border:0"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD15o7bijQYNsCUhowrAafhpGrOcfGTe4E&q=Frist+Campus+Center,Princeton+NJ&maptype=satellite&zoom=18"
+                        allowfullscreen>
+                     </iframe>
+                </div>
+            </div>
+
+            <script>
+                function bigVenue() {
+                    console.log('bigVenue()')
+                    var mapWords = document.getElementById('mapWordsContainer');
+                    var map = document.getElementById('map');
+
+                    mapWords.style.display = 'none';
+                    map.style.width = '100%';
+                }
+
+                function smallVenue() {
+                    console.log('smallVenue()')
+                    var mapWords = document.getElementById('mapWordsContainer');
+                    var map = document.getElementById('map');
+
+                    mapWords.style.display = 'block';
+                    map.style.width = '50%';
+                }
+            </script>
+        </div>
+     </section>
+
+    <!-- SLACK  -->
+     <!--
+    <section class="page" id="page5">
+        <div class="flexbox">
+            <div id="slackContainer">
+                <div class="flexbox">
+                    <div id="slackWordsContainer">
+                        <h2 class="flexbox" style="height: 25%; text-align:center">
+                            Slack
+                        </h2>
+
+                        <div class="flexbox" style="height: 50%;">
+                            <div class="h2" style="padding: 10% 10% 35% 10%;">
+                                We ask all attendees to join the conference slack before arriving. We will post all updates and conference information here.
+                                This is also a great place to keep in touch with the Envision team and everyone you meet at the conference!
+                            </div>
+                        </div>
+                    </div>
+
+                    The QR Code
+                    <a href="https://join.slack.com/t/envision2025/shared_invite/zt-30cgsyamt-KtYfKwBrDAGZKX1adv7WHw" target="_blank">
+                        <img style="height:calc(10vh + 15vw)" src="{{url_for('static', filename='assets/slackQR.jpeg')}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- TEAM PAGE -->
+    <section class="page" id="page5">
+        <div class="page-ctn flexbox flex-col align-center justify-center">
+            <h2 class="m-1 g">Our Team</h2>
+            <p class="p2 text-center" >Meet the beautiful faces behind Envision.</p>
+
+            <div style="padding-bottom: 20px;">
+
+            <!-- TEAM Slides -->
+                {% set counter = 1 %}
+                {% for i in range(team_slides) %}
+                {% if i==0 %}
+                    <div class="a_slide" id="a_slide{{i}}">
+                            <div class="flex flex-row justify-center p2">
+                                    <img class="team-img" style="height: 30vw; border-radius: 20px" src="{{url_for('static', filename=team[i].img)}}">
+                            </div>
+                        <p style="text-align:center;">{{team[i].name}}</p>
+                    </div>
+
+                {% else %}
+                <div class="a_slide" id="a_slide{{i}}">
+                        <div class="flex flex-col g">
+                            <div class="flex flex-row justify-center g">
+                    {% for j in range(6) %}
+                                {% set counter =  loop.index +((i - 1) * 6) %}
+                                {% if counter < length_team %}
+                            <div class="team-m no-select">
+                                <img class="profile-img" src="{{url_for('static', filename=team[counter].img)}}">
+                                <div class="flex flex-col align-center">
+                                    <p style="margin: 0px; font-size:15px;">{{ team[counter].name }}</p>
+                                <i style="font-size: 12px;">{{ team[counter].role }}</i>
+                                </div>
+
+                            </div>
+                                {% endif %}
+
+                    {% if j == 2 %}
+                        </div>
+                         <div class="flex flex-row justify-center g">
+                    {% endif %}
+
+                {% endfor %}
+                    </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+
+                </div>
+
+                <!-- Slide Buttons -->
+                <div class="buttons">
+                    <div class="flexbox" style="cursor: pointer;">
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="teamPrevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% for i in range(team_slides) %}
+                            <div class="material-symbols-outlined t_page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="teamShowSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endfor %}
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="teamNextSlide(); delay()">arrow_forward</div>
+                    </div>
+                </div>
+
+                <!-- Slide Script -->
+                 <script>
+                    var team = document.querySelectorAll(".a_slide");
+                    var t_pageControllers = document.querySelectorAll(".t_page_controllers");
+                    var t_slideNum = 0;
+                    var t_time = 0;
+
+                    function teamShowSlide(j) {
+                        t_slideNum = (j+team.length)%team.length;
+                        for (var i = 0; i < team.length; i++) {
+                            team[i].style.display = "none";
+                            t_pageControllers[i].innerHTML = "radio_button_unchecked";
+                            team[i].classList.remove('inView');
+                        }
+                        team[t_slideNum].style.display = "block";
+                        team[t_slideNum].classList.add('inView');
+                        t_pageControllers[t_slideNum].innerHTML = "radio_button_checked";
+                    }
+
+                    function teamNextSlide(){
+                        t_slideNum++;
+                        teamShowSlide(t_slideNum);
+                    }
+
+                    function teamPrevSlide(){
+                        t_slideNum--;
+                        teamShowSlide(t_slideNum);
+                    }
+
+                    teamShowSlide(0);
+
+                    // Move Slides
+                    function teamMoveAuto() {
+                        t_time++;
+                        if (t_time >= 450) {
+
+                            t_time = 0;
+                        }
+                        requestAnimationFrame(teamMoveAuto);
+                    }
+                    requestAnimationFrame(teamMoveAuto);
+                 </script>
 
         </div>
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page4">
+    <section class="page" id="page6">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
-            <div class="flex flex-col">
-                <div class="flex flex-row align-center g">
-                    <a href="https://citp.princeton.edu/" target="_blank"><img class="l-logo" src="static/assets/citp_logo.jpeg">
-                    </a>
-                    <a href="https://cdh.princeton.edu/" target="_blank"><img class="l-logo" src="static/assets/cdh_logo.jpg"></a>
-
-                </div>
+            <div class="flex flex-row align-center wrap justify-center g">
+                <a class="text-center" href="https://citp.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/citp_logo.jpeg')}}"></a>
+                <a class="text-center" href="https://cdh.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/cdh_logo.jpg')}}"></a>
+                <a class="text-center" href="https://researchcomputing.princeton.edu/" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/princeton_research_computing_logo.jpeg')}}"></a>
+                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/JRCPPF.png')}}"></a>
+                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/LISD_logo.png')}}"></a>
+                <a class="text-center" href="https://jrc.princeton.edu" target="_blank"><img class="l-logo" src="{{url_for('static', filename='assets/odus_logo.png')}}"></a>
             </div>
         </div>
     </section>
 
     <!-- CONTACT PAGE -->
-    <section class="page" id="page5">
+
+    <section class="page" id="page7">
         <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
             <div id="registrationBox">
-                <div class="h1" style="margin-top: 5vh;">Contact Us</div>
+                <h2>Contact Us</h2>
 
                 <div id="messageContainer" class="flexbox" style="height: 10%;">
-                    <div id="message" class="h2">
-                        Fill out this form for any questions or just to get in touch!
+                    <div id="message" class="p2">
+                        Fill out this form to get in touch with us.
                         <br/>
                         We'll reply back as soon as possible.
                     </div>
                 </div>
-
-
+                <!-- Classic reCAPTCHA -->
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                
                 <div id="formContainer">
-                    <form method="POST" class="form" id="form">
-                        {{ contact.csrf_token }}
-                        {{ contact.hidden_tag() }}
+                    <form method="POST" action="{{ url_for('get_involved') }}" class="form" id="form">
+                        {{ ContactForm.csrf_token }}
+                        {{ ContactForm.hidden_tag() }}
+                        
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.name(class_="input", id_="nameBox") }}
+                            {{ ContactForm.name(class_="input", id_="nameBox") }}
                         </div>
+                        <span class="field-error" id="error-name"></span>
+
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.email_id(class_="input", id_="emailBox") }}
+                            {{ ContactForm.email_id(class_="input", id_="emailBox") }}
                         </div>
+                        <span class="field-error" id="error-email_id"></span>
+
                         <div style="display: flex; justify-content: center;">
-                            {{ contact.message(class_="input", id_="msgBox") }}
+                            {{ ContactForm.affiliation(class_="input", id_="affiliationBox") }}
                         </div>
-                        <div style="display: flex; justify-content: center;" onclick="checkAndClose()">
-                            {{ contact.submit(class_="submitButton gradient-background", id_="button") }}
+                        <span class="field-error" id="error-affiliation"></span>
+                        
+                        <div style="display: flex; justify-content: center;">
+                            {{ ContactForm.role(class_="input", id_="roleBox") }}
+                        </div>
+                        <span class="field-error" id="error-role"></span>
+
+                        <div style="display: flex; justify-content: center;">
+                            {{ ContactForm.message(class_="input", id_="msgBox") }}
+                        </div>
+                        <span class="field-error" id="error-message"></span>
+
+                        <div style="display:none">
+                            {{ ContactForm.honeypot(class_="input", id_="websiteBox") }}
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                        <div style="display: flex; justify-content: center; padding:10px;">
+                            {{ ContactForm.submit(class_="submitButton gradient-background", id_="button") }}
                         </div>
 
                         <div class="msg">{{ msg }}</div>
@@ -223,6 +656,84 @@
                 </div>
 
                 <script>
+                    function clearFieldErrors() {
+                    document.querySelectorAll(".field-error").forEach(el => {
+                        el.textContent = "";
+                    });
+                    }
+
+                    function showFieldErrors(errors) {
+                    // errors is a dict like { "email_id": ["Invalid email address."] }
+                    if (!errors || typeof errors !== "object") return;
+                    for (const [field, messages] of Object.entries(errors)) {
+                        const el = document.getElementById(`error-${field}`);
+                        if (el) el.textContent = (messages || []).join(" ");
+                    }
+                    }
+
+                    document.getElementById("form").addEventListener("submit", async function(event){
+                    event.preventDefault();
+
+                    const msgEl = document.getElementById("message");
+                    msgEl.classList.remove("error");
+                    msgEl.innerHTML = ""; // clear prior message
+                    clearFieldErrors();
+
+                    const formData = new FormData(this);
+                    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+                    let response;
+                    try {
+                        response = await fetch("/get-involved", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": csrfToken
+                        },
+                        body: formData,
+                        credentials: "same-origin"
+                        });
+                    } catch (err) {
+                        msgEl.classList.add("error");
+                        msgEl.textContent = "Network error. Please try again.";
+                        if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+                        return;
+                    }
+
+                    // Handle rate limiting explicitly
+                    if (response.status === 429) {
+                        msgEl.classList.add("error");
+                        msgEl.textContent = "Too many form submissions. Please try again later.";
+                        if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+                        return;
+                    }
+
+                    // Try to parse JSON regardless of status
+                    let result = {};
+                    try {
+                        result = await response.json();
+                    } catch (_) {
+                        // Non-JSON response
+                    }
+
+                    if (response.ok && result && result.success) {
+                        closeForm();
+                        return;
+                    }
+
+                    // Show server-provided validation / CSRF / reCAPTCHA messages
+                    if (result && result.errors) {
+                        showFieldErrors(result.errors);
+                    }
+
+                    msgEl.classList.add("error");
+                    if (result && result.message) {
+                    msgEl.textContent = result.message;
+                    } else {
+                    msgEl.textContent = "Submission failed. Please fix errors and try again.";
+                    }
+                    if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+                    });
+
                     // Submit Contact Form
                     function closeForm(){
                         document.getElementById("formContainer").style.display = "none";
@@ -230,15 +741,6 @@
                         document.getElementById("message").innerHTML = "Form Submitted!";
                         document.getElementById("message").classList.add('submitted');
                         document.getElementById("message").classList.add('gradient-background');
-                    }
-
-                    function checkAndClose(){
-                        var name = document.getElementById("nameBox").value;
-                        var email = document.getElementById("emailBox").value;
-                        var msg = document.getElementById("msgBox").value;
-                        if (not((msg==="") || (name==="") || (email===""))){
-                            closeForm();
-                        }
                     }
 
                     if (document.getElementById("formOff").innerHTML==="1") {
@@ -362,8 +864,9 @@
                     icon.style.marginLeft = '5vw';
                 }
 
-                registerFont('15px');
+                // registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
+                bigVenue();
             }
             else {
                 gainSide();
@@ -374,8 +877,9 @@
                     icon.style.marginLeft = '5vh';
                 }
 
-                registerFont('17px');
+                // registerFont('17px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(0px)';
+                smallVenue();
             }
         }
 
@@ -411,9 +915,9 @@
             }
         }
 
-        function registerFont(size) {
-            document.getElementById('register').style.fontSize = size;
-        }
+        // function registerFont(size) {
+        //     document.getElementById('register').style.fontSize = size;
+        // }
     </script>
 </body>
 </html>

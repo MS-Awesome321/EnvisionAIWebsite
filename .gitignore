@@ -1,0 +1,5 @@
+envision_venv/
+.env
+submission_tracking.json
+*.md
+proper_intro.txt
