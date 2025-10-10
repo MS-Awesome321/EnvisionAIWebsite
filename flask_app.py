@@ -2,9 +2,12 @@
 import os
 import logging
 import requests
+import json
+import time
+from datetime import datetime, timedelta
 
 # third-party imports
-from flask import Flask, render_template, url_for, redirect, request, send_file, jsonify, flash
+from flask import Flask, render_template, url_for, redirect, request, send_file, jsonify, flash, session
 from flask_wtf import FlaskForm
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -18,6 +21,7 @@ import resend
 from resend.exceptions import ResendError
 from requests.exceptions import RequestException
 from html import escape
+import hashlib
 
 
 # local imports
@@ -28,13 +32,17 @@ from team import team
 # App / Config
 # ----------------------
 
-load_dotenv()
+from pathlib import Path
+env_path = Path(__file__).with_name(".env")
+load_dotenv(dotenv_path=env_path)
+
 
 # Initialize app and contact form
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('FLASK_APP')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET_KEY')
 app.config['RECAPTCHA_SITE_KEY'] = os.getenv('RECAPTCHA_SITE_KEY')
+app.config['ADMIN_PASSWORD'] = os.getenv('ADMIN_PASSWORD', 'admin123')  # Default password for development
 
 resend.api_key = os.getenv('RESEND_API_KEY')
 MAIL_TO = os.getenv('MAIL_TO')
@@ -53,12 +61,235 @@ if not MAIL_FROM:
 if not MAIL_TO:
     logger.error("MAIL_TO is not set")
 
+# Log admin password status
+if app.config['ADMIN_PASSWORD'] == 'admin123':
+    logger.warning("Using default admin password 'admin123'. Set ADMIN_PASSWORD environment variable for production.")
+else:
+    logger.info("Admin password configured from environment variable.")
+
 csrf = CSRFProtect(app)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
     logger.error(f"CSRF failed: {e.description}")
     return jsonify({"success": False, "message": f"CSRF failed: {e.description}"}), 400
+
+# ----------------------
+# Admin Authentication
+# ----------------------
+
+def hash_password(password):
+    """Simple password hashing using SHA-256"""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def verify_admin_password(password):
+    """Verify admin password"""
+    stored_hash = hash_password(app.config['ADMIN_PASSWORD'])
+    input_hash = hash_password(password)
+    return stored_hash == input_hash
+
+def is_admin_authenticated():
+    """Check if user is authenticated as admin"""
+    return session.get('admin_authenticated', False)
+
+def require_admin_auth(f):
+    """Decorator to require admin authentication"""
+    def decorated_function(*args, **kwargs):
+        if not is_admin_authenticated():
+            return jsonify({"error": "Authentication required", "login_url": "/admin/login"}), 401
+        return f(*args, **kwargs)
+    decorated_function.__name__ = f.__name__
+    return decorated_function
+
+class AdminLoginForm(FlaskForm):
+    password = PasswordField('Password', validators=[InputRequired()])
+    submit = SubmitField('Login')
+
+# ----------------------
+# Duplicate Submission Prevention
+# ----------------------
+
+SUBMISSION_TRACK_FILE = "submission_tracking.json"
+
+def load_submission_tracking():
+    """Load submission tracking data from file"""
+    try:
+        if os.path.exists(SUBMISSION_TRACK_FILE):
+            with open(SUBMISSION_TRACK_FILE, 'r') as f:
+                data = json.load(f)
+                logger.info(f"Loaded tracking data with {len(data)} entries")
+                # Clean up old entries (older than 30 days)
+                current_time = time.time()
+                cleaned_data = {}
+                for key, value in data.items():
+                    # Check if this is the new format with submissions array
+                    if 'submissions' in value:
+                        # New format: clean up old submissions within each entry
+                        submissions = value.get('submissions', [])
+                        recent_submissions = [s for s in submissions if current_time - s['timestamp'] < (30 * 24 * 60 * 60)]
+                        
+                        # Only keep entries that have recent submissions
+                        if recent_submissions:
+                            cleaned_value = value.copy()
+                            cleaned_value['submissions'] = recent_submissions
+                            cleaned_value['last_submission'] = max(s['timestamp'] for s in recent_submissions)
+                            cleaned_data[key] = cleaned_value
+                    else:
+                        # Old format: check timestamp directly (backward compatibility)
+                        if 'timestamp' in value and current_time - value['timestamp'] < (30 * 24 * 60 * 60):
+                            cleaned_data[key] = value
+                logger.info(f"Returning cleaned tracking data with {len(cleaned_data)} entries")
+                return cleaned_data
+        logger.warning("Tracking file does not exist")
+        return {}
+    except Exception as e:
+        logger.error(f"Error loading submission tracking: {e}")
+        return {}
+
+def save_submission_tracking(data):
+    """Save submission tracking data to file"""
+    try:
+        with open(SUBMISSION_TRACK_FILE, 'w') as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        logger.error(f"Error saving submission tracking: {e}")
+
+def check_duplicate_submission(name, email, ip):
+    """
+    Check if this submission exceeds the limits:
+    - Maximum 4 submissions per 2 weeks (14 days)
+    - 24-hour cooldown between every 2 submissions
+    Returns (is_duplicate, message) tuple
+    """
+    tracking_data = load_submission_tracking()
+    current_time = time.time()
+    
+    # Configuration
+    MAX_SUBMISSIONS = 4
+    TWO_WEEKS = 14 * 24 * 60 * 60  # 14 days in seconds
+    COOLDOWN_PERIOD = 24 * 60 * 60  # 24 hours in seconds
+    
+    # Normalize inputs for comparison
+    normalized_name = name.strip().lower()
+    normalized_email = email.strip().lower()
+    
+    # Check submission limits for name
+    if normalized_name in tracking_data:
+        name_data = tracking_data[normalized_name]
+        submissions = name_data.get('submissions', [])
+        
+        # Clean up old submissions (older than 2 weeks)
+        recent_submissions = [s for s in submissions if current_time - s['timestamp'] < TWO_WEEKS]
+        
+        # Check if max submissions reached
+        if len(recent_submissions) >= MAX_SUBMISSIONS:
+            oldest_submission = min(recent_submissions, key=lambda x: x['timestamp'])
+            time_until_reset = TWO_WEEKS - (current_time - oldest_submission['timestamp'])
+            days_until_reset = time_until_reset / (24 * 60 * 60)
+            
+            logger.warning(f"Submission limit exceeded - name '{name}' has submitted {len(recent_submissions)}/{MAX_SUBMISSIONS} times in the last 2 weeks from IP {ip}")
+            return True, f"The name '{name}' has reached the maximum number of submissions ({MAX_SUBMISSIONS}) for this 2-week period. Please wait {days_until_reset:.1f} days before submitting again."
+        
+        # Check cooldown period (24 hours between every 2 submissions)
+        if len(recent_submissions) >= 2:
+            # Sort submissions by timestamp (most recent first)
+            recent_submissions.sort(key=lambda x: x['timestamp'], reverse=True)
+            
+            # Check if we're in a cooldown period (after every 2nd submission)
+            submission_pairs = len(recent_submissions) // 2
+            if submission_pairs > 0:
+                # Check the most recent pair
+                last_pair_start = recent_submissions[submission_pairs * 2 - 1]['timestamp']
+                time_since_last_pair = current_time - last_pair_start
+                
+                if time_since_last_pair < COOLDOWN_PERIOD:
+                    time_until_cooldown_ends = COOLDOWN_PERIOD - time_since_last_pair
+                    hours_until_cooldown_ends = time_until_cooldown_ends / 3600
+                    
+                    logger.warning(f"Cooldown period active - name '{name}' submitted {len(recent_submissions)} times, cooldown ends in {hours_until_cooldown_ends:.1f} hours from IP {ip}")
+                    return True, f"Please wait {hours_until_cooldown_ends:.1f} hours before submitting again. There is a 24-hour cooldown period after every 2 submissions."
+    
+    # Check submission limits for email (same logic)
+    if normalized_email in tracking_data:
+        email_data = tracking_data[normalized_email]
+        submissions = email_data.get('submissions', [])
+        
+        # Clean up old submissions (older than 2 weeks)
+        recent_submissions = [s for s in submissions if current_time - s['timestamp'] < TWO_WEEKS]
+        
+        # Check if max submissions reached
+        if len(recent_submissions) >= MAX_SUBMISSIONS:
+            oldest_submission = min(recent_submissions, key=lambda x: x['timestamp'])
+            time_until_reset = TWO_WEEKS - (current_time - oldest_submission['timestamp'])
+            days_until_reset = time_until_reset / (24 * 60 * 60)
+            
+            logger.warning(f"Submission limit exceeded - email '{email}' has submitted {len(recent_submissions)}/{MAX_SUBMISSIONS} times in the last 2 weeks from IP {ip}")
+            return True, f"The email '{email}' has reached the maximum number of submissions ({MAX_SUBMISSIONS}) for this 2-week period. Please wait {days_until_reset:.1f} days before submitting again."
+        
+        # Check cooldown period (24 hours between every 2 submissions)
+        if len(recent_submissions) >= 2:
+            # Sort submissions by timestamp (most recent first)
+            recent_submissions.sort(key=lambda x: x['timestamp'], reverse=True)
+            
+            # Check if we're in a cooldown period (after every 2nd submission)
+            submission_pairs = len(recent_submissions) // 2
+            if submission_pairs > 0:
+                # Check the most recent pair
+                last_pair_start = recent_submissions[submission_pairs * 2 - 1]['timestamp']
+                time_since_last_pair = current_time - last_pair_start
+                
+                if time_since_last_pair < COOLDOWN_PERIOD:
+                    time_until_cooldown_ends = COOLDOWN_PERIOD - time_since_last_pair
+                    hours_until_cooldown_ends = time_until_cooldown_ends / 3600
+                    
+                    logger.warning(f"Cooldown period active - email '{email}' submitted {len(recent_submissions)} times, cooldown ends in {hours_until_cooldown_ends:.1f} hours from IP {ip}")
+                    return True, f"Please wait {hours_until_cooldown_ends:.1f} hours before submitting again. There is a 24-hour cooldown period after every 2 submissions."
+    
+    # Record this submission
+    submission_record = {
+        'timestamp': current_time,
+        'ip': ip,
+        'name': name,
+        'email': email
+    }
+    
+    # Update tracking data for name
+    if normalized_name in tracking_data:
+        tracking_data[normalized_name]['submissions'].append(submission_record)
+        tracking_data[normalized_name]['last_submission'] = current_time
+        tracking_data[normalized_name]['last_ip'] = ip
+    else:
+        tracking_data[normalized_name] = {
+            'submissions': [submission_record],
+            'first_submission': current_time,
+            'last_submission': current_time,
+            'last_ip': ip,
+            'email': normalized_email,
+            'name': name
+        }
+    
+    # Update tracking data for email
+    if normalized_email in tracking_data:
+        tracking_data[normalized_email]['submissions'].append(submission_record)
+        tracking_data[normalized_email]['last_submission'] = current_time
+        tracking_data[normalized_email]['last_ip'] = ip
+    else:
+        tracking_data[normalized_email] = {
+            'submissions': [submission_record],
+            'first_submission': current_time,
+            'last_submission': current_time,
+            'last_ip': ip,
+            'name': normalized_name,
+            'email': email
+        }
+    
+    save_submission_tracking(tracking_data)
+    
+    # Log successful submission with count info
+    name_submissions = len([s for s in tracking_data[normalized_name]['submissions'] if current_time - s['timestamp'] < TWO_WEEKS])
+    logger.info(f"Submission recorded - name '{name}' (submission #{name_submissions}/{MAX_SUBMISSIONS} in last 2 weeks) from IP {ip}")
+    
+    return False, None
 
 def real_ip():
     return request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
@@ -71,18 +302,6 @@ limiter = Limiter(
 # ----------------------
 # Mail 
 # ----------------------
-
-# sanity checks after you load env vars
-resend.api_key = os.getenv('RESEND_API_KEY')
-MAIL_TO = os.getenv('MAIL_TO')
-MAIL_FROM = os.getenv('MAIL_FROM')
-
-if not resend.api_key:
-    logger.error("RESEND_API_KEY is not set")
-if not MAIL_FROM:
-    logger.error("MAIL_FROM is not set (e.g. 'Your App <noreply@verified-domain.com>')")
-if not MAIL_TO:
-    logger.error("MAIL_TO is not set")
 
 class EmailSendError(Exception):
     pass
@@ -166,39 +385,85 @@ def send_resend(to, subject, html, reply_to_email=None, reply_to_name=None, bcc=
 # ----------------------
 
 def verify_recaptcha_v2(token, remote_ip=None):
+    """
+    Verify reCAPTCHA v2 token with Google's API.
+    
+    Args:
+        token (str): The reCAPTCHA response token from the client
+        remote_ip (str, optional): The user's IP address
+        
+    Returns:
+        tuple: (success: bool, error_message: str or None)
+    """
     secret = app.config.get('RECAPTCHA_SECRET_KEY')
     if not secret:
         logger.error("RECAPTCHA_SECRET_KEY is not set.")
-        return False
+        return False, "reCAPTCHA configuration error"
 
-    logger.info("Verifying reCAPTCHA: ip=%s token_len=%s", remote_ip or real_ip(), len(token or ""))
+    if not token:
+        logger.warning("reCAPTCHA verification attempted with empty token")
+        return False, "reCAPTCHA token is missing"
+
+    client_ip = remote_ip or real_ip()
+    logger.info("Verifying reCAPTCHA: ip=%s token_len=%s", client_ip, len(token))
 
     try:
         resp = requests.post(
             "https://www.google.com/recaptcha/api/siteverify",
             data={
                 'secret': secret,
-                'response': token or '',
-                'remoteip': remote_ip or real_ip(),
+                'response': token,
+                'remoteip': client_ip,
             },
-            timeout=5
+            timeout=10  # Increased timeout for better reliability
         )
-        logger.info("siteverify HTTP %s", resp.status_code)
+        logger.info("reCAPTCHA API response: HTTP %s", resp.status_code)
 
         if resp.status_code != 200:
-            logger.error("siteverify non-200: %s", resp.text[:200])
-            return False
+            logger.error("reCAPTCHA API non-200 response: %s", resp.text[:200])
+            return False, "reCAPTCHA service temporarily unavailable"
 
         data = resp.json()
-        logger.info("siteverify JSON: %s", data)   # <-- this is the line you want to see
-        return bool(data.get('success'))
+        logger.info("reCAPTCHA verification response: %s", data)
+        
+        success = bool(data.get('success'))
+        
+        if not success:
+            error_codes = data.get('error-codes', [])
+            error_messages = []
+            
+            for error_code in error_codes:
+                if error_code == 'missing-input-secret':
+                    error_messages.append("reCAPTCHA secret key is missing")
+                elif error_code == 'invalid-input-secret':
+                    error_messages.append("reCAPTCHA secret key is invalid")
+                elif error_code == 'missing-input-response':
+                    error_messages.append("reCAPTCHA response is missing")
+                elif error_code == 'invalid-input-response':
+                    error_messages.append("reCAPTCHA response is invalid")
+                elif error_code == 'bad-request':
+                    error_messages.append("reCAPTCHA request is malformed")
+                elif error_code == 'timeout-or-duplicate':
+                    error_messages.append("reCAPTCHA response has expired or been used")
+                else:
+                    error_messages.append(f"reCAPTCHA error: {error_code}")
+            
+            error_message = "; ".join(error_messages) if error_messages else "reCAPTCHA verification failed"
+            logger.warning("reCAPTCHA verification failed: %s", error_message)
+            return False, error_message
+        
+        logger.info("reCAPTCHA verification successful")
+        return True, None
 
-    except RequestException:
-        logger.exception("siteverify request failed")
-        return False
-    except ValueError:
-        logger.exception("siteverify returned non-JSON")
-        return False
+    except RequestException as e:
+        logger.exception("reCAPTCHA API request failed: %s", str(e))
+        return False, "reCAPTCHA service temporarily unavailable"
+    except ValueError as e:
+        logger.exception("reCAPTCHA API returned invalid JSON: %s", str(e))
+        return False, "reCAPTCHA service error"
+    except Exception as e:
+        logger.exception("Unexpected error during reCAPTCHA verification: %s", str(e))
+        return False, "reCAPTCHA verification error"
 
 # ----------------------
 # Form
@@ -229,18 +494,21 @@ class ContactForm(FlaskForm):
 # ----------------------
 
 @app.route('/get-involved', methods=['POST'])
-@limiter.limit("10 per minute")
+@limiter.limit("5 per minute")  # Reduced from 10 to 5 per minute
 def get_involved():
     ip = real_ip()
     # get token sent by reCAPTCHA
     token = request.form.get('g-recaptcha-response', '')
-    logger.info("POST /get-involved from %s; token_present=%s", ip, bool(token))
+    logger.info("POST /get-involved from %s; token_present=%s; user_agent=%s", 
+                ip, bool(token), request.headers.get('User-Agent', 'Unknown')[:100])
 
     # verify reCAPTCHA
-    if not token or not verify_recaptcha_v2(token, ip):
+    recaptcha_success, recaptcha_error = verify_recaptcha_v2(token, ip)
+    if not recaptcha_success:
+        logger.warning("reCAPTCHA verification failed for IP %s: %s", ip, recaptcha_error)
         return jsonify({
             "success": False,
-            "message": "reCAPTCHA verification failed. Please try again."
+            "message": f"reCAPTCHA verification failed: {recaptcha_error}. Please try again."
         }), 400
 
     print("Form submission received")
@@ -260,6 +528,15 @@ def get_involved():
     affiliation = (form.affiliation.data or "").strip()
     role = (form.role.data or "").strip()
     message = (form.message.data or "").strip()
+
+    # Check for duplicate submissions
+    is_duplicate, duplicate_message = check_duplicate_submission(name, email, ip)
+    if is_duplicate:
+        logger.warning("Duplicate submission blocked: name=%s, email=%s, ip=%s", name, email, ip)
+        return jsonify({
+            "success": False,
+            "message": duplicate_message
+        }), 400
 
     safe_name = escape(name or "")
     safe_email = escape(email or "")
@@ -371,6 +648,279 @@ def noForm():
 def showSchedule():
     return send_file('templates/EnvisionSchedule.pdf')
 
+
+@app.route("/admin", methods=['GET'])
+def admin_redirect():
+    """
+    Redirect /admin to /admin/login
+    """
+    return redirect('/admin/login')
+
+
+@app.route("/admin/login", methods=['GET', 'POST'])
+def admin_login():
+    """
+    Admin login route
+    """
+    form = AdminLoginForm()
+    
+    if request.method == 'GET':
+        # Return simple login form HTML with Flask-WTF CSRF token
+        return f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Admin Login - Envision</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }}
+                .form-group {{ margin-bottom: 15px; }}
+                label {{ display: block; margin-bottom: 5px; }}
+                input[type="password"] {{ width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }}
+                button {{ background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }}
+                button:hover {{ background: #0056b3; }}
+                .error {{ color: red; margin-top: 10px; }}
+            </style>
+        </head>
+        <body>
+            <h2>Admin Login</h2>
+            <form method="POST">
+                {form.csrf_token()}
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="error" class="error" style="display: none;"></div>
+            <script>
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('error')) {{
+                    document.getElementById('error').textContent = urlParams.get('error');
+                    document.getElementById('error').style.display = 'block';
+                }}
+            </script>
+        </body>
+        </html>
+        """
+    
+    # POST request - handle login
+    if form.validate_on_submit():
+        password = form.password.data
+        ip = real_ip()
+        
+        if verify_admin_password(password):
+            session['admin_authenticated'] = True
+            logger.info(f"Admin login successful from IP {ip}")
+            return redirect('/admin/submissions')
+        else:
+            logger.warning(f"Failed admin login attempt from IP {ip}")
+            return redirect('/admin/login?error=Invalid password')
+    else:
+        # Form validation failed (likely CSRF token issue)
+        ip = real_ip()
+        logger.warning(f"Admin login form validation failed from IP {ip}: {form.errors}")
+        return redirect('/admin/login?error=Form validation failed. Please try again.')
+
+@app.route("/admin/logout", methods=['POST'])
+def admin_logout():
+    """
+    Admin logout route
+    """
+    form = AdminLoginForm()
+    if form.validate_on_submit():
+        session.pop('admin_authenticated', None)
+        logger.info(f"Admin logout from IP {real_ip()}")
+        return redirect('/admin/login')
+    else:
+        # CSRF validation failed, but we can still allow logout for security
+        session.pop('admin_authenticated', None)
+        logger.warning(f"Admin logout with CSRF validation failed from IP {real_ip()}")
+        return redirect('/admin/login')
+
+@app.route("/admin/submissions", methods=['GET'])
+@require_admin_auth
+def view_submissions():
+    """
+    Admin route to view submission tracking data (protected with authentication)
+    """
+    try:
+        tracking_data = load_submission_tracking()
+        current_time = time.time()
+        TWO_WEEKS = 14 * 24 * 60 * 60  # 14 days in seconds
+        
+        # Debug logging
+        logger.info(f"Admin dashboard - tracking_data keys: {list(tracking_data.keys())}")
+        logger.info(f"Admin dashboard - total entries: {len(tracking_data)}")
+        
+        # Format data for display
+        formatted_data = []
+        for key, value in tracking_data.items():
+            # Get recent submissions (within 2 weeks)
+            submissions = value.get('submissions', [])
+            recent_submissions = [s for s in submissions if current_time - s['timestamp'] < TWO_WEEKS]
+            
+            # Calculate cooldown status
+            cooldown_status = "None"
+            if len(recent_submissions) >= 2:
+                recent_submissions.sort(key=lambda x: x['timestamp'], reverse=True)
+                submission_pairs = len(recent_submissions) // 2
+                if submission_pairs > 0:
+                    last_pair_start = recent_submissions[submission_pairs * 2 - 1]['timestamp']
+                    time_since_last_pair = current_time - last_pair_start
+                    cooldown_period = 24 * 60 * 60  # 24 hours
+                    
+                    if time_since_last_pair < cooldown_period:
+                        time_until_cooldown_ends = cooldown_period - time_since_last_pair
+                        hours_until_cooldown_ends = time_until_cooldown_ends / 3600
+                        cooldown_status = f"Active ({hours_until_cooldown_ends:.1f}h remaining)"
+                    else:
+                        cooldown_status = "Available"
+            
+            # Format submission history
+            submission_history = []
+            for submission in sorted(recent_submissions, key=lambda x: x['timestamp'], reverse=True):
+                submission_history.append({
+                    'timestamp': datetime.fromtimestamp(submission['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
+                    'ip': submission.get('ip', 'N/A'),
+                    'hours_ago': f"{(current_time - submission['timestamp']) / 3600:.1f}"
+                })
+            
+            time_diff = current_time - value.get('last_submission', current_time)
+            hours_ago = time_diff / 3600
+            
+            formatted_data.append({
+                'identifier': key,
+                'name': value.get('name', 'N/A'),
+                'email': value.get('email', 'N/A'),
+                'total_submissions': len(recent_submissions),
+                'max_submissions': 4,
+                'cooldown_status': cooldown_status,
+                'last_submission': datetime.fromtimestamp(value.get('last_submission', current_time)).strftime('%Y-%m-%d %H:%M:%S'),
+                'last_ip': value.get('last_ip', 'N/A'),
+                'hours_since_last': f"{hours_ago:.1f}",
+                'submission_history': submission_history
+            })
+        
+        # Sort by last submission time (most recent first)
+        formatted_data.sort(key=lambda x: x['last_submission'], reverse=True)
+        
+        # Debug logging
+        logger.info(f"Admin dashboard - formatted_data entries: {len(formatted_data)}")
+        
+        # Return HTML page instead of JSON for better readability
+        logout_form = AdminLoginForm()  # Reuse form for CSRF token
+        
+        # Check if we have data to display
+        if not formatted_data:
+            html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Admin - Submission Tracking</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; max-width: 1200px; margin: 20px auto; padding: 20px; }}
+                .header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }}
+                .logout-btn {{ background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }}
+                .logout-btn:hover {{ background: #c82333; }}
+                .no-data {{ text-align: center; padding: 40px; background: #f8f9fa; border-radius: 4px; }}
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Envision Admin - Submission Tracking</h1>
+                <form method="POST" action="/admin/logout" style="display: inline;">
+                    {logout_form.csrf_token()}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+            
+            <div class="no-data">
+                <h3>No Submissions Found</h3>
+                <p>No submission data found in the tracking system.</p>
+                <p>Total tracking entries: {len(tracking_data)}</p>
+                <p>Raw tracking data keys: {list(tracking_data.keys())}</p>
+            </div>
+        </body>
+        </html>
+        """
+        else:
+            html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Admin - Submission Tracking</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; max-width: 1200px; margin: 20px auto; padding: 20px; }}
+                .header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }}
+                .logout-btn {{ background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }}
+                .logout-btn:hover {{ background: #c82333; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+                th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                th {{ background-color: #f2f2f2; }}
+                .cooldown-active {{ color: #dc3545; font-weight: bold; }}
+                .cooldown-available {{ color: #28a745; }}
+                .stats {{ background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px; }}
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Envision Admin - Submission Tracking</h1>
+                <form method="POST" action="/admin/logout" style="display: inline;">
+                    {logout_form.csrf_token()}
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </div>
+            
+            <div class="stats">
+                <h3>System Configuration</h3>
+                <p><strong>Total Entries:</strong> {len(formatted_data)}</p>
+                <p><strong>Submission Limit:</strong> 4 per 2 weeks</p>
+                <p><strong>Cooldown Period:</strong> 24 hours after every 2 submissions</p>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name/Email</th>
+                        <th>Submissions</th>
+                        <th>Cooldown Status</th>
+                        <th>Last Submission</th>
+                        <th>Last IP</th>
+                        <th>Submission History</th>
+                    </tr>
+                </thead>
+                <tbody>
+        """
+        
+        for entry in formatted_data:
+            cooldown_class = "cooldown-active" if "Active" in entry['cooldown_status'] else "cooldown-available"
+            history_html = "<br>".join([f"{s['timestamp']} (IP: {s['ip']})" for s in entry['submission_history'][:3]])
+            if len(entry['submission_history']) > 3:
+                history_html += f"<br>... and {len(entry['submission_history']) - 3} more"
+            
+            html_content += f"""
+                    <tr>
+                        <td>{entry['identifier']}</td>
+                        <td>{entry['total_submissions']}/{entry['max_submissions']}</td>
+                        <td class="{cooldown_class}">{entry['cooldown_status']}</td>
+                        <td>{entry['last_submission']}</td>
+                        <td>{entry['last_ip']}</td>
+                        <td style="font-size: 12px;">{history_html}</td>
+                    </tr>
+            """
+        
+            html_content += """
+                </tbody>
+            </table>
+        </body>
+        </html>
+        """
+        
+        return html_content
+    except Exception as e:
+        logger.error(f"Error retrieving submission data: {e}")
+        return jsonify({"error": "Failed to retrieve submission data"}), 500
+
 # RUN APP
 if __name__ == '__main__':
-    app.run(debug=True)   
+    app.run( debug=False)

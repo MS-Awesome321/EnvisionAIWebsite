@@ -33,3 +33,9 @@ Albert Einstein	mpineroj@gmail.com	Princeton	speaker	Testing.
 Stephen Hawkings	mpineroj@gmail.com	Princeton	volunteer	Testing.
 MIGUEL	mpineroj@gmail.com	Princeton	attendee	hello.
 Please	mpineroj@gmail.com	pleasw work	partner-sponsor	okay this might work.
+test	mpineroj@gmail.com	rtes	volunteer	test
+test	mpinero@princeton.edu	test	speaker	sdfd
+Miguel	mpinero@princeton.edu	sdfsd	speaker	sfsdf
+Miguel Piñero-Jacome	mpinero@princeton.edu	sdfsdf	volunteer	sdfsdf
+Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	sfsdfsdf
+Mig	mpineroj@gmail.com	Princeton	volunteer	svdsvdsv
