@@ -1,0 +1,56 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin - Submission Tracking{% endblock %}
+{% block page_title %}Envision Admin - Submission Tracking{% endblock %}
+
+{% block content %}
+{% if not formatted_data %}
+    <div class="no-data">
+        <h3>No Submissions Found</h3>
+        <p>No submission data found in the tracking system.</p>
+        <p>Total tracking entries: {{ tracking_data|length }}</p>
+        <p>Raw tracking data keys: {{ tracking_data.keys()|list }}</p>
+    </div>
+{% else %}
+    <div class="stats">
+        <h3>System Configuration</h3>
+        <p><strong>Total Entries:</strong> {{ formatted_data|length }}</p>
+        <p><strong>Submission Limit:</strong> 4 per 2 weeks</p>
+        <p><strong>Cooldown Period:</strong> 24 hours after every 2 submissions</p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Name/Email</th>
+                <th>Submissions</th>
+                <th>Cooldown Status</th>
+                <th>Last Submission</th>
+                <th>Last IP</th>
+                <th>Submission History</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in formatted_data %}
+            <tr>
+                <td>{{ entry.identifier }}</td>
+                <td>{{ entry.total_submissions }}/{{ entry.max_submissions }}</td>
+                <td class="{% if 'Active' in entry.cooldown_status %}cooldown-active{% else %}cooldown-available{% endif %}">
+                    {{ entry.cooldown_status }}
+                </td>
+                <td>{{ entry.last_submission }}</td>
+                <td>{{ entry.last_ip }}</td>
+                <td style="font-size: 12px;">
+                    {% for submission in entry.submission_history[:3] %}
+                        {{ submission.timestamp }} (IP: {{ submission.ip }})<br>
+                    {% endfor %}
+                    {% if entry.submission_history|length > 3 %}
+                        ... and {{ entry.submission_history|length - 3 }} more
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

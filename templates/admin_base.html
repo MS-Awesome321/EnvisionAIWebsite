@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Envision Admin{% endblock %}</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 1400px; 
+            margin: 20px auto; 
+            padding: 20px; 
+        }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        .logout-btn { 
+            background: #dc3545; 
+            color: white; 
+            padding: 8px 16px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        .logout-btn:hover { 
+            background: #c82333; 
+        }
+        .nav-links { 
+            margin-bottom: 20px; 
+        }
+        .nav-links a { 
+            display: inline-block; 
+            margin-right: 15px; 
+            padding: 8px 16px; 
+            background: #007bff; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 4px; 
+        }
+        .nav-links a:hover { 
+            background: #0056b3; 
+        }
+        .nav-links a.active { 
+            background: #28a745; 
+        }
+        .stats { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 4px; 
+            margin-bottom: 20px; 
+        }
+        .stats h3 { 
+            margin-top: 0; 
+        }
+        .no-data { 
+            text-align: center; 
+            padding: 40px; 
+            background: #f8f9fa; 
+            border-radius: 4px; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+            vertical-align: top; 
+        }
+        th { 
+            background-color: #f2f2f2; 
+            font-weight: bold; 
+        }
+        .cooldown-active { 
+            color: #dc3545; 
+            font-weight: bold; 
+        }
+        .cooldown-available { 
+            color: #28a745; 
+        }
+        .submission-message { 
+            max-width: 300px; 
+            word-wrap: break-word; 
+        }
+        .role-badge { 
+            padding: 4px 8px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
+        .role-speaker { 
+            background: #e3f2fd; 
+            color: #1976d2; 
+        }
+        .role-volunteer { 
+            background: #f3e5f5; 
+            color: #7b1fa2; 
+        }
+        .role-attendee { 
+            background: #e8f5e8; 
+            color: #388e3c; 
+        }
+        .role-partner { 
+            background: #fff3e0; 
+            color: #f57c00; 
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>{% block page_title %}Envision Admin{% endblock %}</h1>
+            <p style="margin: 0; color: #666; font-size: 14px;">Logged in as: {{ admin_name }}</p>
+        </div>
+        <form method="POST" action="/admin/logout" style="display: inline;">
+            {{ csrf_token }}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+    
+    <div class="nav-links">
+        <a href="/admin/submissions" {% if active_page == 'tracking' %}class="active"{% endif %}>Submission Tracking</a>
+        <a href="/admin/all" {% if active_page == 'submissions' %}class="active"{% endif %}>All Submissions</a>
+    </div>
+    
+    {% block content %}{% endblock %}
+</body>
+</html>

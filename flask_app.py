@@ -90,24 +90,23 @@ def verify_admin_password(password):
     return stored_hash == input_hash
 
 def send_admin_access_alert(admin_name, ip_address, access_type, success=True):
-    """Send email alert when someone accesses admin pages"""
+    """Send email alert for admin login attempts (security-focused)"""
     try:
         current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         status = "SUCCESS" if success else "FAILED"
         
-        subject = f"Admin Access Alert - {status} - {admin_name}"
+        subject = f"Admin Login Alert - {status} - {admin_name}"
         
         html = f"""
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: {'#28a745' if success else '#dc3545'};">
-                Admin Access Alert - {status}
+                Admin Login Alert - {status}
             </h2>
             
             <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                <h3>Access Details:</h3>
+                <h3>Login Details:</h3>
                 <p><strong>Admin Name:</strong> {admin_name}</p>
                 <p><strong>IP Address:</strong> {ip_address}</p>
-                <p><strong>Access Type:</strong> {access_type}</p>
                 <p><strong>Timestamp:</strong> {current_time}</p>
                 <p><strong>Status:</strong> {status}</p>
             </div>
@@ -121,14 +120,14 @@ def send_admin_access_alert(admin_name, ip_address, access_type, success=True):
             
             <div style="background: {'#d4edda' if success else '#f8d7da'}; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 <p style="margin: 0; color: {'#155724' if success else '#721c24'};">
-                    {f'✅ Admin successfully accessed the system' if success else '❌ Failed admin access attempt'}
+                    {f'✅ Admin successfully logged in' if success else '❌ Failed admin login attempt'}
                 </p>
             </div>
             
             <hr style="margin: 30px 0;">
             <p style="color: #6c757d; font-size: 12px;">
                 This is an automated security alert from the Envision AI Website admin system.
-                If you did not make this access attempt, please review your security settings immediately.
+                {'You will only receive alerts for login attempts, not for page access.' if success else 'If you did not make this login attempt, please review your security settings immediately.'}
             </p>
         </div>
         """
@@ -832,18 +831,12 @@ def admin_logout():
         session.pop('admin_name', None)
         logger.info(f"Admin logout: {admin_name} from IP {ip}")
         
-        # Send logout alert
-        send_admin_access_alert(admin_name, ip, "LOGOUT", success=True)
-        
         return redirect('/admin/login')
     else:
         # CSRF validation failed, but we can still allow logout for security
         session.pop('admin_authenticated', None)
         session.pop('admin_name', None)
         logger.warning(f"Admin logout with CSRF validation failed: {admin_name} from IP {ip}")
-        
-        # Send logout alert
-        send_admin_access_alert(admin_name, ip, "LOGOUT", success=True)
         
         return redirect('/admin/login')
 
@@ -854,11 +847,7 @@ def view_submissions():
     Admin route to view submission tracking data (protected with authentication)
     """
     try:
-        # Send admin dashboard access alert
         admin_name = session.get('admin_name', 'Unknown')
-        ip = real_ip()
-        send_admin_access_alert(admin_name, ip, "DASHBOARD_ACCESS", success=True)
-        
         tracking_data = load_submission_tracking()
         current_time = time.time()
         TWO_WEEKS = 14 * 24 * 60 * 60  # 14 days in seconds
@@ -922,125 +911,73 @@ def view_submissions():
         # Debug logging
         logger.info(f"Admin dashboard - formatted_data entries: {len(formatted_data)}")
         
-        # Return HTML page instead of JSON for better readability
-        logout_form = AdminLoginForm()  # Reuse form for CSRF token
+        # Create logout form for CSRF token
+        logout_form = AdminLoginForm()
         
-        # Check if we have data to display
-        if not formatted_data:
-            html_content = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Admin - Submission Tracking</title>
-            <style>
-                body {{ font-family: Arial, sans-serif; max-width: 1200px; margin: 20px auto; padding: 20px; }}
-                .header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }}
-                .logout-btn {{ background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }}
-                .logout-btn:hover {{ background: #c82333; }}
-                .no-data {{ text-align: center; padding: 40px; background: #f8f9fa; border-radius: 4px; }}
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <div>
-                    <h1>Envision Admin - Submission Tracking</h1>
-                    <p style="margin: 0; color: #666; font-size: 14px;">Logged in as: {admin_name}</p>
-                </div>
-                <form method="POST" action="/admin/logout" style="display: inline;">
-                    {logout_form.csrf_token()}
-                    <button type="submit" class="logout-btn">Logout</button>
-                </form>
-            </div>
-            
-            <div class="no-data">
-                <h3>No Submissions Found</h3>
-                <p>No submission data found in the tracking system.</p>
-                <p>Total tracking entries: {len(tracking_data)}</p>
-                <p>Raw tracking data keys: {list(tracking_data.keys())}</p>
-            </div>
-        </body>
-        </html>
-        """
-        else:
-            html_content = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Admin - Submission Tracking</title>
-            <style>
-                body {{ font-family: Arial, sans-serif; max-width: 1200px; margin: 20px auto; padding: 20px; }}
-                .header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }}
-                .logout-btn {{ background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }}
-                .logout-btn:hover {{ background: #c82333; }}
-                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
-                th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
-                th {{ background-color: #f2f2f2; }}
-                .cooldown-active {{ color: #dc3545; font-weight: bold; }}
-                .cooldown-available {{ color: #28a745; }}
-                .stats {{ background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px; }}
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <div>
-                    <h1>Envision Admin - Submission Tracking</h1>
-                    <p style="margin: 0; color: #666; font-size: 14px;">Logged in as: {admin_name}</p>
-                </div>
-                <form method="POST" action="/admin/logout" style="display: inline;">
-                    {logout_form.csrf_token()}
-                    <button type="submit" class="logout-btn">Logout</button>
-                </form>
-            </div>
-            
-            <div class="stats">
-                <h3>System Configuration</h3>
-                <p><strong>Total Entries:</strong> {len(formatted_data)}</p>
-                <p><strong>Submission Limit:</strong> 4 per 2 weeks</p>
-                <p><strong>Cooldown Period:</strong> 24 hours after every 2 submissions</p>
-            </div>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name/Email</th>
-                        <th>Submissions</th>
-                        <th>Cooldown Status</th>
-                        <th>Last Submission</th>
-                        <th>Last IP</th>
-                        <th>Submission History</th>
-                    </tr>
-                </thead>
-                <tbody>
-        """
-        
-        for entry in formatted_data:
-            cooldown_class = "cooldown-active" if "Active" in entry['cooldown_status'] else "cooldown-available"
-            history_html = "<br>".join([f"{s['timestamp']} (IP: {s['ip']})" for s in entry['submission_history'][:3]])
-            if len(entry['submission_history']) > 3:
-                history_html += f"<br>... and {len(entry['submission_history']) - 3} more"
-            
-            html_content += f"""
-                    <tr>
-                        <td>{entry['identifier']}</td>
-                        <td>{entry['total_submissions']}/{entry['max_submissions']}</td>
-                        <td class="{cooldown_class}">{entry['cooldown_status']}</td>
-                        <td>{entry['last_submission']}</td>
-                        <td>{entry['last_ip']}</td>
-                        <td style="font-size: 12px;">{history_html}</td>
-                    </tr>
-            """
-        
-            html_content += """
-                </tbody>
-            </table>
-        </body>
-        </html>
-        """
-        
-        return html_content
+        return render_template('admin_tracking.html',
+                             admin_name=admin_name,
+                             tracking_data=tracking_data,
+                             formatted_data=formatted_data,
+                             csrf_token=logout_form.csrf_token(),
+                             active_page='tracking')
     except Exception as e:
         logger.error(f"Error retrieving submission data: {e}")
         return jsonify({"error": "Failed to retrieve submission data"}), 500
+
+@app.route("/admin/all", methods=['GET'])
+@require_admin_auth
+def view_all_submissions():
+    """
+    Admin route to view all accepted form submissions with complete information
+    """
+    try:
+        admin_name = session.get('admin_name', 'Unknown')
+        # Read responses.txt file
+        submissions = []
+        try:
+            with open("responses.txt", "r") as file:
+                for line_num, line in enumerate(file, 1):
+                    line = line.strip()
+                    if line and "\t" in line:
+                        parts = line.split("\t")
+                        if len(parts) >= 5:
+                            submission = {
+                                'line_number': line_num,
+                                'name': parts[0],
+                                'email': parts[1],
+                                'affiliation': parts[2],
+                                'role': parts[3],
+                                'message': parts[4] if len(parts) > 4 else '',
+                                'submission_time': 'Unknown'  # responses.txt doesn't store timestamps
+                            }
+                            submissions.append(submission)
+        except FileNotFoundError:
+            logger.warning("responses.txt file not found")
+        except Exception as e:
+            logger.error(f"Error reading responses.txt: {e}")
+        
+        # Sort submissions by line number (most recent first)
+        submissions.sort(key=lambda x: x['line_number'], reverse=True)
+        
+        # Create logout form for CSRF token
+        logout_form = AdminLoginForm()
+        
+        # Count submissions by role
+        role_counts = {}
+        for submission in submissions:
+            role = submission['role']
+            role_counts[role] = role_counts.get(role, 0) + 1
+        
+        return render_template('admin_submissions.html',
+                             admin_name=admin_name,
+                             submissions=submissions,
+                             role_counts=role_counts,
+                             current_time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                             csrf_token=logout_form.csrf_token(),
+                             active_page='submissions')
+    except Exception as e:
+        logger.error(f"Error retrieving all submissions: {e}")
+        return jsonify({"error": "Failed to retrieve submissions"}), 500
 
 # RUN APP
 if __name__ == '__main__':

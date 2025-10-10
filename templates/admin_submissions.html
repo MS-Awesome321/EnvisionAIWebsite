@@ -1,0 +1,68 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin - All Submissions{% endblock %}
+{% block page_title %}Envision Admin - All Submissions{% endblock %}
+
+{% block content %}
+<div class="stats">
+    <h3>Submission Statistics</h3>
+    <p><strong>Total Submissions:</strong> {{ submissions|length }}</p>
+    <p><strong>File:</strong> responses.txt</p>
+    <p><strong>Last Updated:</strong> {{ current_time }}</p>
+</div>
+
+{% if not submissions %}
+    <div class="no-data">
+        <h3>No Submissions Found</h3>
+        <p>No form submissions found in responses.txt</p>
+    </div>
+{% else %}
+    <div style="margin-bottom: 20px;">
+        <h4>Submissions by Role:</h4>
+        <p>
+            {% for role, count in role_counts.items() %}
+                {{ role }}: {{ count }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Affiliation</th>
+                <th>Role</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission.line_number }}</td>
+                <td>{{ submission.name }}</td>
+                <td><a href="mailto:{{ submission.email }}">{{ submission.email }}</a></td>
+                <td>{{ submission.affiliation }}</td>
+                <td>
+                    <span class="role-badge role-{{ submission.role.replace('-', '').replace('partner-sponsor', 'partner') }}">
+                        {% if submission.role == 'partner-sponsor' %}
+                            Partner/Sponsor
+                        {% else %}
+                            {{ submission.role.replace('-', ' ').title() }}
+                        {% endif %}
+                    </span>
+                </td>
+                <td class="submission-message" title="{{ submission.message }}">
+                    {% if submission.message|length > 150 %}
+                        {{ submission.message[:147] }}...
+                    {% else %}
+                        {{ submission.message }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
