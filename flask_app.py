@@ -44,6 +44,7 @@ app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET_KEY')
 app.config['RECAPTCHA_SITE_KEY'] = os.getenv('RECAPTCHA_SITE_KEY')
 app.config['ADMIN_PASSWORD'] = os.getenv('ADMIN_PASSWORD', 'admin123')  # Default password for development
 
+
 resend.api_key = os.getenv('RESEND_API_KEY')
 MAIL_TO = os.getenv('MAIL_TO')
 MAIL_FROM = os.getenv('MAIL_FROM')
@@ -88,6 +89,64 @@ def verify_admin_password(password):
     input_hash = hash_password(password)
     return stored_hash == input_hash
 
+def send_admin_access_alert(admin_name, ip_address, access_type, success=True):
+    """Send email alert when someone accesses admin pages"""
+    try:
+        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        status = "SUCCESS" if success else "FAILED"
+        
+        subject = f"Admin Access Alert - {status} - {admin_name}"
+        
+        html = f"""
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: {'#28a745' if success else '#dc3545'};">
+                Admin Access Alert - {status}
+            </h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <h3>Access Details:</h3>
+                <p><strong>Admin Name:</strong> {admin_name}</p>
+                <p><strong>IP Address:</strong> {ip_address}</p>
+                <p><strong>Access Type:</strong> {access_type}</p>
+                <p><strong>Timestamp:</strong> {current_time}</p>
+                <p><strong>Status:</strong> {status}</p>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <p><strong>User Agent:</strong></p>
+                <p style="background: #e9ecef; padding: 10px; border-radius: 3px; word-break: break-all;">
+                    {request.headers.get('User-Agent', 'Unknown')}
+                </p>
+            </div>
+            
+            <div style="background: {'#d4edda' if success else '#f8d7da'}; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 0; color: {'#155724' if success else '#721c24'};">
+                    {f'✅ Admin successfully accessed the system' if success else '❌ Failed admin access attempt'}
+                </p>
+            </div>
+            
+            <hr style="margin: 30px 0;">
+            <p style="color: #6c757d; font-size: 12px;">
+                This is an automated security alert from the Envision AI Website admin system.
+                If you did not make this access attempt, please review your security settings immediately.
+            </p>
+        </div>
+        """
+        
+        # Send to the same email as form submissions
+        if MAIL_TO:
+            send_resend(
+                to=MAIL_TO,
+                subject=subject,
+                html=html,
+                reply_to_email="security@envisionprinceton.com",
+                reply_to_name="Envision Security System"
+            )
+            logger.info(f"Admin access alert sent: {admin_name} - {access_type} - {status}")
+        
+    except Exception as e:
+        logger.error(f"Failed to send admin access alert: {e}")
+
 def is_admin_authenticated():
     """Check if user is authenticated as admin"""
     return session.get('admin_authenticated', False)
@@ -102,6 +161,7 @@ def require_admin_auth(f):
     return decorated_function
 
 class AdminLoginForm(FlaskForm):
+    name = StringField('Name', validators=[InputRequired(), Length(min=2, max=50)], render_kw={"placeholder": "Your Name"})
     password = PasswordField('Password', validators=[InputRequired()])
     submit = SubmitField('Login')
 
@@ -674,20 +734,47 @@ def admin_login():
             <style>
                 body {{ font-family: Arial, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }}
                 .form-group {{ margin-bottom: 15px; }}
-                label {{ display: block; margin-bottom: 5px; }}
-                input[type="password"] {{ width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }}
-                button {{ background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }}
+                label {{ display: block; margin-bottom: 5px; font-weight: bold; }}
+                input[type="text"], input[type="password"] {{ 
+                    width: 100%; 
+                    padding: 10px; 
+                    border: 1px solid #ddd; 
+                    border-radius: 4px; 
+                    box-sizing: border-box;
+                    font-size: 14px;
+                }}
+                input:focus {{ outline: none; border-color: #007bff; box-shadow: 0 0 5px rgba(0,123,255,0.3); }}
+                button {{ 
+                    background: #007bff; 
+                    color: white; 
+                    padding: 12px 24px; 
+                    border: none; 
+                    border-radius: 4px; 
+                    cursor: pointer; 
+                    font-size: 16px;
+                    width: 100%;
+                }}
                 button:hover {{ background: #0056b3; }}
-                .error {{ color: red; margin-top: 10px; }}
+                .error {{ color: red; margin-top: 10px; text-align: center; }}
+                .header {{ text-align: center; margin-bottom: 30px; }}
+                .header h2 {{ color: #333; margin-bottom: 5px; }}
+                .header p {{ color: #666; font-size: 14px; }}
             </style>
         </head>
         <body>
-            <h2>Admin Login</h2>
+            <div class="header">
+                <h2>Admin Login</h2>
+                <p>Envision AI Website Administration</p>
+            </div>
             <form method="POST">
                 {form.csrf_token()}
                 <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit">Login</button>
             </form>
@@ -705,15 +792,25 @@ def admin_login():
     
     # POST request - handle login
     if form.validate_on_submit():
+        name = form.name.data.strip()
         password = form.password.data
         ip = real_ip()
         
         if verify_admin_password(password):
             session['admin_authenticated'] = True
-            logger.info(f"Admin login successful from IP {ip}")
+            session['admin_name'] = name
+            logger.info(f"Admin login successful: {name} from IP {ip}")
+            
+            # Send successful login alert
+            send_admin_access_alert(name, ip, "LOGIN", success=True)
+            
             return redirect('/admin/submissions')
         else:
-            logger.warning(f"Failed admin login attempt from IP {ip}")
+            logger.warning(f"Failed admin login attempt: {name} from IP {ip}")
+            
+            # Send failed login alert
+            send_admin_access_alert(name, ip, "LOGIN", success=False)
+            
             return redirect('/admin/login?error=Invalid password')
     else:
         # Form validation failed (likely CSRF token issue)
@@ -727,14 +824,27 @@ def admin_logout():
     Admin logout route
     """
     form = AdminLoginForm()
+    ip = real_ip()
+    admin_name = session.get('admin_name', 'Unknown')
+    
     if form.validate_on_submit():
         session.pop('admin_authenticated', None)
-        logger.info(f"Admin logout from IP {real_ip()}")
+        session.pop('admin_name', None)
+        logger.info(f"Admin logout: {admin_name} from IP {ip}")
+        
+        # Send logout alert
+        send_admin_access_alert(admin_name, ip, "LOGOUT", success=True)
+        
         return redirect('/admin/login')
     else:
         # CSRF validation failed, but we can still allow logout for security
         session.pop('admin_authenticated', None)
-        logger.warning(f"Admin logout with CSRF validation failed from IP {real_ip()}")
+        session.pop('admin_name', None)
+        logger.warning(f"Admin logout with CSRF validation failed: {admin_name} from IP {ip}")
+        
+        # Send logout alert
+        send_admin_access_alert(admin_name, ip, "LOGOUT", success=True)
+        
         return redirect('/admin/login')
 
 @app.route("/admin/submissions", methods=['GET'])
@@ -744,6 +854,11 @@ def view_submissions():
     Admin route to view submission tracking data (protected with authentication)
     """
     try:
+        # Send admin dashboard access alert
+        admin_name = session.get('admin_name', 'Unknown')
+        ip = real_ip()
+        send_admin_access_alert(admin_name, ip, "DASHBOARD_ACCESS", success=True)
+        
         tracking_data = load_submission_tracking()
         current_time = time.time()
         TWO_WEEKS = 14 * 24 * 60 * 60  # 14 days in seconds
@@ -827,7 +942,10 @@ def view_submissions():
         </head>
         <body>
             <div class="header">
-                <h1>Envision Admin - Submission Tracking</h1>
+                <div>
+                    <h1>Envision Admin - Submission Tracking</h1>
+                    <p style="margin: 0; color: #666; font-size: 14px;">Logged in as: {admin_name}</p>
+                </div>
                 <form method="POST" action="/admin/logout" style="display: inline;">
                     {logout_form.csrf_token()}
                     <button type="submit" class="logout-btn">Logout</button>
@@ -864,7 +982,10 @@ def view_submissions():
         </head>
         <body>
             <div class="header">
-                <h1>Envision Admin - Submission Tracking</h1>
+                <div>
+                    <h1>Envision Admin - Submission Tracking</h1>
+                    <p style="margin: 0; color: #666; font-size: 14px;">Logged in as: {admin_name}</p>
+                </div>
                 <form method="POST" action="/admin/logout" style="display: inline;">
                     {logout_form.csrf_token()}
                     <button type="submit" class="logout-btn">Logout</button>
@@ -923,4 +1044,4 @@ def view_submissions():
 
 # RUN APP
 if __name__ == '__main__':
-    app.run( debug=False)
+    app.run( debug=True)
