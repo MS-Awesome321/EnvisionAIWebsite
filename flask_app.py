@@ -708,6 +708,10 @@ def showSchedule():
     return send_file('templates/EnvisionSchedule.pdf')
 
 
+# ----------------------
+# Admin
+# ----------------------
+
 @app.route("/admin", methods=['GET'])
 def admin_redirect():
     """
@@ -981,4 +985,4 @@ def view_all_submissions():
 
 # RUN APP
 if __name__ == '__main__':
-    app.run( debug=True)
+    app.run( debug=True, host="127.0.0.1", port=5001)

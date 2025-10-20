@@ -63,6 +63,30 @@
         </nav>
     </div>
 
+    <!-- MOBILE NAV -->
+    <button class="mobile-menu-toggle gradient-background" id="mobileMenuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+    </button>
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="mobile-nav-inner">
+            <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close navigation menu">
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            </button>
+            <nav class="mobile-nav-links">
+                <a class="mobile-nav-link" href="#page1">Home</a>
+                <a class="mobile-nav-link" href="#page2">About</a>
+                <a class="mobile-nav-link" href="#page3">Past</a>
+                <a class="mobile-nav-link" href="#page4">Venue</a>
+                <a class="mobile-nav-link" href="#page5">Team</a>
+                <a class="mobile-nav-link" href="#page6">Partners</a>
+                <a class="mobile-nav-link" href="#page7">Contact</a>
+            </nav>
+            <div id="mobileSocialContainer" class="mobile-social">
+                <a href="https://www.linkedin.com/company/envision-princeton?trk=public_post_feed-actor-image" target="_blank"><div class="social" id="linkedin"></div></a>
+            </div>
+        </div>
+    </div>
+
     <!-- REGISTER BUTTON -->
     <div class="registerContainer">
         <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8Kz3a4LNCl8EjYF_tPRyPcdygOM-M9fXd5MnlDoCniAz3cA/viewform" class="gradient-background register" id="register"><div>Register</div></a>-->
@@ -756,6 +780,56 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileNavLinks = mobileNavOverlay ? mobileNavOverlay.querySelectorAll('.mobile-nav-link') : [];
+
+            if (!mobileMenuToggle || !mobileNavOverlay || !mobileMenuClose) {
+                return;
+            }
+
+            const openMenu = () => {
+                mobileNavOverlay.classList.add('open');
+                mobileNavOverlay.setAttribute('aria-hidden', 'false');
+                mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('no-scroll');
+            };
+
+            const closeMenu = () => {
+                mobileNavOverlay.classList.remove('open');
+                mobileNavOverlay.setAttribute('aria-hidden', 'true');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('no-scroll');
+            };
+
+            mobileMenuToggle.addEventListener('click', () => {
+                if (mobileNavOverlay.classList.contains('open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            mobileMenuClose.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && mobileNavOverlay.classList.contains('open')) {
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900 && mobileNavOverlay.classList.contains('open')) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+
+    <script>
         let elementsArray = document.querySelectorAll(".page");
         let linksArray = document.querySelectorAll(".pageName");
         var benchmarks = [];
@@ -834,48 +908,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener('resize', checkPhoneMode);
-        var onPhone = true;
+        var onPhone = window.innerWidth <= 900;
         function checkPhoneMode() {
-            var height = window.innerHeight;
-            var width = window.innerWidth;
-            if (height > width) {
-                onPhone = true;
-            }
-            else {
-                onPhone = false;
-            }
+            onPhone = window.innerWidth <= 900;
             phoneMode();
         }
         checkPhoneMode();
 
+        function hideElements(...elements) {
+            for (var i = 0; i < elements.length; i++) {
+                // check if elements[i] is an HTMLCollection
+                if (elements[i] instanceof HTMLCollection || elements[i] instanceof NodeList) {
+                    for (var j = 0; j < elements[i].length; j++) {
+                        elements[i][j].style.display = 'none';
+                    }
+                    continue;
+                } 
+                elements[i].style.display = 'none';
+            }
+        }
+        
+        function showElements(displayStyle='block', ...elements) {
+            for (var i = 0; i < elements.length; i++) {
+                // check if elements[i] is an HTMLCollection
+                if (elements[i] instanceof HTMLCollection || elements[i] instanceof NodeList) {
+                    for (var j = 0; j < elements[i].length; j++) {
+                        elements[i][j].style.display = displayStyle;
+                    }
+                    continue;
+                } 
+                elements[i].style.display = displayStyle;
+            }
+        }
+
         window.addEventListener('scroll', phoneMode);
         function phoneMode() {
             if (onPhone) {
-                if (onFirstPage) {
-                    loseSide();
-                }
-                else{
-                    gainSide();
-                    expandSide();
-                }
-                for (var icon of document.querySelectorAll('.social')) {
-                    icon.style.height = '6vw';
-                    icon.style.width = '6vw';
-                    icon.style.marginLeft = '5vw';
-                }
-
+                loseSide();
+                hideElements(
+                    document.getElementById('socialContainer'),
+                    document.getElementsByClassName('registerContainer'),
+                    document.getElementById('topLogoContainer')
+                );
+               
                 // registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
                 bigVenue();
             }
             else {
+
+                showElements(
+                    'flex',
+                document.getElementsByClassName('registerContainer'),
+                document.getElementById('socialContainer')
+                );
                 gainSide();
                 shrinkSide();
-                for (var icon of document.querySelectorAll('.social')) {
-                    icon.style.height = '4vh';
-                    icon.style.width = '4vh';
-                    icon.style.marginLeft = '5vh';
-                }
+        
 
                 // registerFont('17px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(0px)';

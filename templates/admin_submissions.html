@@ -1,7 +1,7 @@
 {% extends "admin_base.html" %}
 
 {% block title %}Admin - All Submissions{% endblock %}
-{% block page_title %}Envision Admin - All Submissions{% endblock %}
+{% block page_title %}All Submissions{% endblock %}
 
 {% block content %}
 <div class="stats">
@@ -29,6 +29,7 @@
     <table>
         <thead>
             <tr>
+                <th>Timestamp</th>
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -40,6 +41,7 @@
         <tbody>
             {% for submission in submissions %}
             <tr>
+                <td>{{ submission.timestamp }}</td>
                 <td>{{ submission.line_number }}</td>
                 <td>{{ submission.name }}</td>
                 <td><a href="mailto:{{ submission.email }}">{{ submission.email }}</a></td>
