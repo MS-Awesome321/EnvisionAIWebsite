@@ -123,8 +123,8 @@
     </div>
     
     <div class="nav-links">
-        <a href="/admin/submissions" {% if active_page == 'tracking' %}class="active"{% endif %}>Submission Tracking</a>
-        <a href="/admin/all" {% if active_page == 'submissions' %}class="active"{% endif %}>All Submissions</a>
+        <a href="/admin/submissions" {% if active_page == 'submissions' %}class="active"{% endif %}>All Submissions</a>
+        <a href="/admin/rate-limit" {% if active_page == 'tracking' %}class="active"{% endif %}>Submission Rate Limiting</a>
     </div>
     
     {% block content %}{% endblock %}

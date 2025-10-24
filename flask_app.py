@@ -42,7 +42,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAPTCHA_SECRET_KEY')
 app.config['RECAPTCHA_SITE_KEY'] = os.getenv('RECAPTCHA_SITE_KEY')
-app.config['ADMIN_PASSWORD'] = os.getenv('ADMIN_PASSWORD', 'admin123')  # Default password for development
+app.config['ADMIN_PASSWORD'] = os.getenv('ADMIN_PASSWORD') 
 
 
 resend.api_key = os.getenv('RESEND_API_KEY')
@@ -223,12 +223,11 @@ def check_duplicate_submission(name, email, ip):
     tracking_data = load_submission_tracking()
     current_time = time.time()
     
-    # Configuration
     MAX_SUBMISSIONS = 4
     TWO_WEEKS = 14 * 24 * 60 * 60  # 14 days in seconds
     COOLDOWN_PERIOD = 24 * 60 * 60  # 24 hours in seconds
     
-    # Normalize inputs for comparison
+    # normalize inputs for comparison
     normalized_name = name.strip().lower()
     normalized_email = email.strip().lower()
     
@@ -237,7 +236,7 @@ def check_duplicate_submission(name, email, ip):
         name_data = tracking_data[normalized_name]
         submissions = name_data.get('submissions', [])
         
-        # Clean up old submissions (older than 2 weeks)
+        # clean up old submissions (older than 2 weeks)
         recent_submissions = [s for s in submissions if current_time - s['timestamp'] < TWO_WEEKS]
         
         # Check if max submissions reached
@@ -254,10 +253,10 @@ def check_duplicate_submission(name, email, ip):
             # Sort submissions by timestamp (most recent first)
             recent_submissions.sort(key=lambda x: x['timestamp'], reverse=True)
             
-            # Check if we're in a cooldown period (after every 2nd submission)
+            # check if we're in a cooldown period (after every 2nd submission)
             submission_pairs = len(recent_submissions) // 2
             if submission_pairs > 0:
-                # Check the most recent pair
+                # check the most recent pair
                 last_pair_start = recent_submissions[submission_pairs * 2 - 1]['timestamp']
                 time_since_last_pair = current_time - last_pair_start
                 
@@ -312,7 +311,7 @@ def check_duplicate_submission(name, email, ip):
         'email': email
     }
     
-    # Update tracking data for name
+    # update tracking data for name
     if normalized_name in tracking_data:
         tracking_data[normalized_name]['submissions'].append(submission_record)
         tracking_data[normalized_name]['last_submission'] = current_time
@@ -327,7 +326,7 @@ def check_duplicate_submission(name, email, ip):
             'name': name
         }
     
-    # Update tracking data for email
+    # update tracking data for email
     if normalized_email in tracking_data:
         tracking_data[normalized_email]['submissions'].append(submission_record)
         tracking_data[normalized_email]['last_submission'] = current_time
@@ -553,7 +552,7 @@ class ContactForm(FlaskForm):
 # ----------------------
 
 @app.route('/get-involved', methods=['POST'])
-@limiter.limit("5 per minute")  # Reduced from 10 to 5 per minute
+@limiter.limit("5 per minute") 
 def get_involved():
     ip = real_ip()
     # get token sent by reCAPTCHA
@@ -719,7 +718,7 @@ def admin_redirect():
     """
     return redirect('/admin/login')
 
-
+@limiter.limit("3 per minute") 
 @app.route("/admin/login", methods=['GET', 'POST'])
 def admin_login():
     """
@@ -844,11 +843,11 @@ def admin_logout():
         
         return redirect('/admin/login')
 
-@app.route("/admin/submissions", methods=['GET'])
+@app.route("/admin/rate-limit", methods=['GET'])
 @require_admin_auth
-def view_submissions():
+def view_rate_limiting():
     """
-    Admin route to view submission tracking data (protected with authentication)
+    Admin route to view submission rate limiting data 
     """
     try:
         admin_name = session.get('admin_name', 'Unknown')
@@ -928,7 +927,7 @@ def view_submissions():
         logger.error(f"Error retrieving submission data: {e}")
         return jsonify({"error": "Failed to retrieve submission data"}), 500
 
-@app.route("/admin/all", methods=['GET'])
+@app.route("/admin/submissions", methods=['GET'])
 @require_admin_auth
 def view_all_submissions():
     """
