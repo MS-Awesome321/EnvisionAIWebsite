@@ -140,6 +140,8 @@ h3 {
 
 
 
+
+
 /* --------- PAGE STYLES ----------- */
 
 
@@ -514,7 +516,7 @@ nav {
 
 #pastSpeakersTitle {
         height: 25%;
-    font-size: 25px;
+    font-size: 2.6vh;
     font-weight: 600;
     margin-bottom: 2rem;
     text-align: left;
@@ -538,10 +540,16 @@ nav {
     overflow: hidden; /* clip edges so fades look clean */
 }
 
+.pastSpeakerName{
+    font-size: 2vh;
+    padding: 10px 10px 0px 10px;
+}
+
 .scrolling-track {
     display: flex;
     animation: scroll-left 45s linear infinite;
     will-change: transform;
+    height: 35vw;
 }
 
 /* Base state: hidden until 'in-view' is added by the observer */

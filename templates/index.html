@@ -152,14 +152,14 @@
  <section class="page" id="page3">
     <div class="flexbox" style="width: 100%; height: 100%;">
         
-        <div id="historyContainer">
-            <div class="flex flex-row justify-center  margin-bottom g" style="padding: 2vh 0;">
-                <div class="flex-col align-center text-left">
+        <div id="historyContainer" class="flex, flex-col, align-center, justify-center">
+            <div  class="flex flex-row justify-center  align-center margin-bottom g" style="padding: 2vh 0;">
+                <div id="historyText" class="flex-col align-center text-left">
                     <h2 class="g" >Our
                         History</h2>
                 
-                <p class="p1" style="width: 30vw;">Over a decade of inspiring the future.</p>
-                <span style="display: block; width: 30vw;">Since its conception in the early 2010s, Envision has grown into one of Princeton’s hubs for meaningful conversations at the intersection of AI, policy, and society. From intimate gatherings to hosting over 100 participants in 2025, we’ve brought together voices from across universities, industries, and the globe. Each year builds on the last—expanding our reach, refining our themes, and fostering connections that spark new ideas, collaborations, and action. As we look ahead to Envision 2026, we honor the momentum of our past while setting our sights on a future shaped by curiosity, debate, and a shared vision for AI’s role in the world.</span>
+                <p class="p1" >Over a decade of inspiring the future.</p>
+                <span >Since its conception in the early 2010s, Envision has grown into one of Princeton’s hubs for meaningful conversations at the intersection of AI, policy, and society. We have brought together voices from across universities, industries, and the globe, hosting over 100 participants in 2025. As we look ahead to Envision 2026, we set our sights on a future shaped by curiosity, debate, and a shared vision for AI’s role in the world.</span>
                 
                 </div>
                 <img id="conferenceImage" src="static/assets/conference.png" >
@@ -177,8 +177,8 @@
                             <div class="team-m no-select">
                                 <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
                             </div>
-                            <h3>{{ speakers[i].name }}</h3>
-                            <p>{{ speakers[i].organization }}</p>
+                            <h3 class="pastSpeakerName">{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].short_org }}</p>
                         </div>
                     </a>
                     {% endfor %}
@@ -188,8 +188,8 @@
                             <div class="team-m no-select">
                                 <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
                             </div>
-                            <h3>{{ speakers[i].name }}</h3>
-                            <p>{{ speakers[i].organization }}</p>
+                            <h3 class="pastSpeakerName">{{ speakers[i].name }}</h3>
+                            <p>{{ speakers[i].short_org }}</p>
                         </div>
                     </a>
                     {% endfor %}
@@ -948,19 +948,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 hideElements(
                     document.getElementById('socialContainer'),
                     document.getElementsByClassName('registerContainer'),
-                    document.getElementById('topLogoContainer')
+                    document.getElementById('topLogoContainer'),
+                    document.getElementById('conferenceImage')
                 );
                
                 // registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
                 bigVenue();
+                historyText = document.getElementById('historyText');
+                historyText.style.width = '70%';
+                historyText.classList.remove('text-left');
+                historyText.classList.add('text-center');
             }
             else {
 
                 showElements(
                     'flex',
                 document.getElementsByClassName('registerContainer'),
-                document.getElementById('socialContainer')
+                document.getElementById('socialContainer'),
+                document.getElementById('conferenceImage')
                 );
                 gainSide();
                 shrinkSide();
@@ -968,6 +974,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // registerFont('17px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(0px)';
+                historyText = document.getElementById('historyText');
+                historyText.style.width = '30vw';
+                historyText.classList.remove('text-center');
+                historyText.classList.add('text-left');
                 smallVenue();
             }
         }
