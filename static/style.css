@@ -714,10 +714,10 @@ nav {
 
 /* CONTACT BOX */
 #registrationBox {
-    width: calc(68vw - 40px);
+    width: 80vw;
+    max-width: 900px;
     height: 75vh;
     border-radius: 20px;
-    padding: 20px;
     text-align: center;
 }
 
@@ -777,7 +777,7 @@ nav {
 
 .form {
     font-family: DM Mono;
-    width: 52vw;
+    width: 100%;
 }
 
 .input {

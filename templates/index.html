@@ -623,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- CONTACT PAGE -->
 
     <section class="page" id="page7">
-        <div class="flexbox center-x" style="height: 95vh; margin-top: 2.5vh;">
+        <div class="flexbox center-x" style="height: 115vh; margin-top: 2.5vh;">
             <div id="registrationBox">
                 <h2>Contact Us</h2>
 
@@ -670,7 +670,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div style="display:none">
                             {{ ContactForm.honeypot(class_="input", id_="websiteBox") }}
                         </div>
-                        <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                        <div class="g-recaptcha" 
+                            data-sitekey="{{ recaptcha_site_key }}" 
+                            style="transform: scale(0.8); 
+                                    transform-origin: 0 0; 
+                                    -webkit-transform: scale(0.8); 
+                                    -webkit-transform-origin: 0 0;">
+                        </div>
                         <div style="display: flex; justify-content: center; padding:10px;">
                             {{ ContactForm.submit(class_="submitButton gradient-background", id_="button") }}
                         </div>
@@ -776,8 +782,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
 
-        <footer>
+        <footer style="padding:3rem;">
             Made with ❤️ in Princeton by Mayank S, Eden R, and Miguel P
+            <p>
+                This organization is open to all Princeton University students interested in supporting our organization's missions, regardless of identity, such as race, sex, ethnicity, national origin, or other protected characteristics.
+            </p>
+
         </footer>
     </section>
 
@@ -956,7 +966,7 @@ document.addEventListener('DOMContentLoaded', () => {
                
                 // registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
-                bigVenue();
+                // bigVenue();
                 historyText = document.getElementById('historyText');
                 historyText.style.width = '70%';
                 historyText.classList.remove('text-left');
@@ -980,7 +990,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 historyText.style.width = '30vw';
                 historyText.classList.remove('text-center');
                 historyText.classList.add('text-left');
-                smallVenue();
+                //smallVenue();
             }
         }
 

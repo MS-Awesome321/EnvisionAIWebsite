@@ -4,3 +4,4 @@ submission_tracking.json
 *.md
 proper_intro.txt
 requirements-prod.txt
+auto-reply-email.html
