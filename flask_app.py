@@ -681,7 +681,8 @@ def index():
         speakers=speakers,
         team=team,
         length_team=len(team),
-        length_speakers=len(speakers),
+        length_active_speakers=len(speakers.active),
+        length_inactive_speakers=len(speakers.inactive),
         team_slides=int((len(team) / 6) + 0.5) + 1,
         registrationOpen = False  # Set to True if registration is open
     )

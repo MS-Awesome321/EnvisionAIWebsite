@@ -41,8 +41,8 @@
         <nav id="nav">
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Past</a>
-           
+            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Past</a>
             <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
             <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
             <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Contact</a>
@@ -75,7 +75,8 @@
             <nav class="mobile-nav-links">
                 <a class="mobile-nav-link" href="#page1">Home</a>
                 <a class="mobile-nav-link" href="#page2">About</a>
-                <a class="mobile-nav-link" href="#page3">Past</a>
+                <a class="mobile-nav-link" href="#page3">Speakers</a>
+                <a class="mobile-nav-link" href="#page4">Past</a>
                 <a class="mobile-nav-link" href="#page5">Team</a>
                 <a class="mobile-nav-link" href="#page6">Partners</a>
                 <a class="mobile-nav-link" href="#page7">Contact</a>
@@ -147,8 +148,129 @@
         </div>
     </section>
 
-<!-- HISTORY PAGE -->
- <section class="page" id="page3">
+
+    <!-- SPEAKERS PAGE -->
+     <section class="page" id="page3">
+        <div class="flexbox" style="width: 100%; height: 100%;">
+            <div id="speakerSlidesContainer" class="flexbox flex-col" style="justify-content: space-between;">
+                <!-- Speaker Slides -->
+                {% for i in range(length_active_speakers) %}
+                    {% if i%2 == 0 %}
+                        <div class="slide flex" id="slide{{i}}">
+                            <div class="bioContainer flexbox" style="float: left">
+                                <div>
+                                    <div class="team-m no-select">
+                                    <img class="speaker-img-mobile " src="{{url_for('static', filename=speakers.active[i].img)}}">
+                                </div>
+                                    <h2>{{speakers.active[i].name}}</h2>
+                                    <h3>{{speakers.active[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; overflow-y: auto;">
+                                        {{speakers.active[i].bio}}
+                                        <a href="{{speakers.active[i].link}}">{{speakers.active[i].link}}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="imgContainer flexbox" style="float: right">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers.active[i].img)}}">
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="slide" id="slide{{i}}">
+                            <div class="imgContainer flexbox" style="float: left">
+                                <div class="team-m no-select">
+                                    <img class="speaker-img" src="{{url_for('static', filename=speakers.active[i].img)}}">
+                                </div>
+                            </div>
+
+                            <div class="bioContainer flexbox flex-col" style="float: right;">
+                                   
+                                    <div class="team-m no-select">
+                                    <img class="speaker-img-mobile " src="{{url_for('static', filename=speakers.active[i].img)}}">
+                                </div>
+                                <div>
+                                    <h2>{{speakers.active[i].name}}</h2>
+                                    <h3>{{speakers.active[i].organization}}</h3>
+                                    <div class="h2" style="padding-left: 10px; overflow-y: auto;">
+                                        {{speakers.active[i].bio}}
+                                        <a href="{{speakers.active[i].link}}">{{speakers.active[i].link}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Slide Buttons -->
+                <div class="buttons">
+                    <div class="flexbox" style="cursor: pointer;">
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% for i in range(length_active_speakers) %}
+                            <div class="material-symbols-outlined page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% endfor %}
+                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="nextSlide(); delay()">arrow_forward</div>
+                    </div>
+                </div>
+
+                <!-- Slide Script -->
+                 <script>
+                    var speakers = document.querySelectorAll(".slide");
+                    var pageControllers = document.querySelectorAll(".page_controllers");
+                    var slideNum = 0;
+                    var time = 0;
+
+                    function showSlide(j) {
+                        slideNum = (j+speakers.length)%speakers.length;
+                        for (var i = 0; i < speakers.length; i++) {
+                            speakers[i].style.display = "none";
+                            pageControllers[i].innerHTML = "radio_button_unchecked";
+                            speakers[i].classList.remove('inView');
+                        }
+                        speakers[slideNum].style.display = "flex";
+                        speakers[slideNum].classList.add('inView');
+                        pageControllers[slideNum].innerHTML = "radio_button_checked";
+                    }
+
+                    function nextSlide(){
+                        slideNum++;
+                        showSlide(slideNum);
+                    }
+
+                    function prevSlide(){
+                        slideNum--;
+                        showSlide(slideNum);
+                    }
+
+                    showSlide(0);
+
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    function delay() {
+                        time = -450;
+                    }
+
+                    // Move Slides
+                    function moveAuto() {
+                      
+                        if (time >= 450) {
+                            nextSlide();
+                            time = 0;
+                        }
+                        requestAnimationFrame(moveAuto);
+                    }
+
+                    requestAnimationFrame(moveAuto);
+                 </script>
+            </div>
+        </div>
+     </section>
+
+     <!-- HISTORY PAGE -->
+ <section class="page" id="page4">
     <div class="flexbox" style="width: 100%; height: 100%;">
         
         <div id="historyContainer" class="flex, flex-col, align-center, justify-center">
@@ -170,25 +292,25 @@
                     Past Speakers
                 </h3>
                 <div class="scrolling-track" id="scrollingTrack">
-                    {% for i in range(length_speakers) %}
-                    <a class="no-link-decor" href="{{ speakers[i].link }}">
+                    {% for i in range(length_inactive_speakers) %}
+                    <a class="no-link-decor" href="{{ speakers.inactive[i].link }}">
                         <div class="past-speaker-container">
                             <div class="team-m no-select">
-                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers.inactive[i].img) }}">
                             </div>
-                            <h3 class="pastSpeakerName">{{ speakers[i].name }}</h3>
-                            <p>{{ speakers[i].short_org }}</p>
+                            <h3 class="pastSpeakerName">{{ speakers.inactive[i].name }}</h3>
+                            <p>{{ speakers.inactive[i].short_org }}</p>
                         </div>
                     </a>
                     {% endfor %}
-                    {% for i in range(length_speakers) %}
-                        <a class="no-link-decor" href="{{ speakers[i].link }}">
+                    {% for i in range(length_inactive_speakers) %}
+                        <a class="no-link-decor" href="{{ speakers.inactive[i].link }}">
                         <div class="past-speaker-container">
                             <div class="team-m no-select">
-                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers[i].img) }}">
+                                <img class="past-speaker-img" src="{{ url_for('static', filename=speakers.inactive[i].img) }}">
                             </div>
-                            <h3 class="pastSpeakerName">{{ speakers[i].name }}</h3>
-                            <p>{{ speakers[i].short_org }}</p>
+                            <h3 class="pastSpeakerName">{{ speakers.inactive[i].name }}</h3>
+                            <p>{{ speakers.inactive[i].short_org }}</p>
                         </div>
                     </a>
                     {% endfor %}
@@ -205,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const speakerItems = track.querySelectorAll('.past-speaker-container');
 
     // ===== Pause/Resume + Reset animation based on viewport =====
-    const section = document.getElementById('page3');
+    const section = document.getElementById('page4');
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -265,121 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-{% if registrationOpen %}
-    <!-- SPEAKERS PAGE -->
-     <section class="page" id="page3">
-        <div class="flexbox" style="width: 100%; height: 100%;">
-            <div id="speakerSlidesContainer">
-                <!-- Speaker Slides -->
-                {% for i in range(length_speakers) %}
-                    {% if i%2 == 0 %}
-                        <div class="slide" id="slide{{i}}">
-                            <div class="bioContainer flexbox" style="float: left">
-                                <div>
-                                    <h2>{{speakers[i].name}}</h2>
-                                    <h3>{{speakers[i].organization}}</h3>
-                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
-                                        {{speakers[i].bio}}
-                                        <a href="{{speakers[i].link}}">{{speakers[i].link}}</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="imgContainer flexbox" style="float: right">
-                                <div class="team-m no-select">
-                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
-                                </div>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="slide" id="slide{{i}}">
-                            <div class="imgContainer flexbox" style="float: left">
-                                <div class="team-m no-select">
-                                    <img class="speaker-img" src="{{url_for('static', filename=speakers[i].img)}}">
-                                </div>
-                            </div>
-
-                            <div class="bioContainer flexbox" style="float: right;">
-                                <div>
-                                    <h2>{{speakers[i].name}}</h2>
-                                    <h3>{{speakers[i].organization}}</h3>
-                                    <div class="h2" style="padding-left: 10px; max-height: 20vw; overflow-y: auto;">
-                                        {{speakers[i].bio}}
-                                        <a href="{{speakers[i].link}}">{{speakers[i].link}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-
-                <!-- Slide Buttons -->
-                <div class="buttons">
-                    <div class="flexbox" style="cursor: pointer;">
-                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);;" onclick="prevSlide(); delay()">arrow_back</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% for i in range(length_speakers) %}
-                            <div class="material-symbols-outlined page_controllers" style="font-size: calc(1vh + 0.5vw);" onclick="showSlide({{i}}); delay()">radio_button_unchecked</div>&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% endfor %}
-                        <div class="material-symbols-outlined" style="font-size: calc(1vh + 0.5vw);" onclick="nextSlide(); delay()">arrow_forward</div>
-                    </div>
-                </div>
-
-                <!-- Slide Script -->
-                 <script>
-                    var speakers = document.querySelectorAll(".slide");
-                    var pageControllers = document.querySelectorAll(".page_controllers");
-                    var slideNum = 0;
-                    var time = 0;
-
-                    function showSlide(j) {
-                        slideNum = (j+speakers.length)%speakers.length;
-                        for (var i = 0; i < speakers.length; i++) {
-                            speakers[i].style.display = "none";
-                            pageControllers[i].innerHTML = "radio_button_unchecked";
-                            speakers[i].classList.remove('inView');
-                        }
-                        speakers[slideNum].style.display = "block";
-                        speakers[slideNum].classList.add('inView');
-                        pageControllers[slideNum].innerHTML = "radio_button_checked";
-                    }
-
-                    function nextSlide(){
-                        slideNum++;
-                        showSlide(slideNum);
-                    }
-
-                    function prevSlide(){
-                        slideNum--;
-                        showSlide(slideNum);
-                    }
-
-                    showSlide(0);
-
-                    function sleep(ms) {
-                        return new Promise(resolve => setTimeout(resolve, ms));
-                    }
-
-                    function delay() {
-                        time = -450;
-                    }
-
-                    // Move Slides
-                    function moveAuto() {
-                        time++;
-                        if (time >= 450) {
-                            nextSlide();
-                            time = 0;
-                        }
-                        requestAnimationFrame(moveAuto);
-                    }
-
-                    requestAnimationFrame(moveAuto);
-                 </script>
-            </div>
-        </div>
-     </section>
-
-{% endif %}
 
     <!-- VENUE PAGE -->
      <!--
@@ -496,6 +503,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </section>
     -->
+
+    
 
     <!-- TEAM PAGE -->
     <section class="page" id="page5">
@@ -864,6 +873,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     elem.classList.add("inView");
                     elem.classList.remove("outOfView");
                     link.classList.add("inView");
+                    elem.style.zIndex = '1';
                     if (i==0) {
                         onFirstPage = true;
                     }
@@ -871,15 +881,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 else {
                     elem.classList.remove("inView");
                     elem.classList.add("outOfView");
+                    elem.style.zIndex = '0';
                     link.classList.remove("inView");
                     if (i==0) {
                         onFirstPage = false;
                     }
                 }
 
-                elem.style.zIndex = '0';
-                document.getElementById('nav').style.zIndex = '1';
-                document.getElementById('topLogoContainer').style.zIndex = '2';
+                
+                document.getElementById('nav').style.zIndex = '2';
+                document.getElementById('topLogoContainer').style.zIndex = '3';
             }
         }
         fadeIn();
@@ -961,8 +972,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('socialContainer'),
                     document.getElementsByClassName('registerContainer'),
                     document.getElementById('topLogoContainer'),
-                    document.getElementById('conferenceImage')
+                    document.getElementById('conferenceImage'),
+                     document.getElementsByClassName('imgContainer')
                 );
+                showElements(
+                    'flex',
+                    document.getElementsByClassName('speaker-img-mobile')
+                )
                
                 // registerFont('15px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(-12vh)';
@@ -971,6 +987,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 historyText.style.width = '70%';
                 historyText.classList.remove('text-left');
                 historyText.classList.add('text-center');
+
+                bioContainers = document.getElementsByClassName('bioContainer');
+                for (var i = 0; i < bioContainers.length; i++) {
+                    bioContainers[i].style.width = '100%';
+                    bioContainers[i].style.textAlign = 'center';
+                    bioContainers[i].style.margin = '0px 0px 80px 0px';
+
+                }
+                
             }
             else {
 
@@ -978,12 +1003,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     'flex',
                 document.getElementsByClassName('registerContainer'),
                 document.getElementById('socialContainer'),
-                document.getElementById('conferenceImage')
+                document.getElementById('conferenceImage'),
+                document.getElementsByClassName('imgContainer')
                 );
                 gainSide();
                 shrinkSide();
         
-
+                hideElements(
+                    document.getElementsByClassName('speaker-img-mobile')
+                )
                 // registerFont('17px');
                 document.getElementById('bottomHomePage').style.transform = 'translateY(0px)';
                 historyText = document.getElementById('historyText');
@@ -991,6 +1019,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 historyText.classList.remove('text-center');
                 historyText.classList.add('text-left');
                 //smallVenue();
+                
+                bioContainers = document.getElementsByClassName('bioContainer');
+                for (var i = 0; i < bioContainers.length; i++) {
+                    bioContainers[i].style.width = '45%';
+                    bioContainers[i].style.textAlign = 'left';
+                    bioContainers[i].style.margin = '0px';
+                }
             }
         }
 
