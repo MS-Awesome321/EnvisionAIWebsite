@@ -6,6 +6,9 @@ import json
 import time
 from datetime import datetime, timedelta
 
+# google sheets imports
+from threading import Thread
+
 # third-party imports
 from flask import Flask, render_template, url_for, redirect, request, send_file, jsonify, flash, session
 from flask_wtf import FlaskForm
@@ -603,6 +606,18 @@ def get_involved():
     safe_message = escape(message or "")
     safe_ip = escape(ip or "")
 
+        # Collecting Data for Google Sheets (Code Attempt)
+    form_data = {
+        'name': safe_name,
+        'email': safe_email,
+        'affiliation': safe_affiliation,
+        'role': safe_role,
+        'message': safe_message
+    }
+
+    # Sends Data to Google Sheets (Allows Rest of Code to Function)
+    Thread(target=send_to_google_sheets, args=(form_data, safe_ip), daemon=True).start()
+
     if any(x in (name + email) for x in ("\r", "\n")):
         return jsonify({"success": False, "message": "Invalid input."}), 400
 
@@ -611,7 +626,7 @@ def get_involved():
         with open("responses.txt", "a") as file:
             file.write("\t".join([name, email, affiliation, role, message]) + "\n")
     except Exception as e:
-        logger.exception("Failed to write to responses.txt: %s", e)
+        logger.exception("Failed to write to responses.txt: %s", e)   
 
     # build email
     custom_message = ""
@@ -669,6 +684,32 @@ def get_involved():
 
     return jsonify({"success": True, "message": "Form submitted successfully!"})
     
+# ----------------------
+# Google Sheets Integration
+# ----------------------
+
+# Google Sheets Sync Test Code
+google_sheets = "https://script.google.com/macros/s/AKfycbwhNd8nGES6Oof9VKNaz35HH6bASLQjhflgfBKkxvSRh0KLSD6m2l5m6Vnucc3tHd9r4Q/exec"
+def send_to_google_sheets(form_data, ip=None):
+    try:
+        payload = {
+            'name': form_data.get('name', ''),
+            'email': form_data.get('email', ''),
+            'affiliation': form_data.get('affiliation', ''),
+            'role': form_data.get('role', ''),
+            'message': form_data.get('message', ''),
+            'ip': ip or ''
+        }
+
+        response = requests.post(google_sheets, json=payload, timeout=15)
+        if response.status_code == 200:
+            logger.info("Successfully sent data to Google Sheets for %s", form_data['email'])
+        else:
+            logger.error("Failed to send data to Google Sheets: HTTP %s - %s", response.status_code, response.text)
+    
+    except Exception as e:
+        logger.exception("Exception while sending data to Google Sheets: %s", e)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

@@ -39,3 +39,13 @@ Miguel	mpinero@princeton.edu	sdfsd	speaker	sfsdf
 Miguel Piñero-Jacome	mpinero@princeton.edu	sdfsdf	volunteer	sdfsdf
 Miguel Piñero-Jacome	mpineroj@gmail.com	Princeton	speaker	sfsdfsdf
 Mig	mpineroj@gmail.com	Princeton	volunteer	svdsvdsv
+Appy	by8988@princeton.edu	Tester	speaker	test
+Appy	by8988@princeton.edu	Tester	speaker	test
+Testy	yangbecky88@gmail.com	Tester	speaker	Test
+Testy	yangbecky88@gmail.com	Tester	speaker	Test
+BigTest	realemail@gmail.com	Tester	speaker	Test
+BigTest	realemail@gmail.com	Tester	speaker	Test
+AnotherTest	realemail2@gmail.com	Tester	speaker	Test
+FinalTest?	realemail3@gmail.com	Tester	speaker	Test
+FinalTest	realemail4@gmail.com	Tester	partner-sponsor	Test
+DemoTest	testrealemail@gmail.com	Tester	attendee	Message
