@@ -95,6 +95,15 @@ SpeakerProfiles = [
       short_org="Senior Fellow at The GovLab at NYU, Princeton Visiting Research Professor"
     ),
     SpeakerProfile(
+      "Benedikt Lehnert",
+      "Entrepreneurship & Design Fellow, Princeton University; CEO of 74West",
+      "Benedikt is the founder of 74West, a hands-on advisory practice for CEOs, executives, or boards who are navigating pivotal moments in their organizations. Benedikt also serves as an Entrepreneurship & Design Fellow at Princeton University, where he teaches aspiring entrepreneurs at the Keller Center. His work explores the convergence of entrepreneurship, humanistic design, and business leadership with a focus on AI and co-creativity, neuroaesthetics, and the socio-economic responsibility of design. As a board member of the Design Executive Council (DXC) Ben helps shape the standards of humanistic design and strategic leadership as AI transforms experience design and business strategy. Previously, he served as Chief Design Officer at Stark, led global design transformation at SAP, and directed major UX teams at Microsoft, where he helped evolve the Fluent design language. He joined Microsoft through the $150M+ acquisition of Wunderlist, where he was Chief Design Officer. Benedikt is also the author of Typoguide, an angel investor in design-driven startups, and an international keynote speaker whose award-winning work across hardware, software, and brand design has been featured worldwide.",
+      "assets/speakers/lehnert.jpg",
+      link="https://benediktlehnert.github.io/",
+      short_org="CEO,74West; Fellow, Princeton University",
+      active=True
+    ),
+    SpeakerProfile(
       "Vikram V. Ramaswamy",
       "Lecturer, Princeton University",
       "Vikram V. Ramaswamy is a teaching faculty member in Princeton University’s Computer Science Department, where he teaches introductory courses in artificial intelligence and machine learning. His work focuses on fairness and interpretability in machine learning, with an emphasis on visual systems. Ramaswamy has developed improved real and synthetic datasets and produced influential analyses of interpretability methods for convolutional neural networks. He received his Ph.D. from Princeton University under the supervision of Prof. Olga Russakovsky, and earned his bachelor’s and master’s degrees from IIT Madras, where he was advised by Prof. Jayalal Sarma.",
