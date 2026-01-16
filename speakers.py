@@ -95,6 +95,15 @@ SpeakerProfiles = [
       short_org="Senior Fellow at The GovLab at NYU, Princeton Visiting Research Professor"
     ),
     SpeakerProfile(
+      "Jes Parent",
+      "Senior Program Manager, Data x Direction (DxD)",
+      "Jes Parent is a strategist and data scientist helping visionary teams and aspiring philosopher-builders map the path from here to there. He works at the intersection of foresight, research architecture, and mentorship, turning complexity into clear on-ramps for action. He is Senior Program Manager at Data x Direction, a project and learning platform exploring data science, data ethics, human-centered AI, and strategic decision-making through educational materials, discussion series, content, and internships focused on responsible AI, practical data strategy, and the human and systems-level impacts of data-driven choices. He also directs JOPRO, supporting interdisciplinary inquiry and future-oriented leadership through talks, workshops, and community-based learning.",
+      "assets/speakers/parent.jpg",
+      link="https://jesparent.com/",
+      short_org="Senior Program Manager, Data x Direction (DxD)",
+      active=True
+    ),
+    SpeakerProfile(
       "Benedikt Lehnert",
       "Entrepreneurship & Design Fellow, Princeton University; CEO of 74West",
       "Benedikt is the founder of 74West, a hands-on advisory practice for CEOs, executives, or boards who are navigating pivotal moments in their organizations. Benedikt also serves as an Entrepreneurship & Design Fellow at Princeton University, where he teaches aspiring entrepreneurs at the Keller Center. His work explores the convergence of entrepreneurship, humanistic design, and business leadership with a focus on AI and co-creativity, neuroaesthetics, and the socio-economic responsibility of design. As a board member of the Design Executive Council (DXC) Ben helps shape the standards of humanistic design and strategic leadership as AI transforms experience design and business strategy. Previously, he served as Chief Design Officer at Stark, led global design transformation at SAP, and directed major UX teams at Microsoft, where he helped evolve the Fluent design language. He joined Microsoft through the $150M+ acquisition of Wunderlist, where he was Chief Design Officer. Benedikt is also the author of Typoguide, an angel investor in design-driven startups, and an international keynote speaker whose award-winning work across hardware, software, and brand design has been featured worldwide.",
@@ -110,6 +119,24 @@ SpeakerProfiles = [
       "assets/speakers/vikram.jpg",
       link="https://www.cs.princeton.edu/~vr23/",
       short_org="Lecturer, Princeton University",
+      active=True
+    ),
+    SpeakerProfile(
+      "Edward You",
+      "Former FBI Counterintelligence Leader; Founder & Principal, EHY Consulting",
+      "Edward You is the Founder and Principal of EHY Consulting LLC, which focuses on the security, policy, and strategic implications of emerging technologies. He advises industry, academia, and government on the convergence of artificial intelligence, biotechnology, quantum, and other disruptive fields, helping organizations navigate the risks and opportunities shaping the future innovation landscape. He recently retired after more than two decades of service in the FBI, holding leadership roles at the intersection of counterintelligence, biosecurity, and technology protection. Most recently, he served on the FBI’s National Counterintelligence Task Force, advancing a whole-of-government approach to safeguarding emerging and disruptive technologies, and spent 15 years in the Weapons of Mass Destruction Directorate. He also completed a Joint Duty Assignment at the Office of the Director of National Intelligence as the National Counterintelligence Officer for Emerging and Disruptive Technologies.",
+      "assets/speakers/you.jpg",
+      link="https://www.linkedin.com/in/edward-you-1827bb1b/",
+      short_org="Former FBI Counterintelligence; Founder, EHY Consulting",
+      active=True
+    ),
+    SpeakerProfile(
+      "Pallavi Nuka",
+      "Associate Director of Julis-Rabinowitz Center for Public Policy & Finance and Lecturer, Princeton University",
+      "Pallavi Nuka is Associate Director of Princeton SPIA’s Julis-Rabinowitz Center for Public Policy & Finance (JRCPPF). She helps lead the Center’s strategy and programs, oversees operations and academic initiatives, and works across campus with faculty, policymakers, alumni, and funders to advance multidisciplinary research, teaching, and student engagement on financial markets, macroeconomics, and economic policy. Previously, she was Associate Director of Princeton’s Innovations for Successful Societies program, where she researched governance and policy implementation and authored/edited publications on leadership and public-sector reform. She has also taught and conducted research at SPIA and Princeton Politics, and spent six years at the World Bank–GEF Evaluation Office evaluating climate and development investments in addition to serving in the U.S. Peace Corps in Côte d’Ivoire.",
+      "assets/speakers/nuka.jpg",
+      link="https://jrc.princeton.edu/people/pallavi-nuka",
+      short_org="Associate Director of JRCPPF & Lecturer, Princeton University",
       active=True
     ),
     SpeakerProfile(
