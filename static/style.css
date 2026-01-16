@@ -418,6 +418,11 @@ nav {
     mask-size: 100%;
 }
 
+#instagram {
+    mask: url(assets/socialMedia/insta.png);
+    mask-size: 100%;
+}
+
 /* REGISTER BUTTON */
 .registerContainer {
     height: 10vw;
