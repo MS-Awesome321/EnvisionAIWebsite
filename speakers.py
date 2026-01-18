@@ -104,6 +104,15 @@ SpeakerProfiles = [
       active=True
     ),
     SpeakerProfile(
+      "MSA AI Team",
+      "Amber Berry & Morgan Mifflin",
+      "Middle States Association (MSA) is a global accrediting organization that launched the RAIL: Responsible AI in Learning endorsement series to provide the only implementation framework of its kind to support schools in wise change. MSA’s AI Team guides school leaders to move beyond tools to human-led, ethical, and mission-aligned systems. Amber Berry ‘08 is the Vice President of AI & Strategy and co-founder of RAIL. She brings 15 years of school experience as a former teacher and principal with deep expertise in school transformation, adult learning, and ethical AI adoption at scale. Amber is an alumna of Princeton, holds a Master’s from Middlebury, and a Master’s of Education from Columbia, and a Mini-MBA from SectionAI.\n Morgan Mifflin is an AI Project Manager at MSA. She supports Evolution Lab initiatives that guide schools through their AI transformation journeys. Morgan holds a Master of Arts in International Security with a specialization in cybersecurity and AI ethics.",
+      "assets/speakers/berry-mifflin1.png",
+      link="https://www.msaevolutionlab.com/rail",
+      short_org="MSA Responsible AI in Learning Team",
+      active=True
+    ),
+    SpeakerProfile(
       "Benedikt Lehnert",
       "Entrepreneurship & Design Fellow, Princeton University; CEO of 74West",
       "Benedikt is the founder of 74West, a hands-on advisory practice for CEOs, executives, or boards who are navigating pivotal moments in their organizations. Benedikt also serves as an Entrepreneurship & Design Fellow at Princeton University, where he teaches aspiring entrepreneurs at the Keller Center. His work explores the convergence of entrepreneurship, humanistic design, and business leadership with a focus on AI and co-creativity, neuroaesthetics, and the socio-economic responsibility of design. As a board member of the Design Executive Council (DXC) Ben helps shape the standards of humanistic design and strategic leadership as AI transforms experience design and business strategy. Previously, he served as Chief Design Officer at Stark, led global design transformation at SAP, and directed major UX teams at Microsoft, where he helped evolve the Fluent design language. He joined Microsoft through the $150M+ acquisition of Wunderlist, where he was Chief Design Officer. Benedikt is also the author of Typoguide, an angel investor in design-driven startups, and an international keynote speaker whose award-winning work across hardware, software, and brand design has been featured worldwide.",
