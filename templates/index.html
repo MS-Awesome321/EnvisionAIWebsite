@@ -42,10 +42,11 @@
             <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
             <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
-            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Past</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Team</a>
-            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Partners</a>
-            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Contact</a>
+            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
+            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Past</a>
+            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
+            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Partners</a>
+            <a class="pageName" href="#page8" id="page8Link" onmouseenter="hover('page8Link')" onmouseleave="hover('page8Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -76,10 +77,11 @@
                 <a class="mobile-nav-link" href="#page1">Home</a>
                 <a class="mobile-nav-link" href="#page2">About</a>
                 <a class="mobile-nav-link" href="#page3">Speakers</a>
-                <a class="mobile-nav-link" href="#page4">Past</a>
-                <a class="mobile-nav-link" href="#page5">Team</a>
-                <a class="mobile-nav-link" href="#page6">Partners</a>
-                <a class="mobile-nav-link" href="#page7">Contact</a>
+                <a class="mobile-nav-link" href="#page4">Register</a>
+                <a class="mobile-nav-link" href="#page5">Past</a>
+                <a class="mobile-nav-link" href="#page6">Team</a>
+                <a class="mobile-nav-link" href="#page7">Partners</a>
+                <a class="mobile-nav-link" href="#page8">Contact</a>
             </nav>
             <div id="mobileSocialContainer" class="mobile-social">
                 <a href="https://www.linkedin.com/company/envision-ai-princeton/" target="_blank"><div class="social" id="linkedin"></div></a>
@@ -92,7 +94,7 @@
     <div class="registerContainer">
         <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8Kz3a4LNCl8EjYF_tPRyPcdygOM-M9fXd5MnlDoCniAz3cA/viewform" class="gradient-background register" id="register"><div>Register</div></a>-->
 
-        <a href="#page7"  class="gradient-background register"><div>Get Involved</div></a>
+        <a href="#page4"  class="gradient-background register"><div>Register</div></a>
     </div>
 
     <!-- HOME PAGE -->
@@ -127,11 +129,17 @@
 
     <!-- ABOUT US PAGE -->
     <section class="page" id="page2">
+
+        <!-- Background Logo -->
+        <div style=" z-index: -1; position: absolute; top: 30%; left: 75%; transform: translate(-50%, -50%); width: 60%; height: 80%; opacity: 0.08; pointer-events: none;">
+            <div class="gradient-background" style="width: 100%; height: 100%; mask-image: url('static/assets/logo_small.png'); mask-repeat: no-repeat; mask-position: center; mask-size: contain; -webkit-mask-image: url('static/assets/logo_small.png'); -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain; "></div>
+        </div>
+
         <div class="flexbox page-ctn">
             <div id="textBox">
                 <h2 style="text-align: left;">About Envision<br/></h2>
                 <div class="p1" style="text-align: right; width: 60vw; float: right;">A student-led conference that explores
-                    the intersection of AI, tech, policy, and ethics, with the goal of educating,
+                    the intersection of <span class="text-tile">tech, policy, and ethics</span>, with the goal of educating,
                     inspiring action, and shaping tomorrow’s leaders.</div>
                 <div class="p2" style="text-align: left; width: calc(30vw + 10px);">Facilitating discourse between students, practitioners, and policymakers on the ethics, policy, and power in AI.
                     
@@ -165,9 +173,9 @@
                                 </div>
                                     <h2>{{speakers.active[i].name}}</h2>
                                     <h3>{{speakers.active[i].organization}}</h3>
-                                    <div class="h2" style="padding-left: 10px; overflow-y: auto;">
-                                        {{speakers.active[i].bio}}
-                                        <a href="{{speakers.active[i].link}}">{{speakers.active[i].link}}</a>
+                                    <div class="h2" style="padding-left: 10px;">
+                                        <p >{{speakers.active[i].bio}}</p>
+                                        <a class="no-link-decor text-tile" target="_blank" href="{{speakers.active[i].link}}">Learn More</a>
                                     </div>
                                 </div>
                             </div>
@@ -194,9 +202,9 @@
                                 <div>
                                     <h2>{{speakers.active[i].name}}</h2>
                                     <h3>{{speakers.active[i].organization}}</h3>
-                                    <div class="h2" style="padding-left: 10px; overflow-y: auto;">
-                                        {{speakers.active[i].bio}}
-                                        <a href="{{speakers.active[i].link}}">{{speakers.active[i].link}}</a>
+                                    <div class="h2" style="padding-left: 10px;">
+                                        <p>{{speakers.active[i].bio}}</p>
+                                        <a class="no-link-decor text-tile" target="_blank" href="{{speakers.active[i].link}}">Learn More</a>
                                     </div>
                                 </div>
                             </div>
@@ -270,8 +278,49 @@
         </div>
      </section>
 
+<!-- REGISTRATION PAGE -->
+     
+    <section class="page" id="page4">
+        <div class="page-ctn flexbox flex-col align-center justify-center" style="height: 100%; margin-top: 0;">
+            <div class="flex flex-col align-center" style="width: 100%;">
+                <h2 class="m-1 g mobile-center text-center">Join Us at Envision 2026</h2>
+                <p class="p2 text-center" style="margin: 0;">Be part of a transformative conversation on the intersection of AI, policy, and ethics.</p>
+            </div>
+
+            <div class="flex flex-row align-center justify-center" style="width: 100%; gap: 2rem;">
+                <!-- Registration Content -->
+                <div class="flex flex-col align-center justify-center" style="flex: 3;">
+                    <div class="p1" style="text-align: center; margin-bottom: 2rem;">
+                        Connect with experts, help <span class="text-tile">envision</span> the <span>future of AI</span> .
+                    </div>
+                    
+                    <div class="p2" style="text-align: center; margin-bottom: 2rem; line-height: 1.6;">
+                        Network with experts from leading organizations, participate in engaging discussions, and discover how you can shape tomorrow's AI landscape.
+                        <br/>
+                        <br/>
+                        <span style="font-weight: 500;">February 21, 2026 • Princeton, NJ</span>
+                    </div>
+
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXmMbiQIj8K_h1DjLW465b25WyThGu3rjkCqb-Mlq2dB3mLA/viewform?usp=sharing&ouid=110230083856314527170" class="gradient-background register" style="padding: 2vh 6vw; font-size: calc(1vw + 1vh); border-radius: 25px;">
+                        <div style="color: white; text-decoration: none;">Register Now</div>
+                    </a>
+                </div>
+
+              
+                <div class="flex align-center justify-center" style="flex: 2; height: 100%;">
+                    <div style="width: 80%; height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: center; padding-top:4rem;">
+                        <img id="registrationImage"  src="static/assets/gallery.png" alt="Envision Conference" style="width: 100%; height: 100%; object-fit: scale-down" />
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+
+
      <!-- HISTORY PAGE -->
- <section class="page" id="page4">
+ <section class="page" id="page5">
     <div class="flexbox" style="width: 100%; height: 100%;">
         
         <div id="historyContainer" class="flex, flex-col, align-center, justify-center">
@@ -280,11 +329,11 @@
                     <h2 class="g" >Our
                         History</h2>
                 
-                <p class="p1" >Over a decade of inspiring the future.</p>
+                <p class="p1" >Over a decade of inspiring the <span class="text-tile">future</span>.</p>
                 <span >Since its conception in the early 2010s, Envision has grown into one of Princeton’s hubs for meaningful conversations at the intersection of AI, policy, and society. We have brought together voices from across universities, industries, and the globe, hosting over 100 participants in 2025. As we look ahead to Envision 2026, we set our sights on a future shaped by curiosity, debate, and a shared vision for AI’s role in the world.</span>
                 
                 </div>
-                <img id="conferenceImage" src="static/assets/conference.png" >
+                <img id="conferenceImage" class="gradient-shadow-2" src="static/assets/conference.png" >
 
             </div>
             
@@ -292,7 +341,7 @@
                 <h3 id="pastSpeakersTitle" class="flex">
                     Past Speakers
                 </h3>
-                <div class="scrolling-track" id="scrollingTrack">
+                <div class="scrolling-track" id="scrollingTrack" style="height:100%;">
                     {% for i in range(length_inactive_speakers) %}
                     <a class="no-link-decor" href="{{ speakers.inactive[i].link }}">
                         <div class="past-speaker-container">
@@ -328,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const speakerItems = track.querySelectorAll('.past-speaker-container');
 
     // ===== Pause/Resume + Reset animation based on viewport =====
-    const section = document.getElementById('page4');
+    const section = document.getElementById('page5');
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -476,39 +525,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     --> 
      
-    <!-- SLACK  -->
-     <!--
-    <section class="page" id="page5">
-        <div class="flexbox">
-            <div id="slackContainer">
-                <div class="flexbox">
-                    <div id="slackWordsContainer">
-                        <h2 class="flexbox" style="height: 25%; text-align:center">
-                            Slack
-                        </h2>
-
-                        <div class="flexbox" style="height: 50%;">
-                            <div class="h2" style="padding: 10% 10% 35% 10%;">
-                                We ask all attendees to join the conference slack before arriving. We will post all updates and conference information here.
-                                This is also a great place to keep in touch with the Envision team and everyone you meet at the conference!
-                            </div>
-                        </div>
-                    </div>
-
-                    The QR Code
-                    <a href="https://join.slack.com/t/envision2025/shared_invite/zt-30cgsyamt-KtYfKwBrDAGZKX1adv7WHw" target="_blank">
-                        <img style="height:calc(10vh + 15vw)" src="{{url_for('static', filename='assets/slackQR.jpeg')}}" />
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
+    
 
     
 
     <!-- TEAM PAGE -->
-    <section class="page" id="page5">
+    <section class="page" id="page6">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
             <p class="p2 text-center" >Meet the beautiful faces behind Envision.</p>
@@ -521,7 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 {% if i==0 %}
                     <div class="a_slide" id="a_slide{{i}}">
                             <div class="flex flex-row justify-center p2">
-                                    <img class="team-img" style="height: 30vw; border-radius: 20px" src="{{url_for('static', filename=team[i].img)}}">
+                                    <img class="team-img" style="height: 30vw; border-radius: 15px" src="{{url_for('static', filename=team[i].img)}}">
                             </div>
                         <p style="text-align:center;">{{team[i].name}}</p>
                     </div>
@@ -615,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page6">
+    <section class="page" id="page7">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
@@ -632,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- CONTACT PAGE -->
 
-    <section class="page" id="page7">
+    <section class="page" id="page8">
         <div class="flexbox center-x" style="height: 115vh; margin-top: 2.5vh;">
             <div id="registrationBox">
                 <h2>Contact Us</h2>
@@ -974,7 +996,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementsByClassName('registerContainer'),
                     document.getElementById('topLogoContainer'),
                     document.getElementById('conferenceImage'),
-                     document.getElementsByClassName('imgContainer')
+                     document.getElementsByClassName('imgContainer'),
+                     document.getElementById('registrationImage')
                 );
                 showElements(
                     'flex',
@@ -996,16 +1019,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     bioContainers[i].style.margin = '0px 0px 80px 0px';
 
                 }
+
+                elems = document.getElementsByClassName('mobile-center')
+                for (var i = 0; i < elems.length; i++) {
+                    elems[i].style.textAlign = 'center';
+                }
                 
             }
             else {
+
+
+                elems = document.getElementsByClassName('mobile-center')
+                for (var i = 0; i < elems.length; i++) {
+                    elems[i].style.textAlign = 'left';
+                }
 
                 showElements(
                     'flex',
                 document.getElementsByClassName('registerContainer'),
                 document.getElementById('socialContainer'),
                 document.getElementById('conferenceImage'),
-                document.getElementsByClassName('imgContainer')
+                document.getElementsByClassName('imgContainer'),
+                document.getElementById('registrationImage')
                 );
                 gainSide();
                 shrinkSide();

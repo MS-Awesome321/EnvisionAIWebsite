@@ -95,9 +95,18 @@ SpeakerProfiles = [
       short_org="Senior Fellow at The GovLab at NYU, Princeton Visiting Research Professor"
     ),
     SpeakerProfile(
-      "Jes Parent",
+    "Noah Broestl",
+    "Partner and Associate Director, Responsible AI, BCG",
+    "Noah Broestl is a Partner and Associate Director of Responsible AI at Boston Consulting Group (BCG), focusing on implementing ethical AI frameworks across various industries. Prior to joining BCG, he spent 13 years at Google, contributing to projects in vendor management, infrastructure engineering, abuse response, and artificial intelligence. Academically, Noah holds a Master's in Practical Ethics from the University of Oxford, where he explored topics including climate ethics. He is also a member of the Green Software Foundation's Steering Committee, contributing to sustainable software development practices.",
+    "assets/speakers/broestl.jpg",
+    link="https://github.com/orgs/Green-Software-Foundation/discussions/135",
+    short_org="BCG Responsible AI Associate Director",
+    active=True
+  ),
+    SpeakerProfile(
+      "Jesse Parent",
       "Senior Program Manager, Data x Direction (DxD)",
-      "Jes Parent is a strategist and data scientist helping visionary teams and aspiring philosopher-builders map the path from here to there. He works at the intersection of foresight, research architecture, and mentorship, turning complexity into clear on-ramps for action. He is Senior Program Manager at Data x Direction, a project and learning platform exploring data science, data ethics, human-centered AI, and strategic decision-making through educational materials, discussion series, content, and internships focused on responsible AI, practical data strategy, and the human and systems-level impacts of data-driven choices. He also directs JOPRO, supporting interdisciplinary inquiry and future-oriented leadership through talks, workshops, and community-based learning.",
+      "Jesse Parent is a strategist and data scientist helping visionary teams and aspiring philosopher-builders map the path from here to there. He works at the intersection of foresight, research architecture, and mentorship, turning complexity into clear on-ramps for action. He is Senior Program Manager at Data x Direction, a project and learning platform exploring data science, data ethics, human-centered AI, and strategic decision-making through educational materials, discussion series, content, and internships focused on responsible AI, practical data strategy, and the human and systems-level impacts of data-driven choices. He also directs JOPRO, supporting interdisciplinary inquiry and future-oriented leadership through talks, workshops, and community-based learning.",
       "assets/speakers/parent.jpg",
       link="https://jesparent.com/",
       short_org="Senior Program Manager, Data x Direction (DxD)",
@@ -105,7 +114,7 @@ SpeakerProfiles = [
     ),
     SpeakerProfile(
       "MSA AI Team",
-      "Amber Berry & Morgan Mifflin",
+      "Amber Berry, Vice President of AI; Morgan Mifflin, AI Project Manager",
       "Middle States Association (MSA) is a global accrediting organization that launched the RAIL: Responsible AI in Learning endorsement series to provide the only implementation framework of its kind to support schools in wise change. MSA’s AI Team guides school leaders to move beyond tools to human-led, ethical, and mission-aligned systems. Amber Berry ‘08 is the Vice President of AI & Strategy and co-founder of RAIL. She brings 15 years of school experience as a former teacher and principal with deep expertise in school transformation, adult learning, and ethical AI adoption at scale. Amber is an alumna of Princeton, holds a Master’s from Middlebury, and a Master’s of Education from Columbia, and a Mini-MBA from SectionAI.\n Morgan Mifflin is an AI Project Manager at MSA. She supports Evolution Lab initiatives that guide schools through their AI transformation journeys. Morgan holds a Master of Arts in International Security with a specialization in cybersecurity and AI ethics.",
       "assets/speakers/berry-mifflin1.png",
       link="https://www.msaevolutionlab.com/rail",
@@ -115,12 +124,39 @@ SpeakerProfiles = [
     SpeakerProfile(
       "Benedikt Lehnert",
       "Entrepreneurship & Design Fellow, Princeton University; CEO of 74West",
-      "Benedikt is the founder of 74West, a hands-on advisory practice for CEOs, executives, or boards who are navigating pivotal moments in their organizations. Benedikt also serves as an Entrepreneurship & Design Fellow at Princeton University, where he teaches aspiring entrepreneurs at the Keller Center. His work explores the convergence of entrepreneurship, humanistic design, and business leadership with a focus on AI and co-creativity, neuroaesthetics, and the socio-economic responsibility of design. As a board member of the Design Executive Council (DXC) Ben helps shape the standards of humanistic design and strategic leadership as AI transforms experience design and business strategy. Previously, he served as Chief Design Officer at Stark, led global design transformation at SAP, and directed major UX teams at Microsoft, where he helped evolve the Fluent design language. He joined Microsoft through the $150M+ acquisition of Wunderlist, where he was Chief Design Officer. Benedikt is also the author of Typoguide, an angel investor in design-driven startups, and an international keynote speaker whose award-winning work across hardware, software, and brand design has been featured worldwide.",
+      "Benedikt is the founder of 74West, a hands-on advisory practice for CEOs, executives, or boards who are navigating pivotal moments in their organizations. Benedikt also serves as an Entrepreneurship & Design Fellow at Princeton University, where he teaches aspiring entrepreneurs at the Keller Center. His work explores the convergence of entrepreneurship, humanistic design, and business leadership with a focus on AI and co-creativity, neuroaesthetics, and the socio-economic responsibility of design. As a board member of the Design Executive Council (DXC) Ben helps shape the standards of humanistic design and strategic leadership as AI transforms experience design and business strategy. Previously, he served as Chief Design Officer at Stark, led global design transformation at SAP, directed major UX teams at Microsoft, and served as Chief Design Officer at Wunderlist. Benedikt is also the author of Typoguide, an angel investor in design-driven startups, and an international keynote speaker whose award-winning work across hardware, software, and brand design has been featured worldwide.",
       "assets/speakers/lehnert.jpg",
       link="https://benediktlehnert.github.io/",
       short_org="CEO,74West; Fellow, Princeton University",
       active=True
     ),
+    SpeakerProfile(
+    "Alexander Kriebitz",
+    "Political Scientist, Technical University of Munich",
+    "Alexander Kriebitz is a political scientist at the Technical University of Munich whose work sits at the intersection of international law, business ethics, and international relations. His current research re-examines scholarship on Business and Human Rights, focusing on how responsibilities for upholding human rights are divided between states and companies. His work has published in the Business and Human Rights Journal, AI and Ethics, and Human Rights Review. He is a key collaborator on the AI & Human Rights project at the AI Ethics Lab at Rutgers University, a comprehensive legal framework that maps which rights AI can threaten or advance, how risks play out across sectors, and who is accountable for protecting them.",
+    "assets/speakers/kriebitz.jpg",
+    link="https://www.gov.sot.tum.de/en/wirtschaftsethik/team/kriebitz/",
+    short_org="Political Scientist, Technical University of Munich",
+    active=True
+  ),
+    SpeakerProfile(
+    "Georgina Curto",
+    "Senior AI Researcher, United Nations University Institute",
+    "Georgina Curto is a Senior AI Researcher and Team Lead at the United Nations University Institute in Macau. Her research focuses on agentic and foundational AI for inclusive growth, advancing the state of the art in natural language processing, agent-based modeling, social networks, and machine learning, while leading interventions for sustainable development. She also builds corridors between African, Chinese, European, and American AI ecosystems through global research and capacity-building initiatives in order to bridge science and real-world challenges. Previously, she was an Assistant Research Professor at the Lucy Family Institute for Data and Society and a postdoctoral researcher at the ND–IBM Technology Ethics Lab at the University of Notre Dame, and she currently chairs the International Joint Conference on Artificial Intelligence (IJCAI) Symposia in the Global South. She is a key collaborator on the AI & Human Rights project at the AI Ethics Lab at Rutgers University, a comprehensive legal framework that maps which rights AI can threaten or advance, how risks play out across sectors, and who is accountable for protecting them.",
+    "assets/speakers/curto.jpg",
+    link="https://www.georginacurto.com/",
+    short_org="Senior AI Researcher, United Nations University Institute",
+    active=True
+  ),
+    SpeakerProfile(
+    "Nate Walker",
+    "Founder, AI Ethics Lab at Rutgers University",
+    "Dr. Nathan C. Walker is an award-winning First Amendment and human rights educator and founder of the AI Ethics Lab at Rutgers University. He has held research appointments at Harvard, Oxford, and Stellenbosch University in South Africa. The Rockefeller Foundation recently awarded him a Bellagio Residency to advance his research on AI ethics and human rights. Dr. Walker has worked with industry as an Expert AI Trainer for OpenAI and Handshake AI, provided ethics training to Adobe employees, and facilitated a working group at Google’s ethics-to-industry summit. He has published five books on law, education, and religion, and presented his research at the UN Human Rights Council, the Italian Ministry of Foreign Affairs, and the U.S. Senate. He earned his doctorate in First Amendment law and two master’s degrees from Columbia University. An ordained Unitarian Universalist minister, he holds a Master of Divinity from Union Theological Seminary.",
+    "assets/speakers/walker.jpg",
+    link="https://natewalker.com/",
+    short_org="Founder, AI Ethics Lab at Rutgers",
+    active=True
+  ),
     SpeakerProfile(
       "Vikram V. Ramaswamy",
       "Lecturer, Princeton University",
@@ -141,7 +177,7 @@ SpeakerProfiles = [
     ),
     SpeakerProfile(
       "Pallavi Nuka",
-      "Associate Director of Julis-Rabinowitz Center for Public Policy & Finance and Lecturer, Princeton University",
+      "Associate Director, Julis-Rabinowitz Center for Public Policy & Finance; Lecturer, Princeton University",
       "Pallavi Nuka is Associate Director of Princeton SPIA’s Julis-Rabinowitz Center for Public Policy & Finance (JRCPPF). She helps lead the Center’s strategy and programs, oversees operations and academic initiatives, and works across campus with faculty, policymakers, alumni, and funders to advance multidisciplinary research, teaching, and student engagement on financial markets, macroeconomics, and economic policy. Previously, she was Associate Director of Princeton’s Innovations for Successful Societies program, where she researched governance and policy implementation and authored/edited publications on leadership and public-sector reform. She has also taught and conducted research at SPIA and Princeton Politics, and spent six years at the World Bank–GEF Evaluation Office evaluating climate and development investments in addition to serving in the U.S. Peace Corps in Côte d’Ivoire.",
       "assets/speakers/nuka.jpg",
       link="https://jrc.princeton.edu/people/pallavi-nuka",
@@ -149,26 +185,27 @@ SpeakerProfiles = [
       active=True
     ),
     SpeakerProfile(
+      "NJ AI Hub",
+      "Liat Krawczyk, Inaugural Executive Director; Jeffrey Oakman, Senior Strategic Project Manager",
+      "The NJ AI Hub is a first-of-its-kind public-private partnership between Princeton University, the New Jersey Economic Development Authority (NJEDA), Microsoft, and CoreWeave, designed to accelerate innovation in artificial intelligence and position New Jersey as a global leader in the field. Its aim is to bring together AI researchers, entrepreneurs, industry, educational institutions, and the public sector to advance world-class research and development; drive transformative AI innovation; empower the workforce for the AI era; and shape the future of responsible AI deployment. Liat Krawczyk brings over a decade of experience across government, startups, and nonprofits at the intersection of technology, workforce, the care economy and industrial policy, driving the creation of inclusive innovation ecosystems. Jeffrey Oakman  works with the Hub’s Executive Director in advancing the Hub’s goals of promoting advanced research in the field, driving regional economic growth and talent development in the tech sector, supporting private- and public-sector entities in AI utilization, and strengthening the AI start-up ecosystem in New Jersey.",
+      "assets/speakers/nj-ai-hub.png",
+      link="https://njaihub.org/",
+      short_org="NJ AI Hub Leadership Team",
+      active=True
+    ),
+    SpeakerProfile(
       "Steven Kelts",
-      "Lecturer, Princeton University",
+      "Lecturer, Princeton University; Ethics Advisor, Responsible A.I. Institute",
       "Steven Kelts is a Lecturer in Princeton University’s School of Public and International Affairs and Department of Computer Science. His work centers on ethics in technology, including the distinctive moral responsibilities of modern tech firms, with peer-reviewed publications in Technology and Society Magazine and the IEEE International Symposium on Technology and Society. Kelts is an ethics advisor to the Responsible A.I. Institute and the recipient of grants from Princeton’s Council on Science and Technology and from Google for the “Agile Ethics” program. He leads Princeton’s GradFutures initiative on the Ethics of AI, for which he earned the university’s Clio Hall Award. Beyond his teaching and scholarship, Kelts co-founded Kalos Academy, a nonprofit supporting first-generation and low-income students, and has contributed curriculum design for Tsinghua University and the EdTech platform Campus.org.",
       "assets/speakers/kelts.jpeg",
       link="https://www.stevenkelts.com/",
       short_org="Lecturer, Princeton University",
       active=True
     ),
-    SpeakerProfile(
-    "Noah Broestl",
-    "Partner and Associate Director, Responsible AI, BCG",
-    "Noah Broestl is a Partner and Associate Director of Responsible AI at Boston Consulting Group (BCG), focusing on implementing ethical AI frameworks across various industries. Prior to joining BCG, he spent 13 years at Google, contributing to projects in vendor management, infrastructure engineering, abuse response, and artificial intelligence. Academically, Noah holds a Master's in Practical Ethics from the University of Oxford, where he explored topics including climate ethics. He is also a member of the Green Software Foundation's Steering Committee, contributing to sustainable software development practices.",
-    "assets/speakers/broestl.jpg",
-    link="https://github.com/orgs/Green-Software-Foundation/discussions/135",
-    short_org="BCG Responsible AI Associate Director",
-    active=True
-  ),
+    
     SpeakerProfile(
       "Arvind Narayanan",
-      "Professor, Princeton University",
+      "Professor of Computer Science, Princeton University",
       "Arvind Narayanan is a Professor of Computer Science at Princeton University and Director of the Center for Information Technology Policy. He is the co-author of AI Snake Oil—both the book and its widely read newsletter, followed by over 50,000 researchers, policymakers, journalists, and AI enthusiasts—and previously co-authored the influential textbooks Bitcoin and Cryptocurrency Technologies and Fairness in Machine Learning. Narayanan led the Princeton Web Transparency and Accountability Project, producing landmark work on data practices and demonstrating some of the earliest evidence that machine learning systems echo cultural biases. Named to TIME’s inaugural list of the 100 most influential people in AI, he has also received the Presidential Early Career Award for Scientists and Engineers (PECASE).",
       "assets/speakers/arvind.jpg",
       link="https://www.cs.princeton.edu/~arvindn/",
