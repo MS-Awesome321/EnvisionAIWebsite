@@ -43,7 +43,7 @@
             <a class="pageName" href="#about" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
             <a class="pageName" href="#speakers" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
             <a class="pageName" href="#register" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
-            <a class="pageName" href="#past" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">History</a>
+            <a class="pageName" href="#history" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">History</a>
             <a class="pageName" href="#team" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
             <a class="pageName" href="#partners" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Partners</a>
             <a class="pageName" href="#contact" id="page8Link" onmouseenter="hover('page8Link')" onmouseleave="hover('page8Link')">Contact</a>
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const speakerItems = track.querySelectorAll('.past-speaker-container');
 
     // ===== Pause/Resume + Reset animation based on viewport =====
-    const section = document.getElementById('page5');
+    const section = document.getElementById('history');
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
