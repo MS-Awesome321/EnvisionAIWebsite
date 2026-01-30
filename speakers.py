@@ -103,6 +103,15 @@ SpeakerProfiles = [
     short_org="BCG Responsible AI Associate Director",
     active=True
   ),
+  SpeakerProfile(
+      "Michelle Ma",
+      "Organizer, Network on Emerging Threats",
+      "Michelle Ma is an Organizer at the Network on Emerging Threats, a DC-based policy network connecting professionals focused on AI and biosecurity existential risk. She is an incoming Horizon Fellow and was previously a Research Manager at UChicago's Existential Risk Laboratory, researching federal regulatory precedents for emerging technologies. Michelle writes about AI progress and governance on Substack, has written for Works in Progress, and was an AI Blogging Fellow at Asterisk Magazine. She holds a B.A. in Economics from the University of Chicago.",
+      "assets/speakers/parent.jpg",
+      link="https://www.linkedin.com/in/michelle-ma-99837227b/",
+      short_org="Organizer, Network on Emerging Threats",
+      active=True
+    ),
     SpeakerProfile(
       "Jesse Parent",
       "Senior Program Manager, Data x Direction (DxD)",
