@@ -32,21 +32,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <body>
     <!-- TOP LEFT LOGO -->
-    <a href="#page1" id="topLogoContainer">
+    <a href="#home" id="topLogoContainer">
         <div class="gradient-background" id="topLogo"></div>
     </a>
 
     <!-- NAV BAR -->
     <div class="flexbox" style="position: fixed; width: 10vw; height: calc(100vh - 20vw); margin-top: 10vw;" id="nav">
         <nav id="nav">
-            <a class="pageName" href="#page1" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
-            <a class="pageName" href="#page2" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
-            <a class="pageName" href="#page3" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
-            <a class="pageName" href="#page4" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
-            <a class="pageName" href="#page5" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">Past</a>
-            <a class="pageName" href="#page6" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
-            <a class="pageName" href="#page7" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Partners</a>
-            <a class="pageName" href="#page8" id="page8Link" onmouseenter="hover('page8Link')" onmouseleave="hover('page8Link')">Contact</a>
+            <a class="pageName" href="#home" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
+            <a class="pageName" href="#about" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
+            <a class="pageName" href="#speakers" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
+            <a class="pageName" href="#register" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
+            <a class="pageName" href="#past" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">History</a>
+            <a class="pageName" href="#team" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
+            <a class="pageName" href="#partners" id="page7Link" onmouseenter="hover('page7Link')" onmouseleave="hover('page7Link')">Partners</a>
+            <a class="pageName" href="#contact" id="page8Link" onmouseenter="hover('page8Link')" onmouseleave="hover('page8Link')">Contact</a>
 
             <script>
                 function hover(id) {
@@ -74,14 +74,14 @@
                 <span class="material-symbols-outlined" aria-hidden="true">close</span>
             </button>
             <nav class="mobile-nav-links">
-                <a class="mobile-nav-link" href="#page1">Home</a>
-                <a class="mobile-nav-link" href="#page2">About</a>
-                <a class="mobile-nav-link" href="#page3">Speakers</a>
-                <a class="mobile-nav-link" href="#page4">Register</a>
-                <a class="mobile-nav-link" href="#page5">Past</a>
-                <a class="mobile-nav-link" href="#page6">Team</a>
-                <a class="mobile-nav-link" href="#page7">Partners</a>
-                <a class="mobile-nav-link" href="#page8">Contact</a>
+                <a class="mobile-nav-link" href="#home">Home</a>
+                <a class="mobile-nav-link" href="#about">About</a>
+                <a class="mobile-nav-link" href="#speakers">Speakers</a>
+                <a class="mobile-nav-link" href="#register">Register</a>
+                <a class="mobile-nav-link" href="#history">History</a>
+                <a class="mobile-nav-link" href="#team">Team</a>
+                <a class="mobile-nav-link" href="#partners">Partners</a>
+                <a class="mobile-nav-link" href="#contact">Contact</a>
             </nav>
             <div id="mobileSocialContainer" class="mobile-social">
                 <a href="https://www.linkedin.com/company/envision-ai-princeton/" target="_blank"><div class="social" id="linkedin"></div></a>
@@ -94,11 +94,11 @@
     <div class="registerContainer">
         <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSf8Kz3a4LNCl8EjYF_tPRyPcdygOM-M9fXd5MnlDoCniAz3cA/viewform" class="gradient-background register" id="register"><div>Register</div></a>-->
 
-        <a href="#page4"  class="gradient-background register"><div>Register</div></a>
+        <a href="#register"  class="gradient-background register"><div>Register</div></a>
     </div>
 
     <!-- HOME PAGE -->
-    <header class="page" id="page1">
+    <header class="page" id="home">
         <div id="socialContainer">
             <a href="https://www.linkedin.com/company/envision-ai-princeton/" target="_blank"><div class="social" id="linkedin"></div></a>
             <a href="https://www.instagram.com/envisionprinceton?igsh=MzAyY3F4N2FjOXFu&utm_source=qr" target="_blank"><div class="social" id="instagram"></div></a>
@@ -128,7 +128,7 @@
     </header>
 
     <!-- ABOUT US PAGE -->
-    <section class="page" id="page2">
+    <section class="page" id="about">
 
         <!-- Background Logo -->
         <div style=" z-index: -1; position: absolute; top: 30%; left: 75%; transform: translate(-50%, -50%); width: 60%; height: 80%; opacity: 0.08; pointer-events: none;">
@@ -159,7 +159,7 @@
 
 
     <!-- SPEAKERS PAGE -->
-     <section class="page" id="page3">
+     <section class="page" id="speakers">
         <div class="flexbox" style="width: 100%; height: 100%;">
             <div id="speakerSlidesContainer" class="flexbox flex-col" style="justify-content: space-between;">
                 <!-- Speaker Slides -->
@@ -280,7 +280,7 @@
 
 <!-- REGISTRATION PAGE -->
      
-    <section class="page" id="page4">
+    <section class="page" id="register">
         <div class="page-ctn flexbox flex-col align-center justify-center" style="height: 100%; margin-top: 0;">
             <div class="flex flex-col align-center" style="width: 100%;">
                 <h2 class="m-1 g mobile-center text-center">Join Us at Envision 2026</h2>
@@ -320,7 +320,7 @@
 
 
      <!-- HISTORY PAGE -->
- <section class="page" id="page5">
+ <section class="page" id="history">
     <div class="flexbox" style="width: 100%; height: 100%;">
         
         <div id="historyContainer" class="flex, flex-col, align-center, justify-center">
@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     <!-- TEAM PAGE -->
-    <section class="page" id="page6">
+    <section class="page" id="team">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g">Our Team</h2>
             <p class="p2 text-center" >Meet the beautiful faces behind Envision.</p>
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
 
     <!-- PARTNERS PAGE -->
-    <section class="page" id="page7">
+    <section class="page" id="partners">
         <div class="page-ctn flexbox flex-col align-center justify-center">
             <h2 class="m-1 g text-center">Our Partners</h2>
             <p class="p2 text-center" style="margin-bottom:3rem;">Envision promotes a shared vision with our partners.</p>
@@ -653,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- CONTACT PAGE -->
 
-    <section class="page" id="page8">
+    <section class="page" id="contact">
         <div class="flexbox center-x" style="height: 115vh; margin-top: 2.5vh;">
             <div id="registrationBox">
                 <h2>Contact Us</h2>
