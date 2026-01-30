@@ -32,35 +32,11 @@ team = [
         "/assets/team/pinero.JPG",
         "Website"
     ),
-Team(
-        "Haya Elamir",
-        "/assets/team/elamir.jpg",
-        "Treasurer"
-    ),
     Team(
         "Sidak Singh",
         "/assets/team/singh.JPG",
-        ""
+        "Design"
     ),
      
-    Team(
-        "Tarun Iyengar",
-        "/assets/team/iyengar.JPG",
-        ""
-    ),
-    Team(
-        "Alexander Steele",
-        "/assets/team/steele.JPG",
-        ""
-    ),
-    Team(
-        "Chinmaya Saran",
-        "/assets/team/saran.jpg",
-        ""
-    ),
-    Team(
-        "Colin Magelky",
-        "/assets/team/magelky.jpg",
-        ""
-    ),
+
 ]
