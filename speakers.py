@@ -152,7 +152,7 @@ SpeakerProfiles = [
     "Tammy Kwan",
     "Entrepreneur in Residence, Princeton University",
     "Tammy Kwan is an entrepreneur and researcher focused on the intersection of artificial intelligence, education, and human development. She currently serves as Vice President of Product at Teaching Strategies and Entrepreneur-in-Residence at Princeton University’s AI Lab. She writes and speaks on topics related to AI in education, child development, and the future of learning. Previously, she co-founded Cognitive ToyBox and led the company through its acquisition by Teaching Strategies in 2024. Cognitive ToyBox developed research-driven, game-based assessments for early childhood education. Her research and product work—supported by over $5M in funding—has helped shift district and state policy toward the use of developmentally appropriate direct assessment methods in early childhood classrooms, enabling more efficient and accurate measurement of children’s development in district and state-level early learning systems nationwide.",
-    "assets/speakers/curto.jpg",
+    "assets/speakers/kwan.jpg",
     link="https://tammykwan.ai.princeton.edu/",
     short_org="Entrepreneur in Residence, Princeton University",
     active=True
