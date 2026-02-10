@@ -149,12 +149,12 @@ SpeakerProfiles = [
     active=True
   ),
     SpeakerProfile(
-    "Georgina Curto",
-    "Senior AI Researcher, United Nations University Institute",
-    "Georgina Curto is a Senior AI Researcher and Team Lead at the United Nations University Institute in Macau. Her research focuses on agentic and foundational AI for inclusive growth, advancing the state of the art in natural language processing, agent-based modeling, social networks, and machine learning, while leading interventions for sustainable development. She also builds corridors between African, Chinese, European, and American AI ecosystems through global research and capacity-building initiatives in order to bridge science and real-world challenges. Previously, she was an Assistant Research Professor at the Lucy Family Institute for Data and Society and a postdoctoral researcher at the ND–IBM Technology Ethics Lab at the University of Notre Dame, and she currently chairs the International Joint Conference on Artificial Intelligence (IJCAI) Symposia in the Global South. She is a key collaborator on the AI & Human Rights project at the AI Ethics Lab at Rutgers University, a comprehensive legal framework that maps which rights AI can threaten or advance, how risks play out across sectors, and who is accountable for protecting them.",
+    "Tammy Kwan",
+    "Entrepreneur in Residence, Princeton University",
+    "Tammy Kwan is an entrepreneur and researcher focused on the intersection of artificial intelligence, education, and human development. She currently serves as Vice President of Product at Teaching Strategies and Entrepreneur-in-Residence at Princeton University’s AI Lab. She writes and speaks on topics related to AI in education, child development, and the future of learning. Previously, she co-founded Cognitive ToyBox and led the company through its acquisition by Teaching Strategies in 2024. Cognitive ToyBox developed research-driven, game-based assessments for early childhood education. Her research and product work—supported by over $5M in funding—has helped shift district and state policy toward the use of developmentally appropriate direct assessment methods in early childhood classrooms, enabling more efficient and accurate measurement of children’s development in district and state-level early learning systems nationwide.",
     "assets/speakers/curto.jpg",
-    link="https://www.georginacurto.com/",
-    short_org="Senior AI Researcher, United Nations University Institute",
+    link="https://tammykwan.ai.princeton.edu/",
+    short_org="Entrepreneur in Residence, Princeton University",
     active=True
   ),
     SpeakerProfile(
