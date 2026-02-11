@@ -687,7 +687,7 @@ def index():
         registrationOpen = False  # Set to True if registration is open
     )
 
-''''
+'''
 @app.route("/noForm", methods=['GET', 'POST'])
 def noForm():
     form = ContactForm()
