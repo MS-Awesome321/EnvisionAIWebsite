@@ -8,13 +8,13 @@ class Team():
 team = [
 
     Team(
-        "The 2024-2025 Envision Team",
-        "/assets/team/team_shot.JPG",
+        "The 2025-2026 Envision Team",
+        "/assets/team/team_shot26.JPG",
         " "
     ),
     Team(
         "Mohemeen Ahmed",
-        "/assets/team/ahmed.jpeg",
+        "/assets/team/ahmed26.jpg",
         "Co-Director"
     ),
     Team(
@@ -24,18 +24,23 @@ team = [
     ),
     Team(
         "Mayank Sengupta",
-        "/assets/team/sengupta.JPG",
+        "/assets/team/sengupta26.jpg",
         "Outreach"
     ),
     Team(
         "Miguel Piñero-Jacome",
-        "/assets/team/pinero.JPG",
+        "/assets/team/pinero26.jpg",
         "Website"
     ),
     Team(
         "Sidak Singh",
-        "/assets/team/singh.JPG",
+        "/assets/team/singh26.jpg",
         "Design"
+    ),
+    Team(
+        "Cynthia Lee",
+        "/assets/team/lee26.jpg",
+        "Marketing & Media"
     ),
      
 

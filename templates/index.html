@@ -42,6 +42,7 @@
             <a class="pageName" href="#home" id="page1Link" onmouseenter="hover('page1Link')" onmouseleave="hover('page1Link')">Home</a>
             <a class="pageName" href="#about" id="page2Link" onmouseenter="hover('page2Link')" onmouseleave="hover('page2Link')">About</a>
             <a class="pageName" href="#speakers" id="page3Link" onmouseenter="hover('page3Link')" onmouseleave="hover('page3Link')">Speakers</a>
+            <a class="pageName" href="#schedule" id="pageSchedLink" onmouseenter="hover('pageSchedLink')" onmouseleave="hover('pageSchedLink')">Schedule</a>
             <a class="pageName" href="#register" id="page4Link" onmouseenter="hover('page4Link')" onmouseleave="hover('page4Link')">Register</a>
             <a class="pageName" href="#history" id="page5Link" onmouseenter="hover('page5Link')" onmouseleave="hover('page5Link')">History</a>
             <a class="pageName" href="#team" id="page6Link" onmouseenter="hover('page6Link')" onmouseleave="hover('page6Link')">Team</a>
@@ -77,6 +78,7 @@
                 <a class="mobile-nav-link" href="#home">Home</a>
                 <a class="mobile-nav-link" href="#about">About</a>
                 <a class="mobile-nav-link" href="#speakers">Speakers</a>
+                <a class="mobile-nav-link" href="#schedule">Schedule</a>
                 <a class="mobile-nav-link" href="#register">Register</a>
                 <a class="mobile-nav-link" href="#history">History</a>
                 <a class="mobile-nav-link" href="#team">Team</a>
@@ -277,6 +279,131 @@
             </div>
         </div>
      </section>
+
+<!-- SCHEDULE PAGE -->
+<section class="page" id="schedule">
+    <div class="flexbox" style="width:100%; height:100%;">
+        <div class="flex flex-col align-center" style="justify-content:center; margin-top:0; height:100%; gap:0; width:70%;">
+
+            <!-- Header -->
+            <div class="flex flex-col align-center" style="margin-bottom:1.5vh; flex-shrink:0;">
+                <h2 style="text-align:center; padding-bottom:0;">Schedule</h2>
+            
+            </div>
+
+            <!-- Timeline -->
+            <div id="scheduleTimeline">
+
+                <!-- Registration + Breakfast -->
+                <div class="sched-row sched-break">
+                    <div class="sched-time">9:00–10:15 AM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">Registration + Breakfast</span>
+                    </div>
+                </div>
+
+                <!-- Opening Keynote -->
+                <div class="sched-row sched-keynote">
+                    <div class="sched-time">10:15–11:00 AM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title sched-gradient-text">Arvind Narayanan</span>
+                        <span class="sched-org">Director of CITP</span>
+                        <span class="sched-subtitle">AI and the Future of Jobs</span>
+                    </div>
+                </div>
+
+                <!-- NJ AI Hub Panel -->
+                <div class="sched-row">
+                    <div class="sched-time">11:10–11:50 AM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">NJ AI Hub &amp; Pallavi Nuka</span>
+                        <span class="sched-subtitle">The Future of AI in Policy</span>
+                    </div>
+                </div>
+
+                <!-- Lunch -->
+                <div class="sched-row sched-break">
+                    <div class="sched-time">12:00–1:00 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">Lunch w/ Networking</span>
+                    </div>
+                </div>
+
+                <!-- AI & Human Rights Panel -->
+                <div class="sched-row">
+                    <div class="sched-time">1:00–2:00 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">Nate Walker &amp; Alexander Kriebitz</span>
+                        <span class="sched-subtitle">Rutgers AI &amp; Human Rights Panel</span>
+                    </div>
+                </div>
+
+                <!-- AI, Law & Governance -->
+                <div class="sched-row">
+                    <div class="sched-time">2:10–2:40 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">Noah Broestl, Michelle Ma, Steven Kelts</span>
+                        <span class="sched-subtitle">AI, Law, and the Future of Governance</span>
+                    </div>
+                </div>
+
+                <!-- Coffee Break -->
+                <div class="sched-row sched-break">
+                    <div class="sched-time">2:40–3:00 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">Coffee Break</span>
+                    </div>
+                </div>
+
+                <!-- Parallel Tracks -->
+                <div class="sched-row">
+                    <div class="sched-time">3:00–3:40 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content sched-parallel-content">
+                        <div class="sched-track">
+                            <span class="sched-event-title">Edward You</span>
+                            <span class="sched-subtitle">AI &amp; Security</span>
+                        </div>
+                        <div class="sched-or dm-mono">OR</div>
+                        <div class="sched-track">
+                            <span class="sched-event-title">Benedikt Lehnert</span>
+                            <span class="sched-subtitle">AI &amp; Entrepreneurship</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI in Education -->
+                <div class="sched-row">
+                    <div class="sched-time">3:50–4:30 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title">MSA Rail Team, Jesse Parent, Tammy Kwan</span>
+                        <span class="sched-subtitle">The Future of AI in Education</span>
+                    </div>
+                </div>
+
+                <!-- Closing Keynote -->
+                <div class="sched-row sched-keynote">
+                    <div class="sched-time">4:40–5:20 PM</div>
+                    <div class="sched-pip gradient-background"></div>
+                    <div class="sched-content">
+                        <span class="sched-event-title sched-gradient-text">Steven Kelts</span>
+                        <span class="sched-org">Responsible A.I.</span>
+                        <span class="sched-subtitle">Closing Keynote</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- REGISTRATION PAGE -->
      
@@ -706,12 +833,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div style="display:none">
                             {{ ContactForm.honeypot(class_="input", id_="websiteBox") }}
                         </div>
-                        <div class="g-recaptcha" 
-                            data-sitekey="{{ recaptcha_site_key }}" 
-                            style="transform: scale(0.8); 
-                                    transform-origin: 0 0; 
-                                    -webkit-transform: scale(0.8); 
-                                    -webkit-transform-origin: 0 0;">
+                        <div style="overflow: hidden; max-width: 100%;">
+                            <div class="g-recaptcha"
+                                data-sitekey="{{ recaptcha_site_key }}"
+                                style="transform: scale(0.8);
+                                        transform-origin: 0 0;
+                                        -webkit-transform: scale(0.8);
+                                        -webkit-transform-origin: 0 0;">
+                            </div>
                         </div>
                         <div style="display: flex; justify-content: center; padding:10px;">
                             {{ ContactForm.submit(class_="submitButton gradient-background", id_="button") }}
