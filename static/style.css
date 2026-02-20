@@ -678,18 +678,15 @@ nav {
 }
 /* --------- VENUE --------- */
 #mapContainer {
-    width: calc(68vw - 40px);
-    height: 75vh;
-    padding: 20px;
-    color: black;
-    text-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 20px 12px 1px #875681;
 }
 
-#mapWordsContainer {
-    height: 100%;
-    width: 50%;
-    text-align: center;
-
+@media screen and (max-width: 900px) {
+    #mapContainer {
+        display: none;
+    }
 }
 
 /* --------- SLACK --------- */
