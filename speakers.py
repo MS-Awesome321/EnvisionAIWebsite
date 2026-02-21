@@ -194,10 +194,10 @@ SpeakerProfiles = [
       active=True
     ),
     SpeakerProfile(
-      "NJ AI Hub",
-      "Liat Krawczyk, Inaugural Executive Director; Jeffrey Oakman, Senior Strategic Project Manager",
-      "The NJ AI Hub is a first-of-its-kind public-private partnership between Princeton University, the New Jersey Economic Development Authority (NJEDA), Microsoft, and CoreWeave, designed to accelerate innovation in artificial intelligence and position New Jersey as a global leader in the field. Its aim is to bring together AI researchers, entrepreneurs, industry, educational institutions, and the public sector to advance world-class research and development; drive transformative AI innovation; empower the workforce for the AI era; and shape the future of responsible AI deployment. Liat Krawczyk brings over a decade of experience across government, startups, and nonprofits at the intersection of technology, workforce, the care economy and industrial policy, driving the creation of inclusive innovation ecosystems. Jeffrey Oakman  works with the Hub’s Executive Director in advancing the Hub’s goals of promoting advanced research in the field, driving regional economic growth and talent development in the tech sector, supporting private- and public-sector entities in AI utilization, and strengthening the AI start-up ecosystem in New Jersey.",
-      "assets/speakers/nj-ai-hub.png",
+      "Jeffrey Oakman",
+      "NJ AI Hub, Senior Strategic Project Manager",
+      "Jeffrey Oakman  works with the Hub’s Executive Director in advancing the Hub’s goals of promoting advanced research in the field, driving regional economic growth and talent development in the tech sector, supporting private- and public-sector entities in AI utilization, and strengthening the AI start-up ecosystem in New Jersey. The NJ AI Hub is a first-of-its-kind public-private partnership between Princeton University, the New Jersey Economic Development Authority (NJEDA), Microsoft, and CoreWeave, designed to accelerate innovation in artificial intelligence and position New Jersey as a global leader in the field. Its aim is to bring together AI researchers, entrepreneurs, industry, educational institutions, and the public sector to advance world-class research and development; drive transformative AI innovation; empower the workforce for the AI era; and shape the future of responsible AI deployment.",
+      "assets/speakers/oakman.png",
       link="https://njaihub.org/",
       short_org="NJ AI Hub Leadership Team",
       active=True
